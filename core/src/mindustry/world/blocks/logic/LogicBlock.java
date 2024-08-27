@@ -36,9 +36,15 @@ public class LogicBlock extends Block{
 
     public int maxInstructionScale = 5;
     public int instructionsPerTick = 1;
+    public Language language = Language.mindustryLogic;
     //privileged only
     public int maxInstructionsPerTick = 40;
     public float range = 8 * 10;
+
+    public enum Language{
+        mindustryLogic,
+        javaScript
+    }
 
     public LogicBlock(String name){
         super(name);
@@ -245,7 +251,7 @@ public class LogicBlock extends Block{
     public class LogicBuild extends Building implements Ranged{
         /** logic "source code" as list of asm statements */
         public String code = "";
-        public LExecutor executor = new LExecutor();
+        public LExecutor executor = language == Language.mindustryLogic ? new LExecutor() : new JsExecutor();
         public float accumulator = 0;
         public Seq<LogicLink> links = new Seq<>();
         public boolean checkedDuplicates = false;
@@ -351,8 +357,13 @@ public class LogicBlock extends Block{
                 code = str;
 
                 try{
-                    //create assembler to store extra variables
-                    LAssembler asm = LAssembler.assemble(str, privileged);
+                    LAssembler asm;
+                    if(language == Language.mindustryLogic){
+                        //create assembler to store extra variables                    
+                        asm = LAssembler.assemble(str, privileged);
+                    }else{
+                        asm = LAssembler.assemble("", privileged);
+                    }
 
                     //store connections
                     for(LogicLink link : links){

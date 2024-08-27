@@ -161,6 +161,7 @@ public class Blocks{
     message, switchBlock, microProcessor, logicProcessor, hyperProcessor, largeLogicDisplay, logicDisplay, memoryCell, memoryBank,
     canvas, reinforcedMessage,
     worldProcessor, worldCell, worldMessage, worldSwitch,
+    microProcessorJs,
 
     //campaign
     launchPad, interplanetaryAccelerator
@@ -5870,6 +5871,13 @@ public class Blocks{
 
             instructionsPerTick = 2;
             size = 1;
+        }};
+        microProcessorJs = new LogicBlock("micro-processor-js"){{
+            requirements(Category.logic, with(Items.copper, 90, Items.lead, 50, Items.silicon, 50));
+
+            instructionsPerTick = 2;
+            size = 1;
+            language = Language.javaScript;
         }};
 
         logicProcessor = new LogicBlock("logic-processor"){{

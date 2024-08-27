@@ -19,6 +19,8 @@ public class LAssembler{
     /** All instructions to be executed. */
     public LInstruction[] instructions;
 
+    public String code;
+
     public LAssembler(){
         //instruction counter
         putVar("@counter");
@@ -35,6 +37,7 @@ public class LAssembler{
 
         asm.instructions = st.map(l -> l.build(asm)).retainAll(l -> l != null).toArray(LInstruction.class);
         asm.privileged = privileged;
+        asm.code = data;
         return asm;
     }
 

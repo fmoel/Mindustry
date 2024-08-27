@@ -190,6 +190,9 @@ public class SerpuloTechTree{
                                     });
                                 });
                             });
+                            node(microProcessorJs, () -> {
+
+                            });
                         });
 
                         node(illuminator, () -> {
