@@ -73,6 +73,7 @@ public class UI implements ApplicationListener, Loadable{
     public ColorPicker picker;
     public EffectsDialog effects;
     public LogicDialog logic;
+    public JsDialog jsDialog;
     public FullTextDialog fullText;
     public CampaignCompleteDialog campaignComplete;
 
@@ -210,6 +211,7 @@ public class UI implements ApplicationListener, Loadable{
         mods = new ModsDialog();
         schematics = new SchematicsDialog();
         logic = new LogicDialog();
+        jsDialog = new JsDialog();
         fullText = new FullTextDialog();
         campaignComplete = new CampaignCompleteDialog();
         followUpMenus = new IntMap<>();

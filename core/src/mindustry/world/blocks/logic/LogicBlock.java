@@ -251,7 +251,7 @@ public class LogicBlock extends Block{
     public class LogicBuild extends Building implements Ranged{
         /** logic "source code" as list of asm statements */
         public String code = "";
-        public LExecutor executor = language == Language.mindustryLogic ? new LExecutor() : new JsExecutor();
+        public LExecutor executor;
         public float accumulator = 0;
         public Seq<LogicLink> links = new Seq<>();
         public boolean checkedDuplicates = false;
@@ -265,6 +265,7 @@ public class LogicBlock extends Block{
         public @Nullable Runnable loadBlock;
 
         {
+            executor = language == Language.mindustryLogic ? new LExecutor() : new JsExecutor();
             executor.privileged = privileged;
             executor.build = this;
         }
@@ -655,13 +656,23 @@ public class LogicBlock extends Block{
         }
 
         public void showEditDialog(boolean forceEditor){
-            ui.logic.show(code, executor, privileged, code -> {
-                boolean prev = state.rules.editor;
-                //this is a hack to allow configuration to work correctly in the editor for privileged processors
-                if(forceEditor) state.rules.editor = true;
-                configure(compress(code, relativeConnections()));
-                state.rules.editor = prev;
-            });
+            if(language == Language.mindustryLogic){
+                ui.logic.show(code, executor, privileged, code -> {
+                    boolean prev = state.rules.editor;
+                    //this is a hack to allow configuration to work correctly in the editor for privileged processors
+                    if(forceEditor) state.rules.editor = true;
+                    configure(compress(code, relativeConnections()));
+                    state.rules.editor = prev;
+                });
+            }else if (language == Language.javaScript){
+                ui.jsDialog.show(code, (JsExecutor) executor, privileged, code -> {
+                    boolean prev = state.rules.editor;
+                    //this is a hack to allow configuration to work correctly in the editor for privileged processors
+                    if(forceEditor) state.rules.editor = true;
+                    configure(compress(code, relativeConnections()));
+                    state.rules.editor = prev;
+                });
+            }
         }
 
         @Override
