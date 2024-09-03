@@ -53,13 +53,6 @@ public class JsExecutor extends LExecutor implements Debugger {
     @Override
     public void load(LAssembler builder) {
         builder.putVar("test");
-        /*
-         * vars = builder.vars.values().toSeq().retainAll(var ->
-         * !var.constant).toArray(LVar.class);
-         * for (int i = 0; i < vars.length; i++) {
-         * vars[i].id = i;
-         * }
-         */
 
         counter = builder.getVar("@counter");
         unit = builder.getVar("@unit");
@@ -68,27 +61,23 @@ public class JsExecutor extends LExecutor implements Debugger {
         this.builder = builder;
         code = builder.code;
 
-        if (code.isEmpty()) {
-            code = """
-                    var duo = cpu.links().duo1;
-                    var vault = cpu.links().vault1;
-                    console.log("vault copper: " + vault.sensor("@copper"))
-                    console.log("dou range: " + duo.sensor("@range"))
-                    """;
-        }
         this.isInitialized = !code.isEmpty();
+        createSecuredCode(code);
 
         instructions = LAssembler.assemble("ubind", false).instructions;
 
         // stop execution thread, if already running
         if (executionThread != null) {
-            while (isRunning) {
-                stopExecution = true;
-                synchronized (singleStepLock) {
-                    singleStepLock.notify(); // Resume the paused thread
+            stopExecution = true;
+            if(isRunning){
+                executionThread.interrupt();
+                long timeOut = Time.millis() + 10;
+                while (isRunning && timeOut < Time.millis()){
+                    try{
+                        Thread.sleep(1);
+                    }catch(InterruptedException e){}
                 }
             }
-            cleanupContext();
         }
 
         if (isInitialized) {
@@ -97,17 +86,21 @@ public class JsExecutor extends LExecutor implements Debugger {
             executionThread = new Thread(() -> {
                 initializeContext(); // Initialize the context and start the script
                 try {
-                    while (true)
+                    while (!stopExecution){
                         context.evaluateString(scope, this.securedCode, "script", 1, null);
-                } catch (Error e) {
-                    if (consoleListener != null) {
-                        if (e.getMessage() == "Script execution aborted") {
-                            consoleListener.get("Code and state resetted");
-                        } else {
-                            consoleListener.get("Error from JS code." + getStackTrace(e));
-                        }
                     }
+                    console.log("stop execution");
+                } catch (Error e) {
+                    console.log("error catched");
+                    if (e.getMessage() == "Script execution aborted") {
+                        console.log("Code Execution stopped.");
+                    } else {
+                        console.log("Error from JS code." + getStackTrace(e));
+                    }
+                } catch (Exception e) {
+                    console.log("Error from JS code." + getStackTrace(e));
                 } finally {
+                    console.log("Context closed.");
                     cleanupContext(); // Ensure context cleanup on script completion
                     isRunning = false;
                 }
@@ -116,11 +109,12 @@ public class JsExecutor extends LExecutor implements Debugger {
         }
     }
 
-    public void createSecuredCode(String code) {
-        // prevent while(1); etc. from hanging
+    // Makes the script cooperative
+    public void createSecuredCode(String code) {        
+        // yield while(1); 
         securedCode = code.replaceAll("\\bwhile\\b(\\s*)\\(", "while$1(cpu.yield()||");
 
-        // prevent for(var i = 0; i < 0; i++); etc. from hanging
+        // yield for(var i = 0; i < 0;{cpu.yield(),}i++);
         securedCode = code.replaceAll("\\bfor\\b(\\s*)\\(([^;]*;[^;]*;)", "for$1($2cpu.yield(),");
 
     }
@@ -134,7 +128,7 @@ public class JsExecutor extends LExecutor implements Debugger {
     // Executes exactly one line of code
     @Override
     public void runOnce() {
-        if (!isInitialized || context == null) {
+        if (!isInitialized) {
             return;
         }
         if (sleepUntil > Time.nanos()) {
@@ -154,7 +148,11 @@ public class JsExecutor extends LExecutor implements Debugger {
             try {
                 singleStepLock.wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                if (consoleListener != null) 
+                    consoleListener.get("Error from yield");
+                e.printStackTrace();                
+            }catch(Throwable e){
+                console.log("yield: some error");
             }
         }
     }
@@ -233,11 +231,7 @@ public class JsExecutor extends LExecutor implements Debugger {
         context.setGeneratingDebug(true);
         context.setDebugger(this, null);
         scope = context.initStandardObjects();
-
-        createConsole();
-    }
-
-    private void createConsole() {
+        
         console = new Console();
         mindustry = new JsWrapper(this, console, scope);
     }
@@ -277,14 +271,17 @@ public class JsExecutor extends LExecutor implements Debugger {
         public void onLineChange(Context cx, int lineNumber) {
             executor.counter.numval = lineNumber;
             executor.currentLineNumber = lineNumber;
+            console.log("onLineChange line " + lineNumber);
             if (executor.stopExecution) {
+                console.log("From fhread: Stop execution.");
                 throw new Error("Script execution aborted");
             }
             synchronized (executor.singleStepLock) {
                 try {
                     executor.singleStepLock.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    console.log("From thread: interruptd detected.");
+                    throw new Error("Script execution aborted");
                 }
             }
         }

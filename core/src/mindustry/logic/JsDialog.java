@@ -110,7 +110,7 @@ public class JsDialog extends BaseDialog {
         controlButtons.button("@back", Icon.left, this::hide).name("back");
         controlButtons.button("@step", Icon.play, () -> {
             executor.runOnce();
-            consoleOutput.setText("current line: " + executor.getCurrentLineNumber());
+            //consoleOutput.setText("current line: " + executor.getCurrentLineNumber());
         }).disabled(t -> net.active() || isRunning);
 
         if (isRunning) {
@@ -222,6 +222,7 @@ public class JsDialog extends BaseDialog {
         executor.setConsoleListener(log -> {
             if (consoleOutput != null)
                 consoleOutput.setText(log);
+            //consoleOutput.setCursorPosition(log.length());
         });
 
         this.consumer = result -> {

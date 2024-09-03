@@ -124,7 +124,7 @@ public class LStatements{
     public static class DrawStatement extends LStatement{
         static final String[] aligns = {"center", "top", "bottom", "left", "right", "topLeft", "topRight", "bottomLeft", "bottomRight"};
         //yes, boxing Integer is gross but this is easier to construct and Integers <128 don't allocate anyway
-        static final ObjectMap<String, Integer> nameToAlign = ObjectMap.of(
+        public static final ObjectMap<String, Integer> nameToAlign = ObjectMap.of(
         "center", Align.center,
         "top", Align.top,
         "bottom", Align.bottom,
@@ -281,7 +281,7 @@ public class LStatements{
 
         @Override
         public LInstruction build(LAssembler builder){
-            return new DrawI((byte)type.ordinal(), builder.var(x), builder.var(y),
+            return new DrawInst((byte)type.ordinal(), builder.var(x), builder.var(y),
                 type == GraphicsType.print ? new LVar(p1, nameToAlign.get(p1, Align.bottomLeft), true) : builder.var(p1), builder.var(p2), builder.var(p3), builder.var(p4));
         }
 
@@ -345,7 +345,7 @@ public class LStatements{
 
         @Override
         public LInstruction build(LAssembler builder){
-            return new DrawFlushI(builder.var(target));
+            return new DrawFlushInst(builder.var(target));
         }
 
         @Override

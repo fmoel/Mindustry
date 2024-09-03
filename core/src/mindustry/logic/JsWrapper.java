@@ -1,11 +1,15 @@
 package mindustry.logic;
 
+import arc.util.*;
 import arc.util.Time;
 import mindustry.gen.*;
 import mindustry.logic.JsExecutor;
 import mindustry.logic.LExecutor.*;
+import mindustry.logic.LStatements.*;
 import mindustry.game.Team;
 import mindustry.world.blocks.logic.LogicBlock.*;
+import mindustry.world.blocks.logic.LogicDisplay.*;
+import mindustry.world.blocks.logic.LogicDisplay.GraphicsType;
 import mindustry.world.meta.BlockFlag;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
@@ -27,11 +31,15 @@ public class JsWrapper {
     }
 
     public class CPU extends JsBuilding {
-        private LogicBuild logicBuild;
+        private final LogicBuild logicBuild;
+        public final JsCanvas canvas;
+        public final JsMessage message;
 
         public CPU(JsExecutor executor) {
             super(executor.thisv);
             logicBuild = (LogicBuild) executor.thisv.objval;
+            canvas = new JsCanvas(executor);
+            message = new JsMessage(executor);
         }
 
         public Scriptable links() {
@@ -129,6 +137,7 @@ public class JsWrapper {
         protected LVar p3 = new LVar("p3");
         protected LVar p4 = new LVar("p4");
         protected LVar p5 = new LVar("p5");
+        protected LVar p6 = new LVar("p6");
         protected final LVar target;
 
         public JsGeneric(JsGeneric original) {
@@ -235,6 +244,23 @@ public class JsWrapper {
                 }
             }
             return null;
+        }
+
+        public void flush(){
+            cpu.yield();
+            console.log("flush: Buffer at start: " + String.valueOf(executor.graphicsBuffer.size));
+            if(target.building() instanceof LogicDisplayBuild d && (d.team == executor.team || executor.privileged)){
+                if(d.commands.size + executor.graphicsBuffer.size < executor.maxDisplayBuffer){
+                    console.log("flush: should execute");
+                }else{
+                    console.log("flush: Buffer too full");
+                }
+            }else{
+                console.log("flush: cannot execute");
+            }
+            LExecutor.DrawFlushInst drawFlush = new LExecutor.DrawFlushInst(target);
+            drawFlush.run(executor);
+            console.log("flush: Buffer at end: " + String.valueOf(executor.graphicsBuffer.size));
         }
 
         public String toString() {
@@ -380,11 +406,11 @@ public class JsWrapper {
         }
 
         private LocateResult locate(LLocate type) {
-            cpu.yield();
             return locate(type, BlockFlag.battery);
         }
 
         private LocateResult locate(LLocate type, BlockFlag blockFlag) {
+            cpu.yield();
             if (executor.unit.objval != target.objval)
                 cpu.bind(this);
             LExecutor.UnitLocateI unitLocate = new LExecutor.UnitLocateI(LLocate.building, blockFlag, p1, p1, p2, p3,
@@ -451,6 +477,182 @@ public class JsWrapper {
                 y = yval;
                 this.building = building;
             }
+        }
+    }
+
+    public class JsMessage{
+        private final LExecutor executor;
+        protected LVar p1 = new LVar("p1");
+        
+        JsMessage(LExecutor executor){
+            this.executor = executor;
+        }
+
+        public void print(String text){
+            cpu.yield();
+            p1.setobj(text);
+            LExecutor.PrintI print = new LExecutor.PrintI(p1);
+            print.run(executor);
+        }
+
+        public void flush(JsBuilding message){
+            cpu.yield();
+            p1.setobj(message.target);
+            LExecutor.PrintFlushI printFlush = new LExecutor.PrintFlushI(p1);
+            printFlush.run(executor);
+        }
+
+        public String format(Object object){
+            return PrintI.toString(object);
+        }
+    }
+
+    public class JsCanvas{
+        protected LVar p1 = new LVar("p1");
+        protected LVar p2 = new LVar("p2");
+        protected LVar p3 = new LVar("p3");
+        protected LVar p4 = new LVar("p4");
+        protected LVar p5 = new LVar("p5");
+        protected LVar p6 = new LVar("p6");
+
+        private final LExecutor executor;
+
+        JsCanvas(LExecutor executor){
+            this.executor = executor;
+        }
+
+        public void draw(GraphicsType type){
+            cpu.yield();
+            DrawInst draw = new DrawInst((byte) type.ordinal(), p1, p2, p3, p4, p5, p6);
+            draw.run(executor);
+        }
+
+        public void clear(Number r, Number g, Number b){
+            p1.setnum(r.longValue());
+            p2.setnum(g.longValue());
+            p3.setnum(b.longValue());
+            draw(GraphicsType.clear);
+        }
+        
+        
+        public void color(Number r, Number g, Number b, Number a){
+            p1.setnum(r.doubleValue());
+            p2.setnum(g.doubleValue());
+            p3.setnum(b.doubleValue());
+            p4.setnum(a.doubleValue());
+            draw(GraphicsType.color);
+        }
+        
+        
+        /*public void col(String color){
+            p1.setnum(r.longValue());
+            p2.setnum(g.longValue());
+            p3.setnum(b.longValue());
+            p4.setnum(a.longValue());
+            draw(GraphicsType.col);
+        }*/
+        
+        
+        public void stroke(Number width){
+            p1.setnum(width.doubleValue());
+            draw(GraphicsType.stroke);
+        }
+        
+        
+        public void line(double x, double y, double x2, double y2){
+            p1.setnum(x);
+            p2.setnum(y);
+            p3.setnum(x2);
+            p4.setnum(y2);
+            draw(GraphicsType.line);
+        }
+        
+        
+        public void rect(Number x, Number y, Number x2, Number y2){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());
+            p3.setnum(x2.longValue());
+            p4.setnum(y2.longValue());
+            draw(GraphicsType.rect);
+        }
+        
+        
+        public void lineRect(Number x, Number y, Number x2, Number y2){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());
+            p3.setnum(x2.longValue());
+            p4.setnum(y2.longValue());
+            draw(GraphicsType.lineRect);
+        }
+        
+        
+        public void poly(Number x, Number y, Boolean sides, Number radius, Number rotation){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());
+            p3.setbool(sides);
+            p4.setnum(radius.longValue());
+            p5.setnum(rotation.longValue());
+            draw(GraphicsType.poly);        
+        }
+        
+        
+        public void linePoly(Number x, Number y, Boolean sides, Number radius, Number rotation){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());
+            p3.setbool(sides);
+            p4.setnum(radius.longValue());
+            p5.setnum(rotation.longValue());
+            draw(GraphicsType.linePoly);        
+        }
+        
+        
+        public void triangle(Number x, Number y, Number x2, Number y2, Number x3, Number y3){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());
+            p3.setnum(x2.longValue());
+            p4.setnum(y2.longValue());
+            p5.setnum(x3.longValue());
+            p6.setnum(y3.longValue());
+            draw(GraphicsType.triangle);                
+        }
+        
+        
+        public void image(Number x, Number y, String image, Number size, Number rotation){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());            
+            p3.setobj(((JsExecutor) executor).builder.var(image).objval);
+            p4.setnum(size.longValue());
+            p5.setnum(rotation.longValue());
+            draw(GraphicsType.image);                
+        }
+        
+        
+        public void print(String text, Number x, Number y, String align){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());            
+            p3.setnum(DrawStatement.nameToAlign.get(align, Align.bottomLeft));
+            draw(GraphicsType.print);                  
+        }
+        
+        
+        public void translate(Number x, Number y){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());            
+            draw(GraphicsType.print);           
+        }
+        
+        
+        public void scale(Number x, Number y){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());            
+            draw(GraphicsType.scale);    
+        }
+    
+    
+        public void rotate(Number x, Number y){
+            p1.setnum(x.longValue());
+            p2.setnum(y.longValue());            
+            draw(GraphicsType.rotate);           
         }
     }
 }

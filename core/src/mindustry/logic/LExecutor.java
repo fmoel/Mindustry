@@ -804,11 +804,11 @@ public class LExecutor{
         public void run(LExecutor exec){}
     }
 
-    public static class DrawI implements LInstruction{
+    public static class DrawInst implements LInstruction{
         public byte type;
         public LVar x, y, p1, p2, p3, p4;
 
-        public DrawI(byte type, LVar x, LVar y, LVar p1, LVar p2, LVar p3, LVar p4){
+        public DrawInst(byte type, LVar x, LVar y, LVar p1, LVar p2, LVar p3, LVar p4){
             this.type = type;
             this.x = x;
             this.y = y;
@@ -818,7 +818,7 @@ public class LExecutor{
             this.p4 = p4;
         }
 
-        public DrawI(){
+        public DrawInst(){
         }
 
         @Override
@@ -919,14 +919,14 @@ public class LExecutor{
         }
     }
 
-    public static class DrawFlushI implements LInstruction{
+    public static class DrawFlushInst implements LInstruction{
         public LVar target;
 
-        public DrawFlushI(LVar target){
+        public DrawFlushInst(LVar target){
             this.target = target;
         }
 
-        public DrawFlushI(){
+        public DrawFlushInst(){
         }
 
         @Override
