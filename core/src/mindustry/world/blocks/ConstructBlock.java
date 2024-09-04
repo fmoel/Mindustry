@@ -358,9 +358,7 @@ public class ConstructBlock extends Block{
                         int target = Mathf.round(requirements[i].amount * state.rules.buildCostMultiplier * state.rules.deconstructRefundMultiplier);
                         int remaining = target - itemsLeft[i];
 
-                        if(requirements[i].item.unlockedNowHost()){
-                            core.items.add(requirements[i].item, Mathf.clamp(remaining, 0, core.storageCapacity - core.items.get(requirements[i].item)));
-                        }
+                        core.items.add(current.requirements[i].item, Mathf.clamp(remaining, 0, core.storageCapacity - core.items.get(current.requirements[i].item)));
                         itemsLeft[i] = target;
                     }
                 }

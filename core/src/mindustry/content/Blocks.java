@@ -5924,7 +5924,7 @@ public class Blocks{
         }};
 
         worldProcessor = new LogicBlock("world-processor"){{
-            requirements(Category.logic, BuildVisibility.worldProcessorOnly, with());
+            requirements(Category.logic, BuildVisibility.editorOnly, with());
 
             canOverdrive = false;
             targetable = false;
@@ -5937,7 +5937,7 @@ public class Blocks{
         }};
 
         worldCell = new MemoryBlock("world-cell"){{
-            requirements(Category.logic, BuildVisibility.worldProcessorOnly, with());
+            requirements(Category.logic, BuildVisibility.editorOnly, with());
             
             targetable = false;
             privileged = true;
@@ -5946,14 +5946,14 @@ public class Blocks{
         }};
 
         worldMessage = new MessageBlock("world-message"){{
-            requirements(Category.logic, BuildVisibility.worldProcessorOnly, with());
+            requirements(Category.logic, BuildVisibility.editorOnly, with());
             
             targetable = false;
             privileged = true;
         }};
 
         worldSwitch = new SwitchBlock("world-switch"){{
-            requirements(Category.logic, BuildVisibility.worldProcessorOnly, with());
+            requirements(Category.logic, BuildVisibility.editorOnly, with());
 
             targetable = false;
             privileged = true;

@@ -2,7 +2,6 @@ package mindustry.content;
 
 import arc.struct.*;
 import mindustry.game.Objectives.*;
-import mindustry.type.*;
 
 import static mindustry.content.Blocks.*;
 import static mindustry.content.SectorPresets.craters;
@@ -363,8 +362,7 @@ public class SerpuloTechTree{
                         });
                     });
 
-                    //override research requirements to have graphite, not coal
-                    node(crawler, ItemStack.with(Items.silicon, 400, Items.graphite, 400), () -> {
+                    node(crawler, () -> {
                         node(atrax, () -> {
                             node(spiroct, () -> {
                                 node(arkyid, () -> {
@@ -402,7 +400,7 @@ public class SerpuloTechTree{
                         });
                     });
 
-                    node(navalFactory, Seq.with(new OnSector(windsweptIslands)), () -> {
+                    node(navalFactory, Seq.with(new SectorComplete(ruinousShores)), () -> {
                         node(risso, () -> {
                             node(minke, () -> {
                                 node(bryde, () -> {
@@ -505,19 +503,15 @@ public class SerpuloTechTree{
                                     });
                                 });
 
-                                node(facility32m, Seq.with(
-                                new Research(pneumaticDrill)
+                                node(extractionOutpost, Seq.with(
+                                new SectorComplete(stainedMountains),
+                                new SectorComplete(windsweptIslands),
+                                new Research(groundFactory),
+                                new Research(nova),
+                                new Research(airFactory),
+                                new Research(mono)
                                 ), () -> {
-                                    node(extractionOutpost, Seq.with(
-                                    new SectorComplete(stainedMountains),
-                                    new SectorComplete(windsweptIslands),
-                                    new Research(groundFactory),
-                                    new Research(nova),
-                                    new Research(airFactory),
-                                    new Research(mono)
-                                    ), () -> {
 
-                                    });
                                 });
 
                                 node(saltFlats, Seq.with(

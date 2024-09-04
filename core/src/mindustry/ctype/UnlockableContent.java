@@ -9,7 +9,6 @@ import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.annotations.Annotations.*;
-import mindustry.content.*;
 import mindustry.content.TechTree.*;
 import mindustry.game.EventType.*;
 import mindustry.graphics.*;
@@ -94,7 +93,7 @@ public abstract class UnlockableContent extends MappableContent{
     }
 
     public boolean isOnPlanet(@Nullable Planet planet){
-        return planet == null || planet == Planets.sun || shownPlanets.isEmpty() || shownPlanets.contains(planet);
+        return planet == null || shownPlanets.isEmpty() || shownPlanets.contains(planet);
     }
 
     public int getLogicId(){

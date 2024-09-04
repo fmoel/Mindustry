@@ -80,6 +80,9 @@ public class ItemStack implements Comparable<ItemStack>{
 
     @Override
     public String toString(){
-        return item + ": " + amount;
+        return "ItemStack{" +
+        "item=" + item +
+        ", amount=" + amount +
+        '}';
     }
 }
