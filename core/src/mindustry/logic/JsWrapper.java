@@ -628,6 +628,7 @@ public class JsWrapper {
         
         
         public void print(String text, Number x, Number y, String align){
+            executor.textBuffer.append(text);
             p1.setnum(x.longValue());
             p2.setnum(y.longValue());            
             p3.setnum(DrawStatement.nameToAlign.get(align, Align.bottomLeft));
