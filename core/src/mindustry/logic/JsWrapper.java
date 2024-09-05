@@ -1,7 +1,6 @@
 package mindustry.logic;
 
 import arc.util.*;
-import arc.util.Time;
 import mindustry.gen.*;
 import mindustry.logic.JsExecutor;
 import mindustry.logic.LExecutor.*;
@@ -9,7 +8,6 @@ import mindustry.logic.LStatements.*;
 import mindustry.game.Team;
 import mindustry.world.blocks.logic.LogicBlock.*;
 import mindustry.world.blocks.logic.LogicDisplay.*;
-import mindustry.world.blocks.logic.LogicDisplay.GraphicsType;
 import mindustry.world.meta.BlockFlag;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
@@ -33,13 +31,11 @@ public class JsWrapper {
     public class CPU extends JsBuilding {
         private final LogicBuild logicBuild;
         public final JsCanvas canvas;
-        public final JsMessage message;
 
         public CPU(JsExecutor executor) {
             super(executor.thisv);
             logicBuild = (LogicBuild) executor.thisv.objval;
             canvas = new JsCanvas(executor);
-            message = new JsMessage(executor);
         }
 
         public Scriptable links() {
@@ -52,6 +48,14 @@ public class JsWrapper {
                 }
             }
             return object;
+        }
+
+        public JsBuilding link(String linkName) {
+            LogicLink logicLink = logicBuild.links.find(l -> l.name == linkName);
+            if (logicLink != null && logicLink.lastBuild != null) {
+                return new JsBuilding(logicLink.lastBuild);
+            }
+            return null;
         }
 
         public Scriptable linkArray() {
@@ -68,22 +72,8 @@ public class JsWrapper {
             return logicLink != null;
         }
 
-        public JsBuilding getLink(String linkName) {
-            LogicLink logicLink = logicBuild.links.find(l -> l.name == linkName);
-            if (logicLink != null && logicLink.lastBuild != null) {
-                return new JsBuilding(logicLink.lastBuild);
-            }
-            return null;
-        }
-
         public String[] getLinkNames() {
             return logicBuild.links.map(link -> (String) link.name).toArray(String.class);
-        }
-
-        public JsBuilding[] getLinkArray() {
-            return logicBuild.links
-                    .select(link -> link.lastBuild != null && !link.lastBuild.dead())
-                    .map(link -> new JsBuilding(link.lastBuild)).toArray(JsBuilding.class);
         }
 
         public JsUnit bind(String unitType) {
@@ -104,14 +94,25 @@ public class JsWrapper {
             return null;
         }
 
-        public void sleep(Number milliseconds) {
-            executor.sleepUntil = Time.nanos() + Time.millisToNanos(milliseconds.longValue());
+        public void sleep(Long milliseconds) {
+            executor.sleepUntil = Time.nanos() + Time.millisToNanos(milliseconds);
             executor.sendToYield();
         }
 
         public void yield() {
             executor.sendToYield();
         }
+
+        public void print(String text){
+            cpu.yield();
+            p1.setobj(text);
+            LExecutor.PrintI print = new LExecutor.PrintI(p1);
+            print.run(executor);
+        }
+
+        public String format(Object object){
+            return PrintI.toString(object);
+        }        
     }
 
     public class JsBuilding extends JsGeneric {
@@ -127,7 +128,6 @@ public class JsWrapper {
         public JsBuilding(LVar lvar) {
             super(lvar);
         }
-
     }
 
     public class JsGeneric {
@@ -172,10 +172,10 @@ public class JsWrapper {
             return ret.num();
         }
 
-        public void shoot(Number x, Number y, Boolean shoot) {
+        public void shoot(Double x, Double y, Boolean shoot) {
             cpu.yield();
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+            p1.setnum(x);
+            p2.setnum(y);
             p3.setbool(shoot);
             LExecutor.ControlI control = new LExecutor.ControlI(LAccess.shoot, target, p1, p2, p3, p4);
             control.run(executor);
@@ -210,25 +210,25 @@ public class JsWrapper {
             control.run(executor);
         }
 
-        public Number read(Number address) {
+        public Double read(Long address) {
             cpu.yield();
-            p1.setnum(address.doubleValue());
+            p1.setnum(address);
             LExecutor.ReadI read = new LExecutor.ReadI(target, p1, ret);
             read.run(executor);
             return ret.num();
         }
 
-        public void write(Number address, Number value) {
+        public void write(Long address, Double value) {
             cpu.yield();
-            p1.setnum(address.doubleValue());
-            p2.setnum(value.doubleValue());
+            p1.setnum(address);
+            p2.setnum(value);
             LExecutor.WriteI write = new LExecutor.WriteI(target, p1, p2);
             write.run(executor);
         }
 
-        public Object radar(String targetType1, String targetType2, String targetType3, Number order, String sort) {
+        public Object radar(String targetType1, String targetType2, String targetType3, Long order, String sort) {
             cpu.yield();
-            p1.setnum(order.doubleValue());
+            p1.setnum(order);
             p3.setobj(executor.builder.var(targetType3));
             LExecutor.RadarI radar = new LExecutor.RadarI(RadarTarget.valueOf(targetType1),
                     RadarTarget.valueOf(targetType2),
@@ -248,19 +248,13 @@ public class JsWrapper {
 
         public void flush(){
             cpu.yield();
-            console.log("flush: Buffer at start: " + String.valueOf(executor.graphicsBuffer.size));
-            if(target.building() instanceof LogicDisplayBuild d && (d.team == executor.team || executor.privileged)){
-                if(d.commands.size + executor.graphicsBuffer.size < executor.maxDisplayBuffer){
-                    console.log("flush: should execute");
-                }else{
-                    console.log("flush: Buffer too full");
-                }
+            if(target.building() instanceof LogicDisplayBuild){
+                LExecutor.DrawFlushInst drawFlush = new LExecutor.DrawFlushInst(target);
+                drawFlush.run(executor);    
             }else{
-                console.log("flush: cannot execute");
+                LExecutor.PrintFlushI printFlush = new LExecutor.PrintFlushI(target);
+                printFlush.run(executor);    
             }
-            LExecutor.DrawFlushInst drawFlush = new LExecutor.DrawFlushInst(target);
-            drawFlush.run(executor);
-            console.log("flush: Buffer at end: " + String.valueOf(executor.graphicsBuffer.size));
         }
 
         public String toString() {
@@ -289,21 +283,21 @@ public class JsWrapper {
             control(LUnitControl.idle);
         }
 
-        public void move(Number x, Number y) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public void move(Double x, Double y) {
+            p1.setnum(x);
+            p2.setnum(y);
             control(LUnitControl.move);
         }
 
-        public void pathfind(Number x, Number y) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public void pathfind(Double x, Double y) {
+            p1.setnum(x);
+            p2.setnum(y);
             control(LUnitControl.pathfind);
         }
 
-        public void approach(Number x, Number y) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public void approach(Double x, Double y) {
+            p1.setnum(x);
+            p2.setnum(y);
             control(LUnitControl.approach);
         }
 
@@ -315,10 +309,10 @@ public class JsWrapper {
             control(LUnitControl.stop);
         }
 
-        public Boolean within(Number x, Number y, Number radius) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
-            p3.setnum(radius.doubleValue());
+        public Boolean within(Double x, Double y, Double radius) {
+            p1.setnum(x);
+            p2.setnum(y);
+            p3.setnum(radius);
             control(LUnitControl.within);
             return p4.bool();
         }
@@ -328,9 +322,9 @@ public class JsWrapper {
             control(LUnitControl.within);
         }
 
-        public void target(Number x, Number y, Boolean shoot) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public void target(Double x, Double y, Boolean shoot) {
+            p1.setnum(x);
+            p2.setnum(y);
             p3.setbool(shoot);
             control(LUnitControl.target);
         }
@@ -341,16 +335,16 @@ public class JsWrapper {
             control(LUnitControl.targetp);
         }
 
-        public void itemTake(JsBuilding fromBuilding, String itemType, Number amount) {
+        public void itemTake(JsBuilding fromBuilding, String itemType, Long amount) {
             p1.setobj(fromBuilding.target.objval);
             p2.setobj(executor.builder.var(itemType));
-            p3.setnum(amount.intValue());
+            p3.setnum(amount);
             control(LUnitControl.itemTake);
         }
 
-        public void itemDrop(JsBuilding toBuilding, Number amount) {
+        public void itemDrop(JsBuilding toBuilding, Long amount) {
             p1.setobj(toBuilding.target.objval);
-            p2.setnum(amount.intValue());
+            p2.setnum(amount);
             control(LUnitControl.itemDrop);
         }
 
@@ -372,32 +366,31 @@ public class JsWrapper {
             control(LUnitControl.payEnter);
         }
 
-        public void mine(Number x, Number y) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public void mine(Double x, Double y) {
+            p1.setnum(x);
+            p2.setnum(y);
             control(LUnitControl.mine);
         }
 
-        public void build(Number x, Number y, String blockType, Number rotation, String config) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public void build(Double x, Double y, String blockType, Long rotation, String config) {
+            p1.setnum(x);
+            p2.setnum(y);
             p3.setobj(executor.builder.var(blockType));
-            p4.setnum(rotation.intValue());
+            p4.setnum(rotation);
             p5.setobj(executor.builder.var(config));
             control(LUnitControl.build);
         }
 
-        public void flag(Number value) {
-            p1.setnum(value.doubleValue());
+        public void flag(Double value) {
+            p1.setnum(value);
             control(LUnitControl.flag);
         }
 
-        public GetBlockResult getBlock(Number x, Number y) {
-            p1.setnum(x.doubleValue());
-            p2.setnum(y.doubleValue());
+        public GetBlockResult getBlock(Double x, Double y) {
+            p1.setnum(x);
+            p2.setnum(y);
             control(LUnitControl.getBlock);
 
-            // {Number type, Building building, Number floorType}
             JsBuilding building = null;
             if (p5.isobj && p5.objval instanceof Building b) {
                 building = new JsBuilding(b);
@@ -463,7 +456,7 @@ public class JsWrapper {
         }
 
         public class LocateResult {
-            public Number x, y;
+            public Double x, y;
             public JsBuilding building;
 
             public LocateResult(double xval, double yval) {
@@ -477,33 +470,6 @@ public class JsWrapper {
                 y = yval;
                 this.building = building;
             }
-        }
-    }
-
-    public class JsMessage{
-        private final LExecutor executor;
-        protected LVar p1 = new LVar("p1");
-        
-        JsMessage(LExecutor executor){
-            this.executor = executor;
-        }
-
-        public void print(String text){
-            cpu.yield();
-            p1.setobj(text);
-            LExecutor.PrintI print = new LExecutor.PrintI(p1);
-            print.run(executor);
-        }
-
-        public void flush(JsBuilding message){
-            cpu.yield();
-            p1.setobj(message.target);
-            LExecutor.PrintFlushI printFlush = new LExecutor.PrintFlushI(p1);
-            printFlush.run(executor);
-        }
-
-        public String format(Object object){
-            return PrintI.toString(object);
         }
     }
 
@@ -527,19 +493,19 @@ public class JsWrapper {
             draw.run(executor);
         }
 
-        public void clear(Number r, Number g, Number b){
-            p1.setnum(r.longValue());
-            p2.setnum(g.longValue());
-            p3.setnum(b.longValue());
+        public void clear(Long r, Long g, Long b){
+            p1.setnum(r);
+            p2.setnum(g);
+            p3.setnum(b);
             draw(GraphicsType.clear);
         }
         
         
-        public void color(Number r, Number g, Number b, Number a){
-            p1.setnum(r.doubleValue());
-            p2.setnum(g.doubleValue());
-            p3.setnum(b.doubleValue());
-            p4.setnum(a.doubleValue());
+        public void color(Long r, Long g, Long b, Long a){
+            p1.setnum(r);
+            p2.setnum(g);
+            p3.setnum(b);
+            p4.setnum(a);
             draw(GraphicsType.color);
         }
         
@@ -553,13 +519,13 @@ public class JsWrapper {
         }*/
         
         
-        public void stroke(Number width){
-            p1.setnum(width.doubleValue());
+        public void stroke(Long width){
+            p1.setnum(width);
             draw(GraphicsType.stroke);
         }
         
         
-        public void line(double x, double y, double x2, double y2){
+        public void line(Long x, Long y, Long x2, Long y2){
             p1.setnum(x);
             p2.setnum(y);
             p3.setnum(x2);
@@ -568,91 +534,92 @@ public class JsWrapper {
         }
         
         
-        public void rect(Number x, Number y, Number x2, Number y2){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());
-            p3.setnum(x2.longValue());
-            p4.setnum(y2.longValue());
+        public void rect(Long x, Long y, Long x2, Long y2){
+            p1.setnum(x);
+            p2.setnum(y);
+            p3.setnum(x2);
+            p4.setnum(y2);
             draw(GraphicsType.rect);
         }
         
         
-        public void lineRect(Number x, Number y, Number x2, Number y2){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());
-            p3.setnum(x2.longValue());
-            p4.setnum(y2.longValue());
+        public void lineRect(Long x, Long y, Long x2, Long y2){
+            p1.setnum(x);
+            p2.setnum(y);
+            p3.setnum(x2);
+            p4.setnum(y2);
             draw(GraphicsType.lineRect);
         }
         
         
-        public void poly(Number x, Number y, Boolean sides, Number radius, Number rotation){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());
+        public void poly(Long x, Long y, Boolean sides, Long radius, Long rotation){
+            p1.setnum(x);
+            p2.setnum(y);
             p3.setbool(sides);
-            p4.setnum(radius.longValue());
-            p5.setnum(rotation.longValue());
+            p4.setnum(radius);
+            p5.setnum(rotation);
             draw(GraphicsType.poly);        
         }
         
         
-        public void linePoly(Number x, Number y, Boolean sides, Number radius, Number rotation){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());
+        public void linePoly(Long x, Long y, Boolean sides, Long radius, Long rotation){
+            p1.setnum(x);
+            p2.setnum(y);
             p3.setbool(sides);
-            p4.setnum(radius.longValue());
-            p5.setnum(rotation.longValue());
+            p4.setnum(radius);
+            p5.setnum(rotation);
             draw(GraphicsType.linePoly);        
         }
         
         
-        public void triangle(Number x, Number y, Number x2, Number y2, Number x3, Number y3){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());
-            p3.setnum(x2.longValue());
-            p4.setnum(y2.longValue());
-            p5.setnum(x3.longValue());
-            p6.setnum(y3.longValue());
+        public void triangle(Long x, Long y, Long x2, Long y2, Long x3, Long y3){
+            p1.setnum(x);
+            p2.setnum(y);
+            p3.setnum(x2);
+            p4.setnum(y2);
+            p5.setnum(x3);
+            p6.setnum(y3);
             draw(GraphicsType.triangle);                
         }
         
         
-        public void image(Number x, Number y, String image, Number size, Number rotation){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());            
+        public void image(Long x, Long y, String image, Long size, Long rotation){
+            p1.setnum(x);
+            p2.setnum(y);            
             p3.setobj(((JsExecutor) executor).builder.var(image).objval);
-            p4.setnum(size.longValue());
-            p5.setnum(rotation.longValue());
+            p4.setnum(size);
+            p5.setnum(rotation);
             draw(GraphicsType.image);                
         }
         
         
-        public void print(String text, Number x, Number y, String align){
+        public void print(String text, Long x, Long y, String align){
+            executor.textBuffer.setLength(0);
             executor.textBuffer.append(text);
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());            
-            p3.setnum(DrawStatement.nameToAlign.get(align, Align.bottomLeft));
+            p1.setnum(x);
+            p2.setnum(y);            
+            p3.id = DrawStatement.nameToAlign.get(align, Align.bottomLeft);
             draw(GraphicsType.print);                  
         }
         
         
-        public void translate(Number x, Number y){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());            
+        public void translate(Long x, Long y){
+            p1.setnum(x);
+            p2.setnum(y);            
             draw(GraphicsType.print);           
         }
         
         
-        public void scale(Number x, Number y){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());            
+        public void scale(Long x, Long y){
+            p1.setnum(x);
+            p2.setnum(y);            
             draw(GraphicsType.scale);    
         }
     
     
-        public void rotate(Number x, Number y){
-            p1.setnum(x.longValue());
-            p2.setnum(y.longValue());            
+        public void rotate(Long x, Long y){
+            p1.setnum(x);
+            p2.setnum(y);            
             draw(GraphicsType.rotate);           
         }
     }

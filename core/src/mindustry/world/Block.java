@@ -144,6 +144,8 @@ public class Block extends UnlockableContent implements Senseable{
     public boolean absorbLasers = false;
     /** if false, the status is never drawn */
     public boolean enableDrawStatus = true;
+    /** if true, the status will always drawn */
+    public boolean enforceDrawStatus = false;
     /** whether to draw disabled status */
     public boolean drawDisabled = true;
     /** whether to automatically reset enabled status after a logic block has not interacted for a while. */

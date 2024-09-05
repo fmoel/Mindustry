@@ -26,6 +26,7 @@ import mindustry.world.blocks.heat.*;
 import mindustry.world.blocks.legacy.*;
 import mindustry.world.blocks.liquid.*;
 import mindustry.world.blocks.logic.*;
+import mindustry.world.blocks.logic.LogicBlock.Language;
 import mindustry.world.blocks.payloads.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
@@ -5856,6 +5857,7 @@ public class Blocks{
         microProcessorJs = new LogicBlock("micro-processor-js"){{
             requirements(Category.logic, with(Items.copper, 90, Items.lead, 50, Items.silicon, 50));
 
+            enforceDrawStatus = true;
             instructionsPerTick = 2;
             size = 1;
             language = Language.javaScript;

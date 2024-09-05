@@ -1,6 +1,5 @@
 package mindustry.logic;
 
-import java.lang.*;
 import arc.*;
 import arc.func.*;
 import arc.graphics.*;
@@ -14,7 +13,6 @@ import mindustry.ctype.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.logic.JsWrapper.JsBuilding;
 import mindustry.logic.LExecutor.*;
 import mindustry.logic.LStatements.*;
 import mindustry.ui.*;
@@ -33,6 +31,7 @@ public class JsDialog extends BaseDialog {
     };
     private TextArea codeEditor = new TextArea("");
     private TextArea consoleOutput = new TextArea("console.log():");
+    private String logText = "";
     private Table controlButtons = new Table();
     private boolean isRunning = false;
     private GlobalVarsDialog globalsDialog = new GlobalVarsDialog();
@@ -49,19 +48,26 @@ public class JsDialog extends BaseDialog {
 
         // Setup listeners
         shown(this::setup);
-        hidden(() -> consumer.get(codeEditor.getText()));
+        hidden(() -> {
+            consumer.get(codeEditor.getText());
+            executor.setConsoleListener(null);
+        });
         onResize(this::setup);
     }
 
     private void setup() {
         // Code editor setup
         codeEditor.setPrefRows(15);
-        codeEditor.setMessageText("//Enter your JavaScript code here...");
         codeEditor.getStyle().font = Fonts.logic;
         codeEditor.setStyle(codeEditor.getStyle());
+        codeEditor.setMessageText("//Enter your JavaScript code here...");
 
         // Console output setup
         consoleOutput.setPrefRows(5);
+        consoleOutput.update(() -> {
+            consoleOutput.setText(logText);
+            consoleOutput.setCursorPosition(logText.length());
+        });
 
         // Control buttons setup
         controlButtons.defaults().size(120f, 50f);
@@ -70,6 +76,65 @@ public class JsDialog extends BaseDialog {
         // Layout setup
         clearChildren();
         add(codeEditor).grow().pad(10f);
+        pane(p -> {
+            p.margin(10f).marginRight(16f);
+            p.table(Tex.button, t -> {
+                t.defaults().fillX().height(45f);
+                for (var varName : executor.getAllVariableNames()) {
+                    Color varColor = Pal.gray;
+                    float stub = 8f, mul = 0.5f, pad = 4;
+
+                    t.add(new Image(Tex.whiteui, varColor.cpy().mul(mul))).width(stub);
+                    t.stack(new Image(Tex.whiteui, varColor), new Label(" " + varName + " ", Styles.outlineLabel) {
+                        {
+                            setColor(Pal.accent);
+                        }
+                    }).padRight(pad);
+
+                    t.add(new Image(Tex.whiteui, Pal.gray.cpy().mul(mul))).width(stub);
+                    t.table(Tex.pane, out -> {
+                        float period = 15f;
+                        float[] counter = { -1f };
+                        Label label = out.add("").style(Styles.outlineLabel).padLeft(4).padRight(4).width(140f)
+                                .wrap().get();
+                        label.update(() -> {
+                            if (counter[0] < 0 || (counter[0] += Time.delta) >= period) {
+                                Object varValue = executor.getVariableValue(varName);
+                                String text = getDisplayableValue(varValue);
+                                if (!label.textEquals(text)) {
+                                    label.setText(text);
+                                    if (counter[0] >= 0f) {
+                                        label.actions(Actions.color(Pal.accent), Actions.color(Color.white, 0.2f));
+                                    }
+                                }
+                                counter[0] = 0f;
+                            }
+                        });
+                        label.act(1f);
+                    }).padRight(pad);
+
+                    t.add(new Image(Tex.whiteui,
+                            typeColor(executor.getVariableValue(varName), new Color()).mul(mul)))
+                            .update(i -> i
+                                    .setColor(typeColor(executor.getVariableValue(varName), i.color).mul(mul)))
+                            .width(stub);
+
+                    t.stack(new Image(Tex.whiteui, typeColor(executor.getVariableValue(varName), new Color())) {
+                        {
+                            update(() -> setColor(typeColor(executor.getVariableValue(varName), color)));
+                        }
+                    }, new Label(() -> " " + typeName(executor.getVariableValue(varName)) + " ") {
+                        {
+                            setStyle(Styles.outlineLabel);
+                        }
+                    });
+
+                    t.row();
+
+                    t.add().growX().colspan(6).height(4).row();
+                }
+            });
+        });
         row();
         add(controlButtons).growX().pad(5f);
         row();
@@ -128,102 +193,24 @@ public class JsDialog extends BaseDialog {
         }
 
         controlButtons.button("@reset", Icon.cancel, () -> {
+            state.set(State.paused);
             executor.builder.code = codeEditor.getText();
             executor.load(executor.builder);
             isRunning = false;
-            state.set(State.paused);
             setupControlButtons();
         }).disabled(t -> net.active());
-
-        controlButtons.button("@variables", Icon.menu, () -> {
-            BaseDialog dialog = new BaseDialog("@variables");
-            dialog.hidden(() -> {
-                if (!wasPaused && !net.active()) {
-                    state.set(State.paused);
-                }
-            });
-
-            dialog.shown(() -> {
-                if (!wasPaused && !net.active()) {
-                    state.set(State.playing);
-                }
-            });
-
-            dialog.cont.pane(p -> {
-                p.margin(10f).marginRight(16f);
-                p.table(Tex.button, t -> {
-                    t.defaults().fillX().height(45f);
-                    for (var varName : executor.getAllVariableNames()) {
-                        Color varColor = Pal.gray;
-                        float stub = 8f, mul = 0.5f, pad = 4;
-
-                        t.add(new Image(Tex.whiteui, varColor.cpy().mul(mul))).width(stub);
-                        t.stack(new Image(Tex.whiteui, varColor), new Label(" " + varName + " ", Styles.outlineLabel) {
-                            {
-                                setColor(Pal.accent);
-                            }
-                        }).padRight(pad);
-
-                        t.add(new Image(Tex.whiteui, Pal.gray.cpy().mul(mul))).width(stub);
-                        t.table(Tex.pane, out -> {
-                            float period = 15f;
-                            float[] counter = { -1f };
-                            Label label = out.add("").style(Styles.outlineLabel).padLeft(4).padRight(4).width(140f)
-                                    .wrap().get();
-                            label.update(() -> {
-                                if (counter[0] < 0 || (counter[0] += Time.delta) >= period) {
-                                    Object varValue = executor.getVariableValue(varName);
-                                    String text = getDisplayableValue(varValue);
-                                    if (!label.textEquals(text)) {
-                                        label.setText(text);
-                                        if (counter[0] >= 0f) {
-                                            label.actions(Actions.color(Pal.accent), Actions.color(Color.white, 0.2f));
-                                        }
-                                    }
-                                    counter[0] = 0f;
-                                }
-                            });
-                            label.act(1f);
-                        }).padRight(pad);
-
-                        t.add(new Image(Tex.whiteui,
-                                typeColor(executor.getVariableValue(varName), new Color()).mul(mul)))
-                                .update(i -> i
-                                        .setColor(typeColor(executor.getVariableValue(varName), i.color).mul(mul)))
-                                .width(stub);
-
-                        t.stack(new Image(Tex.whiteui, typeColor(executor.getVariableValue(varName), new Color())) {
-                            {
-                                update(() -> setColor(typeColor(executor.getVariableValue(varName), color)));
-                            }
-                        }, new Label(() -> " " + typeName(executor.getVariableValue(varName)) + " ") {
-                            {
-                                setStyle(Styles.outlineLabel);
-                            }
-                        });
-
-                        t.row();
-
-                        t.add().growX().colspan(6).height(4).row();
-                    }
-                });
-            });
-
-            dialog.addCloseButton();
-            dialog.buttons.button("@logic.globals", Icon.list, () -> globalsDialog.show()).size(210f, 64f);
-
-            dialog.show();
-        }).name("variables").disabled(b -> executor == null);
     }
 
     public void show(String code, JsExecutor executor, boolean privileged, Cons<String> modified) {
         this.executor = executor;
         codeEditor.setText(executor.code);
         executor.setConsoleListener(log -> {
-            if (consoleOutput != null)
-                consoleOutput.setText(log);
-            //consoleOutput.setCursorPosition(log.length());
+            logText = log;
         });
+
+        if(executor.console != null){
+            logText = executor.console.getLogContent();
+        }
 
         this.consumer = result -> {
             if (!result.equals(code)) {

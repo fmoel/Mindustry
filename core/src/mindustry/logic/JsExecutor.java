@@ -28,25 +28,59 @@ import org.mozilla.javascript.debug.DebuggableScript;
 import org.mozilla.javascript.debug.Debugger;
 
 public class JsExecutor extends LExecutor implements Debugger {
+    private boolean isInitialized;
+    public LAssembler builder = new LAssembler(); // TODO: check if still needs be initialized
+
     public Context context;
     public Scriptable scope;
     public String code;
-    public String securedCode;
-    private boolean isInitialized;
-    private boolean isRunning = false;
+    public String cooperativeCode;
+
+    // Control the javascript thread
+    public volatile boolean isRunning = false;
     private Thread executionThread;
     public final Object singleStepLock = new Object();
-    public boolean stopExecution = false;
-    private int currentLineNumber = 1;
+    public final Object startLock = new Object();
+    public volatile boolean hasErrors = false;
+
+    private volatile int currentLineNumber = 1;
     public String consoleLog = "";
     public Cons<String> consoleListener;
-    public LAssembler builder = new LAssembler();
     public Console console;
-    public JsWrapper mindustry;
+    public JsWrapper jsWrapper;
     public long sleepUntil = 0;
 
     public JsExecutor() {
         this.isInitialized = false;
+        executionThread = new Thread(() -> {
+            while(true){
+                try{
+                    synchronized(startLock){
+                        startLock.wait();
+                    }
+                    isRunning = true;
+                    hasErrors = false;
+                    while (isRunning){
+                        initializeContext(); // Initialize the context and start the script
+                        try {
+                            context.evaluateString(scope, this.cooperativeCode, "script", 1, null);
+                        } catch (AbortCodeExecution e) {
+                            isRunning = false;
+                        } catch (Throwable e){
+                            hasErrors = true;
+                            isRunning = false;
+                            console.error(getStackTrace(e));                            
+                        } finally {
+                            cleanupContext(); 
+                        }
+                    }
+                }catch(InterruptedException e){
+                    // this interrupt would stop the thread
+                    return;
+                }
+            }
+        });
+        executionThread.start();
     }
 
     // Loads the JavaScript code into the executor
@@ -62,61 +96,38 @@ public class JsExecutor extends LExecutor implements Debugger {
         code = builder.code;
 
         this.isInitialized = !code.isEmpty();
-        createSecuredCode(code);
+        cooperativeCode = makeCodeCooperative(code);
 
-        instructions = LAssembler.assemble("ubind", false).instructions;
+        instructions = LAssembler.assemble("ubind", false).instructions; // TODO: Check if this is still needed
 
-        // stop execution thread, if already running
-        if (executionThread != null) {
-            stopExecution = true;
-            if(isRunning){
-                executionThread.interrupt();
-                long timeOut = Time.millis() + 10;
-                while (isRunning && timeOut < Time.millis()){
-                    try{
-                        Thread.sleep(1);
-                    }catch(InterruptedException e){}
-                }
+        // interrupt running program
+        if(isRunning){
+            executionThread.interrupt();
+            for(long timeOut = Time.millis() + 10; isRunning && timeOut < Time.millis(); ){
+                try{
+                    Thread.sleep(1);
+                }catch(InterruptedException e){}
             }
         }
 
-        if (isInitialized) {
-            stopExecution = false;
-            isRunning = true;
-            executionThread = new Thread(() -> {
-                initializeContext(); // Initialize the context and start the script
-                try {
-                    while (!stopExecution){
-                        context.evaluateString(scope, this.securedCode, "script", 1, null);
-                    }
-                    console.log("stop execution");
-                } catch (Error e) {
-                    console.log("error catched");
-                    if (e.getMessage() == "Script execution aborted") {
-                        console.log("Code Execution stopped.");
-                    } else {
-                        console.log("Error from JS code." + getStackTrace(e));
-                    }
-                } catch (Exception e) {
-                    console.log("Error from JS code." + getStackTrace(e));
-                } finally {
-                    console.log("Context closed.");
-                    cleanupContext(); // Ensure context cleanup on script completion
-                    isRunning = false;
-                }
-            });
-            executionThread.start();
+
+        try{
+            Thread.sleep(1);
+        }catch(InterruptedException e){}
+
+        // start the the (new) code
+        synchronized(startLock){
+            startLock.notify();
         }
     }
 
-    // Makes the script cooperative
-    public void createSecuredCode(String code) {        
-        // yield while(1); 
-        securedCode = code.replaceAll("\\bwhile\\b(\\s*)\\(", "while$1(cpu.yield()||");
+    public String makeCodeCooperative(String code) {        
+        // yield while({cpu.yield()||}1);  
+        String cooperativeCode = code.replaceAll("\\bwhile\\b(\\s*)\\(", "while$1(cpu.yield()||");
 
-        // yield for(var i = 0; i < 0;{cpu.yield(),}i++);
-        securedCode = code.replaceAll("\\bfor\\b(\\s*)\\(([^;]*;[^;]*;)", "for$1($2cpu.yield(),");
-
+        // yield for(var i = 0; i < 1;{cpu.yield(),}i--); 
+        cooperativeCode = cooperativeCode.replaceAll("\\bfor\\b(\\s*)\\(([^;]*;[^;]*;)", "for$1($2cpu.yield(),");
+        return cooperativeCode;
     }
 
     public static String getStackTrace(Throwable t) {
@@ -125,7 +136,7 @@ public class JsExecutor extends LExecutor implements Debugger {
         return sw.toString();
     }
 
-    // Executes exactly one line of code
+    // Executes exactly one line of code (or until one LAsm call)
     @Override
     public void runOnce() {
         if (!isInitialized) {
@@ -141,18 +152,11 @@ public class JsExecutor extends LExecutor implements Debugger {
 
     // will be called from the script thread eg. via cpu.yield()
     public void sendToYield() {
-        if (stopExecution) {
-            throw new Error("Script execution aborted");
-        }
         synchronized (singleStepLock) {
             try {
                 singleStepLock.wait();
             } catch (InterruptedException e) {
-                if (consoleListener != null) 
-                    consoleListener.get("Error from yield");
-                e.printStackTrace();                
-            }catch(Throwable e){
-                console.log("yield: some error");
+                throw new AbortCodeExecution();
             }
         }
     }
@@ -162,6 +166,8 @@ public class JsExecutor extends LExecutor implements Debugger {
     public boolean initialized() {
         return isInitialized;
     }
+
+    public class AbortCodeExecution extends Error{}
 
     public static class SandboxNativeJavaObject extends NativeJavaObject {
         public SandboxNativeJavaObject(Scriptable scope, Object javaObject, Class staticType) {
@@ -233,7 +239,7 @@ public class JsExecutor extends LExecutor implements Debugger {
         scope = context.initStandardObjects();
         
         console = new Console();
-        mindustry = new JsWrapper(this, console, scope);
+        jsWrapper = new JsWrapper(this, console, scope);
     }
 
     public void setConsoleListener(Cons<String> listener) {
@@ -272,16 +278,11 @@ public class JsExecutor extends LExecutor implements Debugger {
             executor.counter.numval = lineNumber;
             executor.currentLineNumber = lineNumber;
             console.log("onLineChange line " + lineNumber);
-            if (executor.stopExecution) {
-                console.log("From fhread: Stop execution.");
-                throw new Error("Script execution aborted");
-            }
             synchronized (executor.singleStepLock) {
                 try {
                     executor.singleStepLock.wait();
                 } catch (InterruptedException e) {
-                    console.log("From thread: interruptd detected.");
-                    throw new Error("Script execution aborted");
+                    throw new AbortCodeExecution();
                 }
             }
         }

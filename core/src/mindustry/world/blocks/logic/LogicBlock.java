@@ -8,7 +8,6 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
-import arc.struct.Bits;
 import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
@@ -575,6 +574,31 @@ public class LogicBlock extends Block {
                 }
             }
         }
+
+        @Override
+        public BlockStatus status(){
+            if(!enabled){
+                return BlockStatus.logicDisable;
+            }
+            if(language == Language.mindustryLogic){
+                int index = (int) executor.counter.numval;
+                if(index >= 0 && index < executor.instructions.length){
+                    if(executor.instructions[index] instanceof LExecutor.StopI){
+                        return BlockStatus.noInput;
+                    }
+                }
+            }else if(language == Language.javaScript){
+                JsExecutor jse = (JsExecutor) executor;
+                if(jse.hasErrors){
+                    return BlockStatus.noInput;
+                }
+                if(!jse.isRunning){
+                    return BlockStatus.noOutput;
+                }
+            }
+            return BlockStatus.active;
+        }
+
 
         @Override
         public byte[] config() {

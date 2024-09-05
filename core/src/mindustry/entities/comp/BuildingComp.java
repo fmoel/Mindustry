@@ -1167,7 +1167,7 @@ abstract class BuildingComp implements Posc, Teamc, Healthc, Buildingc, Timerc, 
     }
 
     public void drawStatus(){
-        if(block.enableDrawStatus && block.consumers.length > 0){
+        if(block.enforceDrawStatus || (block.enableDrawStatus && block.consumers.length > 0)){
             float multiplier = block.size > 1 ? 1 : 0.64f;
             float brcx = x + (block.size * tilesize / 2f) - (tilesize * multiplier / 2f);
             float brcy = y - (block.size * tilesize / 2f) + (tilesize * multiplier / 2f);

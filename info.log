@@ -1,0 +1,1373 @@
+Initialized native services in: C:\Users\toshiba\.gradle\native
+Initialized jansi services in: C:\Users\toshiba\.gradle\native
+Received JVM installation metadata from 'C:\Program Files\Eclipse Adoptium\jdk-17.0.12.7-hotspot': {JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.0.12.7-hotspot, JAVA_VERSION=17.0.12, JAVA_VENDOR=Eclipse Adoptium, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.12+7, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.12+7, VM_VENDOR=Eclipse Adoptium, OS_ARCH=amd64}
+Found daemon DaemonInfo{pid=28336, address=[d5d84e08-395d-4ae8-a910-89f583e22582 port:8472, addresses:[/127.0.0.1]], state=Idle, lastBusy=1724105716163, context=DefaultDaemonContext[uid=45d31204-9462-4053-8e91-1ceb773617ab,javaHome=C:\Users\toshiba\.vscode\extensions\redhat.java-1.33.0-win32-x64\jre\17.0.11-win32-x86_64,javaVersion=17,daemonRegistryDir=C:\Users\toshiba\.gradle\daemon,pid=28336,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=--illegal-access=permit,--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED,--add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xms256m,-Xmx1024m,-Dfile.encoding=UTF-8,-Duser.country=DE,-Duser.language=de,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{requestedJvm=17.0.12 (Eclipse Adoptium 17.0.12+7), jvmCriteria=null, daemonOpts=[--illegal-access=permit, --add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED, --add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED, --add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED, --add-opens=java.base/java.util=ALL-UNNAMED, --add-opens=java.base/java.lang=ALL-UNNAMED, --add-opens=java.base/java.lang.invoke=ALL-UNNAMED, --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED, --add-opens=java.base/java.nio.charset=ALL-UNNAMED, --add-opens=java.base/java.net=ALL-UNNAMED, --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED, -Xms256m, -Xmx1024m, -Dfile.encoding=windows-1252, -Duser.country=DE, -Duser.language=de, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=45d31204-9462-4053-8e91-1ceb773617ab,javaHome=C:\Users\toshiba\.vscode\extensions\redhat.java-1.33.0-win32-x64\jre\17.0.11-win32-x86_64,javaVersion=17,daemonRegistryDir=C:\Users\toshiba\.gradle\daemon,pid=28336,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=--illegal-access=permit,--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED,--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED,--add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xms256m,-Xmx1024m,-Dfile.encoding=UTF-8,-Duser.country=DE,-Duser.language=de,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 528). The daemon log file: C:\Users\toshiba\.gradle\daemon\8.8\daemon-528.out.log
+Starting 2nd build in daemon [uptime: 10 mins 35.369 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 1 GiB]
+Using 12 worker leases.
+Now considering [E:\Projects\Mindustry] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'E:\Projects\Mindustry\settings.gradle'.
+Using local directory build cache for the root build (location = C:\Users\toshiba\.gradle\caches\build-cache-1, removeUnusedEntriesAfter = 7 days).
+Projects loaded. Root project using build file 'E:\Projects\Mindustry\build.gradle'.
+Included projects: [root project 'Mindustry', project ':android', project ':annotations', project ':core', project ':desktop', project ':ios', project ':server', project ':tests', project ':tools']
+
+> Configure project :
+Evaluating root project 'Mindustry' using build file 'E:\Projects\Mindustry\build.gradle'.
+Transforming packer-277a7cc689.jar (com.github.Anuken.Arc:packer:277a7cc689) with InstrumentationAnalysisTransform
+Transforming arc-core-277a7cc689.jar (com.github.Anuken.Arc:arc-core:277a7cc689) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-util-klib-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-klib:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-klib-commonizer-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-tooling-metadata-1.6.0.jar (org.jetbrains.kotlin:kotlin-tooling-metadata:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-project-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-project-model:1.6.0) with InstrumentationAnalysisTransform
+Transforming gson-2.8.6.jar (com.google.code.gson:gson:2.8.6) with InstrumentationAnalysisTransform
+Transforming guava-29.0-jre.jar (com.google.guava:guava:29.0-jre) with InstrumentationAnalysisTransform
+Transforming gradle-download-task-4.1.1.jar (de.undercouch:gradle-download-task:4.1.1) with InstrumentationAnalysisTransform
+Transforming semver4j-0.16.4-nodeps.jar (com.github.gundy:semver4j:0.16.4) with InstrumentationAnalysisTransform
+Transforming kotlin-annotation-processing-gradle-1.6.0.jar (org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-android-extensions-1.6.0.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-runner-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-native-utils-1.6.0.jar (org.jetbrains.kotlin:kotlin-native-utils:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-util-io-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-io:1.6.0) with InstrumentationAnalysisTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with InstrumentationAnalysisTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with InstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with InstrumentationAnalysisTransform
+Transforming checker-qual-2.11.1.jar (org.checkerframework:checker-qual:2.11.1) with InstrumentationAnalysisTransform
+Transforming error_prone_annotations-2.3.4.jar (com.google.errorprone:error_prone_annotations:2.3.4) with InstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with InstrumentationAnalysisTransform
+Transforming kotlin-daemon-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming trove4j-1.0.20181211.jar (org.jetbrains.intellij.deps:trove4j:1.0.20181211) with InstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-build-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-build-common:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-daemon-client-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.6.0) with InstrumentationAnalysisTransform
+Transforming packer-277a7cc689.jar (com.github.Anuken.Arc:packer:277a7cc689) with InstrumentationAnalysisTransform
+Transforming packer-277a7cc689.jar (com.github.Anuken.Arc:packer:277a7cc689) with MergeInstrumentationAnalysisTransform
+Transforming arc-core-277a7cc689.jar (com.github.Anuken.Arc:arc-core:277a7cc689) with InstrumentationAnalysisTransform
+Transforming arc-core-277a7cc689.jar (com.github.Anuken.Arc:arc-core:277a7cc689) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming arc-core-277a7cc689.jar (com.github.Anuken.Arc:arc-core:277a7cc689) with ExternalDependencyInstrumentingArtifactTransform
+Transforming packer-277a7cc689.jar (com.github.Anuken.Arc:packer:277a7cc689) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-klib:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-util-klib-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-klib:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-klib-commonizer-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-klib-commonizer-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-util-klib-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-klib:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-tooling-metadata-1.6.0.jar (org.jetbrains.kotlin:kotlin-tooling-metadata:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-tooling-metadata-1.6.0.jar (org.jetbrains.kotlin:kotlin-tooling-metadata:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-klib-commonizer-api-1.6.0.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-project-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-project-model:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-project-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-project-model:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-tooling-metadata-1.6.0.jar (org.jetbrains.kotlin:kotlin-tooling-metadata:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gson-2.8.6.jar (com.google.code.gson:gson:2.8.6) with InstrumentationAnalysisTransform
+Transforming gson-2.8.6.jar (com.google.code.gson:gson:2.8.6) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-project-model-1.6.0.jar (org.jetbrains.kotlin:kotlin-project-model:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming guava-29.0-jre.jar (com.google.guava:guava:29.0-jre) with InstrumentationAnalysisTransform
+Transforming guava-29.0-jre.jar (com.google.guava:guava:29.0-jre) with MergeInstrumentationAnalysisTransform
+Transforming gson-2.8.6.jar (com.google.code.gson:gson:2.8.6) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gradle-download-task-4.1.1.jar (de.undercouch:gradle-download-task:4.1.1) with InstrumentationAnalysisTransform
+Transforming gradle-download-task-4.1.1.jar (de.undercouch:gradle-download-task:4.1.1) with MergeInstrumentationAnalysisTransform
+Transforming semver4j-0.16.4-nodeps.jar (com.github.gundy:semver4j:0.16.4) with InstrumentationAnalysisTransform
+Transforming guava-29.0-jre.jar (com.google.guava:guava:29.0-jre) with ExternalDependencyInstrumentingArtifactTransform
+Transforming semver4j-0.16.4-nodeps.jar (com.github.gundy:semver4j:0.16.4) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-annotation-processing-gradle-1.6.0.jar (org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.6.0) with InstrumentationAnalysisTransform
+Transforming gradle-download-task-4.1.1.jar (de.undercouch:gradle-download-task:4.1.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-annotation-processing-gradle-1.6.0.jar (org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-android-extensions-1.6.0.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.6.0) with InstrumentationAnalysisTransform
+Transforming semver4j-0.16.4-nodeps.jar (com.github.gundy:semver4j:0.16.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-android-extensions-1.6.0.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-annotation-processing-gradle-1.6.0.jar (org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-compiler-runner-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-runner-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-android-extensions-1.6.0.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-runner-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-native-utils-1.6.0.jar (org.jetbrains.kotlin:kotlin-native-utils:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-native-utils-1.6.0.jar (org.jetbrains.kotlin:kotlin-native-utils:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-io-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-io:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-util-io-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-io:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-native-utils-1.6.0.jar (org.jetbrains.kotlin:kotlin-native-utils:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with InstrumentationAnalysisTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with MergeInstrumentationAnalysisTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with InstrumentationAnalysisTransform
+Transforming kotlin-util-io-1.6.0.jar (org.jetbrains.kotlin:kotlin-util-io:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with MergeInstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with InstrumentationAnalysisTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with MergeInstrumentationAnalysisTransform
+Transforming checker-qual-2.11.1.jar (org.checkerframework:checker-qual:2.11.1) with InstrumentationAnalysisTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with ExternalDependencyInstrumentingArtifactTransform
+Transforming checker-qual-2.11.1.jar (org.checkerframework:checker-qual:2.11.1) with MergeInstrumentationAnalysisTransform
+Transforming error_prone_annotations-2.3.4.jar (com.google.errorprone:error_prone_annotations:2.3.4) with InstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming error_prone_annotations-2.3.4.jar (com.google.errorprone:error_prone_annotations:2.3.4) with MergeInstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with InstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with MergeInstrumentationAnalysisTransform
+Transforming checker-qual-2.11.1.jar (org.checkerframework:checker-qual:2.11.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming error_prone_annotations-2.3.4.jar (com.google.errorprone:error_prone_annotations:2.3.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.6.0) with InstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming trove4j-1.0.20181211.jar (org.jetbrains.intellij.deps:trove4j:1.0.20181211) with InstrumentationAnalysisTransform
+Transforming trove4j-1.0.20181211.jar (org.jetbrains.intellij.deps:trove4j:1.0.20181211) with MergeInstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with InstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-daemon-embeddable-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-build-common:1.6.0) with InstrumentationAnalysisTransform
+Transforming trove4j-1.0.20181211.jar (org.jetbrains.intellij.deps:trove4j:1.0.20181211) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-build-common:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-daemon-client-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.6.0) with InstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-client-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-build-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-build-common:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with InstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-daemon-client-1.6.0.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-jvm-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-common-1.6.0.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.6.0) with ExternalDependencyInstrumentingArtifactTransform
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Compiling with build: 'custom build'
+
+> Configure project :android
+Evaluating project ':android' using build file 'E:\Projects\Mindustry\android\build.gradle'.
+Transforming gradle-8.2.2.jar (com.android.tools.build:gradle:8.2.2) with InstrumentationAnalysisTransform
+Transforming gradle-settings-api-8.2.2.jar (com.android.tools.build:gradle-settings-api:8.2.2) with InstrumentationAnalysisTransform
+Transforming lint-model-31.2.2.jar (com.android.tools.lint:lint-model:31.2.2) with InstrumentationAnalysisTransform
+Transforming builder-8.2.2.jar (com.android.tools.build:builder:8.2.2) with InstrumentationAnalysisTransform
+Transforming manifest-merger-31.2.2.jar (com.android.tools.build:manifest-merger:31.2.2) with InstrumentationAnalysisTransform
+Transforming sdk-common-31.2.2.jar (com.android.tools:sdk-common:31.2.2) with InstrumentationAnalysisTransform
+Transforming sdklib-31.2.2.jar (com.android.tools:sdklib:31.2.2) with InstrumentationAnalysisTransform
+Transforming repository-31.2.2.jar (com.android.tools:repository:31.2.2) with InstrumentationAnalysisTransform
+Transforming gradle-api-8.2.2.jar (com.android.tools.build:gradle-api:8.2.2) with InstrumentationAnalysisTransform
+Transforming builder-test-api-8.2.2.jar (com.android.tools.build:builder-test-api:8.2.2) with InstrumentationAnalysisTransform
+Transforming ddmlib-31.2.2.jar (com.android.tools.ddms:ddmlib:31.2.2) with InstrumentationAnalysisTransform
+Transforming aaptcompiler-8.2.2.jar (com.android.tools.build:aaptcompiler:8.2.2) with InstrumentationAnalysisTransform
+Transforming bundletool-1.15.2.jar (com.android.tools.build:bundletool:1.15.2) with InstrumentationAnalysisTransform
+Transforming aapt2-proto-8.2.2-10154469.jar (com.android.tools.build:aapt2-proto:8.2.2-10154469) with InstrumentationAnalysisTransform
+Transforming crash-31.2.2.jar (com.android.tools.analytics-library:crash:31.2.2) with InstrumentationAnalysisTransform
+Transforming tracker-31.2.2.jar (com.android.tools.analytics-library:tracker:31.2.2) with InstrumentationAnalysisTransform
+Transforming shared-31.2.2.jar (com.android.tools.analytics-library:shared:31.2.2) with InstrumentationAnalysisTransform
+Transforming lint-typedef-remover-31.2.2.jar (com.android.tools.lint:lint-typedef-remover:31.2.2) with InstrumentationAnalysisTransform
+Transforming databinding-compiler-common-8.2.2.jar (androidx.databinding:databinding-compiler-common:8.2.2) with InstrumentationAnalysisTransform
+Transforming databinding-common-8.2.2.jar (androidx.databinding:databinding-common:8.2.2) with InstrumentationAnalysisTransform
+Transforming baseLibrary-8.2.2.jar (com.android.databinding:baseLibrary:8.2.2) with InstrumentationAnalysisTransform
+Transforming layoutlib-api-31.2.2.jar (com.android.tools.layoutlib:layoutlib-api:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-device-provider-ddmlib-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-ddmlib-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-device-provider-gradle-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-gradle-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-additional-test-output-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-additional-test-output-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-coverage-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-coverage-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-emulator-control-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-emulator-control-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-logcat-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-logcat-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-apk-installer-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-apk-installer-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-retention-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-retention-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-result-listener-gradle-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-result-listener-gradle-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming builder-model-8.2.2.jar (com.android.tools.build:builder-model:8.2.2) with InstrumentationAnalysisTransform
+Transforming dvlib-31.2.2.jar (com.android.tools:dvlib:31.2.2) with InstrumentationAnalysisTransform
+Transforming common-31.2.2.jar (com.android.tools:common:31.2.2) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-jdk8-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0) with InstrumentationAnalysisTransform
+Transforming transform-api-2.0.0-deprecated-use-gradle-api.jar (com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api) with InstrumentationAnalysisTransform
+Transforming httpmime-4.5.6.jar (org.apache.httpcomponents:httpmime:4.5.6) with InstrumentationAnalysisTransform
+Transforming commons-io-2.4.jar (commons-io:commons-io:2.4) with InstrumentationAnalysisTransform
+Transforming jetifier-processor-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10) with InstrumentationAnalysisTransform
+Transforming asm-commons-9.2.jar (org.ow2.asm:asm-commons:9.2) with InstrumentationAnalysisTransform
+Transforming asm-util-9.2.jar (org.ow2.asm:asm-util:9.2) with InstrumentationAnalysisTransform
+Transforming asm-analysis-9.2.jar (org.ow2.asm:asm-analysis:9.2) with InstrumentationAnalysisTransform
+Transforming asm-tree-9.2.jar (org.ow2.asm:asm-tree:9.2) with InstrumentationAnalysisTransform
+Transforming asm-9.2.jar (org.ow2.asm:asm:9.2) with InstrumentationAnalysisTransform
+Transforming apkzlib-8.2.2.jar (com.android.tools.build:apkzlib:8.2.2) with InstrumentationAnalysisTransform
+Transforming bcpkix-jdk15on-1.67.jar (org.bouncycastle:bcpkix-jdk15on:1.67) with InstrumentationAnalysisTransform
+Transforming jaxb-runtime-2.3.2.jar (org.glassfish.jaxb:jaxb-runtime:2.3.2) with InstrumentationAnalysisTransform
+Transforming jopt-simple-4.9.jar (net.sf.jopt-simple:jopt-simple:4.9) with InstrumentationAnalysisTransform
+Transforming jetifier-core-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-core:1.0.0-beta10) with InstrumentationAnalysisTransform
+Transforming javapoet-1.10.0.jar (com.squareup:javapoet:1.10.0) with InstrumentationAnalysisTransform
+Transforming protobuf-java-util-3.19.3.jar (com.google.protobuf:protobuf-java-util:3.19.3) with InstrumentationAnalysisTransform
+Transforming grpc-protobuf-1.45.1.jar (io.grpc:grpc-protobuf:1.45.1) with InstrumentationAnalysisTransform
+Transforming tink-1.7.0.jar (com.google.crypto.tink:tink:1.7.0) with InstrumentationAnalysisTransform
+Transforming protos-31.2.2.jar (com.android.tools.analytics-library:protos:31.2.2) with InstrumentationAnalysisTransform
+Transforming proto-google-common-protos-2.0.1.jar (com.google.api.grpc:proto-google-common-protos:2.0.1) with InstrumentationAnalysisTransform
+Transforming protobuf-java-3.19.3.jar (com.google.protobuf:protobuf-java:3.19.3) with InstrumentationAnalysisTransform
+Transforming grpc-netty-1.45.1.jar (io.grpc:grpc-netty:1.45.1) with InstrumentationAnalysisTransform
+Transforming grpc-core-1.45.1.jar (io.grpc:grpc-core:1.45.1) with InstrumentationAnalysisTransform
+Transforming gson-2.10.jar (com.google.code.gson:gson:2.10) with InstrumentationAnalysisTransform
+Transforming grpc-stub-1.45.1.jar (io.grpc:grpc-stub:1.45.1) with InstrumentationAnalysisTransform
+Transforming core-proto-0.0.8-alpha08.jar (com.google.testing.platform:core-proto:0.0.8-alpha08) with InstrumentationAnalysisTransform
+Transforming tensorflow-lite-metadata-0.1.0-rc2.jar (org.tensorflow:tensorflow-lite-metadata:0.1.0-rc2) with InstrumentationAnalysisTransform
+Transforming flatbuffers-java-1.12.0.jar (com.google.flatbuffers:flatbuffers-java:1.12.0) with InstrumentationAnalysisTransform
+Transforming jimfs-1.1.jar (com.google.jimfs:jimfs:1.1) with InstrumentationAnalysisTransform
+Transforming grpc-protobuf-lite-1.45.1.jar (io.grpc:grpc-protobuf-lite:1.45.1) with InstrumentationAnalysisTransform
+Transforming grpc-api-1.45.1.jar (io.grpc:grpc-api:1.45.1) with InstrumentationAnalysisTransform
+Transforming guava-31.1-jre.jar (com.google.guava:guava:31.1-jre) with InstrumentationAnalysisTransform
+Transforming dagger-2.28.3.jar (com.google.dagger:dagger:2.28.3) with InstrumentationAnalysisTransform
+Transforming javax.inject-1.jar (javax.inject:javax.inject:1) with InstrumentationAnalysisTransform
+Transforming kxml2-2.3.0.jar (net.sf.kxml:kxml2:2.3.0) with InstrumentationAnalysisTransform
+Transforming bcprov-jdk15on-1.67.jar (org.bouncycastle:bcprov-jdk15on:1.67) with InstrumentationAnalysisTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with InstrumentationAnalysisTransform
+Transforming kotlin-reflect-1.9.0.jar (org.jetbrains.kotlin:kotlin-reflect:1.9.0) with InstrumentationAnalysisTransform
+Transforming xercesImpl-2.12.0.jar (xerces:xercesImpl:2.12.0) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.21.jar (org.apache.commons:commons-compress:1.21) with InstrumentationAnalysisTransform
+Transforming httpclient-4.5.14.jar (org.apache.httpcomponents:httpclient:4.5.14) with InstrumentationAnalysisTransform
+Transforming httpcore-4.4.16.jar (org.apache.httpcomponents:httpcore:4.4.16) with InstrumentationAnalysisTransform
+Transforming javax.activation-1.2.0.jar (com.sun.activation:javax.activation:1.2.0) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-jdk7-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib:1.9.0) with InstrumentationAnalysisTransform
+Transforming annotations-13.0.jar (org.jetbrains:annotations:13.0) with InstrumentationAnalysisTransform
+Transforming signflinger-8.2.2.jar (com.android:signflinger:8.2.2) with InstrumentationAnalysisTransform
+Transforming zipflinger-8.2.2.jar (com.android:zipflinger:8.2.2) with InstrumentationAnalysisTransform
+Transforming annotations-31.2.2.jar (com.android.tools:annotations:31.2.2) with InstrumentationAnalysisTransform
+Transforming jna-platform-5.6.0.jar (net.java.dev.jna:jna-platform:5.6.0) with InstrumentationAnalysisTransform
+Transforming juniversalchardet-1.0.3.jar (com.googlecode.juniversalchardet:juniversalchardet:1.0.3) with InstrumentationAnalysisTransform
+Transforming javax.annotation-api-1.3.2.jar (javax.annotation:javax.annotation-api:1.3.2) with InstrumentationAnalysisTransform
+Transforming stax-ex-1.8.1.jar (org.jvnet.staxex:stax-ex:1.8.1) with InstrumentationAnalysisTransform
+Transforming jakarta.xml.bind-api-2.3.2.jar (jakarta.xml.bind:jakarta.xml.bind-api:2.3.2) with InstrumentationAnalysisTransform
+Transforming txw2-2.3.2.jar (org.glassfish.jaxb:txw2:2.3.2) with InstrumentationAnalysisTransform
+Transforming istack-commons-runtime-3.0.8.jar (com.sun.istack:istack-commons-runtime:3.0.8) with InstrumentationAnalysisTransform
+Transforming FastInfoset-1.2.16.jar (com.sun.xml.fastinfoset:FastInfoset:1.2.16) with InstrumentationAnalysisTransform
+Transforming jakarta.activation-api-1.2.1.jar (jakarta.activation:jakarta.activation-api:1.2.1) with InstrumentationAnalysisTransform
+Transforming auto-value-annotations-1.6.2.jar (com.google.auto.value:auto-value-annotations:1.6.2) with InstrumentationAnalysisTransform
+Transforming error_prone_annotations-2.11.0.jar (com.google.errorprone:error_prone_annotations:2.11.0) with InstrumentationAnalysisTransform
+Transforming jose4j-0.7.0.jar (org.bitbucket.b_c:jose4j:0.7.0) with InstrumentationAnalysisTransform
+Transforming slf4j-api-1.7.30.jar (org.slf4j:slf4j-api:1.7.30) with InstrumentationAnalysisTransform
+Transforming jdom2-2.0.6.jar (org.jdom:jdom2:2.0.6) with InstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with InstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with InstrumentationAnalysisTransform
+Transforming annotations-4.1.1.4.jar (com.google.android:annotations:4.1.1.4) with InstrumentationAnalysisTransform
+Transforming animal-sniffer-annotations-1.19.jar (org.codehaus.mojo:animal-sniffer-annotations:1.19) with InstrumentationAnalysisTransform
+Transforming perfmark-api-0.23.0.jar (io.perfmark:perfmark-api:0.23.0) with InstrumentationAnalysisTransform
+Transforming netty-codec-http2-4.1.72.Final.jar (io.netty:netty-codec-http2:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-handler-proxy-4.1.72.Final.jar (io.netty:netty-handler-proxy:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming checker-qual-3.12.0.jar (org.checkerframework:checker-qual:3.12.0) with InstrumentationAnalysisTransform
+Transforming commons-codec-1.11.jar (commons-codec:commons-codec:1.11) with InstrumentationAnalysisTransform
+Transforming apksig-8.2.2.jar (com.android.tools.build:apksig:8.2.2) with InstrumentationAnalysisTransform
+Transforming javawriter-2.5.0.jar (com.squareup:javawriter:2.5.0) with InstrumentationAnalysisTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with InstrumentationAnalysisTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with InstrumentationAnalysisTransform
+Transforming xml-apis-1.4.01.jar (xml-apis:xml-apis:1.4.01) with InstrumentationAnalysisTransform
+Transforming commons-logging-1.2.jar (commons-logging:commons-logging:1.2) with InstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-common-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0) with InstrumentationAnalysisTransform
+Transforming grpc-context-1.45.1.jar (io.grpc:grpc-context:1.45.1) with InstrumentationAnalysisTransform
+Transforming netty-codec-http-4.1.72.Final.jar (io.netty:netty-codec-http:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-handler-4.1.72.Final.jar (io.netty:netty-handler:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-codec-socks-4.1.72.Final.jar (io.netty:netty-codec-socks:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-codec-4.1.72.Final.jar (io.netty:netty-codec:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-transport-4.1.72.Final.jar (io.netty:netty-transport:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-buffer-4.1.72.Final.jar (io.netty:netty-buffer:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-resolver-4.1.72.Final.jar (io.netty:netty-resolver:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-common-4.1.72.Final.jar (io.netty:netty-common:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-tcnative-classes-2.0.46.Final.jar (io.netty:netty-tcnative-classes:2.0.46.Final) with InstrumentationAnalysisTransform
+Transforming gradle-8.2.2.jar (com.android.tools.build:gradle:8.2.2) with InstrumentationAnalysisTransform
+Transforming gradle-8.2.2.jar (com.android.tools.build:gradle:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming gradle-settings-api-8.2.2.jar (com.android.tools.build:gradle-settings-api:8.2.2) with InstrumentationAnalysisTransform
+Transforming gradle-settings-api-8.2.2.jar (com.android.tools.build:gradle-settings-api:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming lint-model-31.2.2.jar (com.android.tools.lint:lint-model:31.2.2) with InstrumentationAnalysisTransform
+Transforming lint-model-31.2.2.jar (com.android.tools.lint:lint-model:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming gradle-8.2.2.jar (com.android.tools.build:gradle:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming builder-8.2.2.jar (com.android.tools.build:builder:8.2.2) with InstrumentationAnalysisTransform
+Transforming gradle-settings-api-8.2.2.jar (com.android.tools.build:gradle-settings-api:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming builder-8.2.2.jar (com.android.tools.build:builder:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming lint-model-31.2.2.jar (com.android.tools.lint:lint-model:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming manifest-merger-31.2.2.jar (com.android.tools.build:manifest-merger:31.2.2) with InstrumentationAnalysisTransform
+Transforming manifest-merger-31.2.2.jar (com.android.tools.build:manifest-merger:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming builder-8.2.2.jar (com.android.tools.build:builder:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming sdk-common-31.2.2.jar (com.android.tools:sdk-common:31.2.2) with InstrumentationAnalysisTransform
+Transforming sdk-common-31.2.2.jar (com.android.tools:sdk-common:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming manifest-merger-31.2.2.jar (com.android.tools.build:manifest-merger:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming sdklib-31.2.2.jar (com.android.tools:sdklib:31.2.2) with InstrumentationAnalysisTransform
+Transforming sdklib-31.2.2.jar (com.android.tools:sdklib:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming repository-31.2.2.jar (com.android.tools:repository:31.2.2) with InstrumentationAnalysisTransform
+Transforming sdk-common-31.2.2.jar (com.android.tools:sdk-common:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming repository-31.2.2.jar (com.android.tools:repository:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming sdklib-31.2.2.jar (com.android.tools:sdklib:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gradle-api-8.2.2.jar (com.android.tools.build:gradle-api:8.2.2) with InstrumentationAnalysisTransform
+Transforming gradle-api-8.2.2.jar (com.android.tools.build:gradle-api:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming repository-31.2.2.jar (com.android.tools:repository:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming builder-test-api-8.2.2.jar (com.android.tools.build:builder-test-api:8.2.2) with InstrumentationAnalysisTransform
+Transforming builder-test-api-8.2.2.jar (com.android.tools.build:builder-test-api:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming gradle-api-8.2.2.jar (com.android.tools.build:gradle-api:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming ddmlib-31.2.2.jar (com.android.tools.ddms:ddmlib:31.2.2) with InstrumentationAnalysisTransform
+Transforming ddmlib-31.2.2.jar (com.android.tools.ddms:ddmlib:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming builder-test-api-8.2.2.jar (com.android.tools.build:builder-test-api:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aaptcompiler-8.2.2.jar (com.android.tools.build:aaptcompiler:8.2.2) with InstrumentationAnalysisTransform
+Transforming aaptcompiler-8.2.2.jar (com.android.tools.build:aaptcompiler:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming bundletool-1.15.2.jar (com.android.tools.build:bundletool:1.15.2) with InstrumentationAnalysisTransform
+Transforming ddmlib-31.2.2.jar (com.android.tools.ddms:ddmlib:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming bundletool-1.15.2.jar (com.android.tools.build:bundletool:1.15.2) with MergeInstrumentationAnalysisTransform
+Transforming aaptcompiler-8.2.2.jar (com.android.tools.build:aaptcompiler:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aapt2-proto-8.2.2-10154469.jar (com.android.tools.build:aapt2-proto:8.2.2-10154469) with InstrumentationAnalysisTransform
+Transforming aapt2-proto-8.2.2-10154469.jar (com.android.tools.build:aapt2-proto:8.2.2-10154469) with MergeInstrumentationAnalysisTransform
+Transforming crash-31.2.2.jar (com.android.tools.analytics-library:crash:31.2.2) with InstrumentationAnalysisTransform
+Transforming bundletool-1.15.2.jar (com.android.tools.build:bundletool:1.15.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming crash-31.2.2.jar (com.android.tools.analytics-library:crash:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming tracker-31.2.2.jar (com.android.tools.analytics-library:tracker:31.2.2) with InstrumentationAnalysisTransform
+Transforming aapt2-proto-8.2.2-10154469.jar (com.android.tools.build:aapt2-proto:8.2.2-10154469) with ExternalDependencyInstrumentingArtifactTransform
+Transforming tracker-31.2.2.jar (com.android.tools.analytics-library:tracker:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming shared-31.2.2.jar (com.android.tools.analytics-library:shared:31.2.2) with InstrumentationAnalysisTransform
+Transforming crash-31.2.2.jar (com.android.tools.analytics-library:crash:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming shared-31.2.2.jar (com.android.tools.analytics-library:shared:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming lint-typedef-remover-31.2.2.jar (com.android.tools.lint:lint-typedef-remover:31.2.2) with InstrumentationAnalysisTransform
+Transforming tracker-31.2.2.jar (com.android.tools.analytics-library:tracker:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming lint-typedef-remover-31.2.2.jar (com.android.tools.lint:lint-typedef-remover:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming databinding-compiler-common-8.2.2.jar (androidx.databinding:databinding-compiler-common:8.2.2) with InstrumentationAnalysisTransform
+Transforming shared-31.2.2.jar (com.android.tools.analytics-library:shared:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming databinding-compiler-common-8.2.2.jar (androidx.databinding:databinding-compiler-common:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming databinding-common-8.2.2.jar (androidx.databinding:databinding-common:8.2.2) with InstrumentationAnalysisTransform
+Transforming lint-typedef-remover-31.2.2.jar (com.android.tools.lint:lint-typedef-remover:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming databinding-common-8.2.2.jar (androidx.databinding:databinding-common:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming baseLibrary-8.2.2.jar (com.android.databinding:baseLibrary:8.2.2) with InstrumentationAnalysisTransform
+Transforming databinding-compiler-common-8.2.2.jar (androidx.databinding:databinding-compiler-common:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming baseLibrary-8.2.2.jar (com.android.databinding:baseLibrary:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming layoutlib-api-31.2.2.jar (com.android.tools.layoutlib:layoutlib-api:31.2.2) with InstrumentationAnalysisTransform
+Transforming databinding-common-8.2.2.jar (androidx.databinding:databinding-common:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming layoutlib-api-31.2.2.jar (com.android.tools.layoutlib:layoutlib-api:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-device-provider-ddmlib-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-ddmlib-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming baseLibrary-8.2.2.jar (com.android.databinding:baseLibrary:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-device-provider-ddmlib-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-ddmlib-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-device-provider-gradle-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-gradle-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-device-provider-gradle-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-gradle-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming layoutlib-api-31.2.2.jar (com.android.tools.layoutlib:layoutlib-api:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-additional-test-output-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-additional-test-output-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-device-provider-ddmlib-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-ddmlib-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-additional-test-output-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-additional-test-output-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-host-coverage-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-coverage-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-device-provider-gradle-proto-31.2.2.jar (com.android.tools.utp:android-device-provider-gradle-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-coverage-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-coverage-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-host-emulator-control-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-emulator-control-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-additional-test-output-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-additional-test-output-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-emulator-control-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-emulator-control-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-host-logcat-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-logcat-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-coverage-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-coverage-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-logcat-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-logcat-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-host-apk-installer-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-apk-installer-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-emulator-control-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-emulator-control-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-apk-installer-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-apk-installer-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-host-retention-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-retention-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-logcat-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-logcat-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-host-retention-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-retention-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-result-listener-gradle-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-result-listener-gradle-proto:31.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-apk-installer-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-apk-installer-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming android-test-plugin-result-listener-gradle-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-result-listener-gradle-proto:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming builder-model-8.2.2.jar (com.android.tools.build:builder-model:8.2.2) with InstrumentationAnalysisTransform
+Transforming android-test-plugin-host-retention-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-host-retention-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming builder-model-8.2.2.jar (com.android.tools.build:builder-model:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming dvlib-31.2.2.jar (com.android.tools:dvlib:31.2.2) with InstrumentationAnalysisTransform
+Transforming dvlib-31.2.2.jar (com.android.tools:dvlib:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming android-test-plugin-result-listener-gradle-proto-31.2.2.jar (com.android.tools.utp:android-test-plugin-result-listener-gradle-proto:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming common-31.2.2.jar (com.android.tools:common:31.2.2) with InstrumentationAnalysisTransform
+Transforming builder-model-8.2.2.jar (com.android.tools.build:builder-model:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming common-31.2.2.jar (com.android.tools:common:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-stdlib-jdk8-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0) with InstrumentationAnalysisTransform
+Transforming dvlib-31.2.2.jar (com.android.tools:dvlib:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-stdlib-jdk8-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0) with MergeInstrumentationAnalysisTransform
+Transforming transform-api-2.0.0-deprecated-use-gradle-api.jar (com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api) with InstrumentationAnalysisTransform
+Transforming common-31.2.2.jar (com.android.tools:common:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming transform-api-2.0.0-deprecated-use-gradle-api.jar (com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api) with MergeInstrumentationAnalysisTransform
+Transforming httpmime-4.5.6.jar (org.apache.httpcomponents:httpmime:4.5.6) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-jdk8-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpmime-4.5.6.jar (org.apache.httpcomponents:httpmime:4.5.6) with MergeInstrumentationAnalysisTransform
+Transforming commons-io-2.4.jar (commons-io:commons-io:2.4) with InstrumentationAnalysisTransform
+Transforming transform-api-2.0.0-deprecated-use-gradle-api.jar (com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-io-2.4.jar (commons-io:commons-io:2.4) with MergeInstrumentationAnalysisTransform
+Transforming jetifier-processor-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10) with InstrumentationAnalysisTransform
+Transforming httpmime-4.5.6.jar (org.apache.httpcomponents:httpmime:4.5.6) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jetifier-processor-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10) with MergeInstrumentationAnalysisTransform
+Transforming commons-io-2.4.jar (commons-io:commons-io:2.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-commons-9.2.jar (org.ow2.asm:asm-commons:9.2) with InstrumentationAnalysisTransform
+Transforming asm-commons-9.2.jar (org.ow2.asm:asm-commons:9.2) with MergeInstrumentationAnalysisTransform
+Transforming asm-util-9.2.jar (org.ow2.asm:asm-util:9.2) with InstrumentationAnalysisTransform
+Transforming jetifier-processor-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-util-9.2.jar (org.ow2.asm:asm-util:9.2) with MergeInstrumentationAnalysisTransform
+Transforming asm-analysis-9.2.jar (org.ow2.asm:asm-analysis:9.2) with InstrumentationAnalysisTransform
+Transforming asm-commons-9.2.jar (org.ow2.asm:asm-commons:9.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-analysis-9.2.jar (org.ow2.asm:asm-analysis:9.2) with MergeInstrumentationAnalysisTransform
+Transforming asm-tree-9.2.jar (org.ow2.asm:asm-tree:9.2) with InstrumentationAnalysisTransform
+Transforming asm-util-9.2.jar (org.ow2.asm:asm-util:9.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-tree-9.2.jar (org.ow2.asm:asm-tree:9.2) with MergeInstrumentationAnalysisTransform
+Transforming asm-9.2.jar (org.ow2.asm:asm:9.2) with InstrumentationAnalysisTransform
+Transforming asm-analysis-9.2.jar (org.ow2.asm:asm-analysis:9.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-9.2.jar (org.ow2.asm:asm:9.2) with MergeInstrumentationAnalysisTransform
+Transforming apkzlib-8.2.2.jar (com.android.tools.build:apkzlib:8.2.2) with InstrumentationAnalysisTransform
+Transforming apkzlib-8.2.2.jar (com.android.tools.build:apkzlib:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming asm-tree-9.2.jar (org.ow2.asm:asm-tree:9.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming bcpkix-jdk15on-1.67.jar (org.bouncycastle:bcpkix-jdk15on:1.67) with InstrumentationAnalysisTransform
+Transforming asm-9.2.jar (org.ow2.asm:asm:9.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming bcpkix-jdk15on-1.67.jar (org.bouncycastle:bcpkix-jdk15on:1.67) with MergeInstrumentationAnalysisTransform
+Transforming apkzlib-8.2.2.jar (com.android.tools.build:apkzlib:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jaxb-runtime-2.3.2.jar (org.glassfish.jaxb:jaxb-runtime:2.3.2) with InstrumentationAnalysisTransform
+Transforming bcpkix-jdk15on-1.67.jar (org.bouncycastle:bcpkix-jdk15on:1.67) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jaxb-runtime-2.3.2.jar (org.glassfish.jaxb:jaxb-runtime:2.3.2) with MergeInstrumentationAnalysisTransform
+Transforming jopt-simple-4.9.jar (net.sf.jopt-simple:jopt-simple:4.9) with InstrumentationAnalysisTransform
+Transforming jopt-simple-4.9.jar (net.sf.jopt-simple:jopt-simple:4.9) with MergeInstrumentationAnalysisTransform
+Transforming jaxb-runtime-2.3.2.jar (org.glassfish.jaxb:jaxb-runtime:2.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jetifier-core-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-core:1.0.0-beta10) with InstrumentationAnalysisTransform
+Transforming jetifier-core-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-core:1.0.0-beta10) with MergeInstrumentationAnalysisTransform
+Transforming javapoet-1.10.0.jar (com.squareup:javapoet:1.10.0) with InstrumentationAnalysisTransform
+Transforming jopt-simple-4.9.jar (net.sf.jopt-simple:jopt-simple:4.9) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javapoet-1.10.0.jar (com.squareup:javapoet:1.10.0) with MergeInstrumentationAnalysisTransform
+Transforming jetifier-core-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-core:1.0.0-beta10) with ExternalDependencyInstrumentingArtifactTransform
+Transforming protobuf-java-util-3.19.3.jar (com.google.protobuf:protobuf-java-util:3.19.3) with InstrumentationAnalysisTransform
+Transforming protobuf-java-util-3.19.3.jar (com.google.protobuf:protobuf-java-util:3.19.3) with MergeInstrumentationAnalysisTransform
+Transforming javapoet-1.10.0.jar (com.squareup:javapoet:1.10.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-protobuf-1.45.1.jar (io.grpc:grpc-protobuf:1.45.1) with InstrumentationAnalysisTransform
+Transforming grpc-protobuf-1.45.1.jar (io.grpc:grpc-protobuf:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming protobuf-java-util-3.19.3.jar (com.google.protobuf:protobuf-java-util:3.19.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming tink-1.7.0.jar (com.google.crypto.tink:tink:1.7.0) with InstrumentationAnalysisTransform
+Transforming tink-1.7.0.jar (com.google.crypto.tink:tink:1.7.0) with MergeInstrumentationAnalysisTransform
+Transforming protos-31.2.2.jar (com.android.tools.analytics-library:protos:31.2.2) with InstrumentationAnalysisTransform
+Transforming grpc-protobuf-1.45.1.jar (io.grpc:grpc-protobuf:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming protos-31.2.2.jar (com.android.tools.analytics-library:protos:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming proto-google-common-protos-2.0.1.jar (com.google.api.grpc:proto-google-common-protos:2.0.1) with InstrumentationAnalysisTransform
+Transforming tink-1.7.0.jar (com.google.crypto.tink:tink:1.7.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming proto-google-common-protos-2.0.1.jar (com.google.api.grpc:proto-google-common-protos:2.0.1) with MergeInstrumentationAnalysisTransform
+Transforming protobuf-java-3.19.3.jar (com.google.protobuf:protobuf-java:3.19.3) with InstrumentationAnalysisTransform
+Transforming protos-31.2.2.jar (com.android.tools.analytics-library:protos:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming protobuf-java-3.19.3.jar (com.google.protobuf:protobuf-java:3.19.3) with MergeInstrumentationAnalysisTransform
+Transforming grpc-netty-1.45.1.jar (io.grpc:grpc-netty:1.45.1) with InstrumentationAnalysisTransform
+Transforming proto-google-common-protos-2.0.1.jar (com.google.api.grpc:proto-google-common-protos:2.0.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-netty-1.45.1.jar (io.grpc:grpc-netty:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming grpc-core-1.45.1.jar (io.grpc:grpc-core:1.45.1) with InstrumentationAnalysisTransform
+Transforming protobuf-java-3.19.3.jar (com.google.protobuf:protobuf-java:3.19.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-core-1.45.1.jar (io.grpc:grpc-core:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming gson-2.10.jar (com.google.code.gson:gson:2.10) with InstrumentationAnalysisTransform
+Transforming grpc-netty-1.45.1.jar (io.grpc:grpc-netty:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gson-2.10.jar (com.google.code.gson:gson:2.10) with MergeInstrumentationAnalysisTransform
+Transforming grpc-stub-1.45.1.jar (io.grpc:grpc-stub:1.45.1) with InstrumentationAnalysisTransform
+Transforming grpc-core-1.45.1.jar (io.grpc:grpc-core:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-stub-1.45.1.jar (io.grpc:grpc-stub:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming core-proto-0.0.8-alpha08.jar (com.google.testing.platform:core-proto:0.0.8-alpha08) with InstrumentationAnalysisTransform
+Transforming gson-2.10.jar (com.google.code.gson:gson:2.10) with ExternalDependencyInstrumentingArtifactTransform
+Transforming core-proto-0.0.8-alpha08.jar (com.google.testing.platform:core-proto:0.0.8-alpha08) with MergeInstrumentationAnalysisTransform
+Transforming tensorflow-lite-metadata-0.1.0-rc2.jar (org.tensorflow:tensorflow-lite-metadata:0.1.0-rc2) with InstrumentationAnalysisTransform
+Transforming grpc-stub-1.45.1.jar (io.grpc:grpc-stub:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming tensorflow-lite-metadata-0.1.0-rc2.jar (org.tensorflow:tensorflow-lite-metadata:0.1.0-rc2) with MergeInstrumentationAnalysisTransform
+Transforming flatbuffers-java-1.12.0.jar (com.google.flatbuffers:flatbuffers-java:1.12.0) with InstrumentationAnalysisTransform
+Transforming core-proto-0.0.8-alpha08.jar (com.google.testing.platform:core-proto:0.0.8-alpha08) with ExternalDependencyInstrumentingArtifactTransform
+Transforming flatbuffers-java-1.12.0.jar (com.google.flatbuffers:flatbuffers-java:1.12.0) with MergeInstrumentationAnalysisTransform
+Transforming jimfs-1.1.jar (com.google.jimfs:jimfs:1.1) with InstrumentationAnalysisTransform
+Transforming tensorflow-lite-metadata-0.1.0-rc2.jar (org.tensorflow:tensorflow-lite-metadata:0.1.0-rc2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jimfs-1.1.jar (com.google.jimfs:jimfs:1.1) with MergeInstrumentationAnalysisTransform
+Transforming grpc-protobuf-lite-1.45.1.jar (io.grpc:grpc-protobuf-lite:1.45.1) with InstrumentationAnalysisTransform
+Transforming flatbuffers-java-1.12.0.jar (com.google.flatbuffers:flatbuffers-java:1.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-protobuf-lite-1.45.1.jar (io.grpc:grpc-protobuf-lite:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming grpc-api-1.45.1.jar (io.grpc:grpc-api:1.45.1) with InstrumentationAnalysisTransform
+Transforming jimfs-1.1.jar (com.google.jimfs:jimfs:1.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-api-1.45.1.jar (io.grpc:grpc-api:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming grpc-protobuf-lite-1.45.1.jar (io.grpc:grpc-protobuf-lite:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming guava-31.1-jre.jar (com.google.guava:guava:31.1-jre) with InstrumentationAnalysisTransform
+Transforming grpc-api-1.45.1.jar (io.grpc:grpc-api:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming guava-31.1-jre.jar (com.google.guava:guava:31.1-jre) with MergeInstrumentationAnalysisTransform
+Transforming dagger-2.28.3.jar (com.google.dagger:dagger:2.28.3) with InstrumentationAnalysisTransform
+Transforming dagger-2.28.3.jar (com.google.dagger:dagger:2.28.3) with MergeInstrumentationAnalysisTransform
+Transforming javax.inject-1.jar (javax.inject:javax.inject:1) with InstrumentationAnalysisTransform
+Transforming guava-31.1-jre.jar (com.google.guava:guava:31.1-jre) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javax.inject-1.jar (javax.inject:javax.inject:1) with MergeInstrumentationAnalysisTransform
+Transforming kxml2-2.3.0.jar (net.sf.kxml:kxml2:2.3.0) with InstrumentationAnalysisTransform
+Transforming dagger-2.28.3.jar (com.google.dagger:dagger:2.28.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kxml2-2.3.0.jar (net.sf.kxml:kxml2:2.3.0) with MergeInstrumentationAnalysisTransform
+Transforming bcprov-jdk15on-1.67.jar (org.bouncycastle:bcprov-jdk15on:1.67) with InstrumentationAnalysisTransform
+Transforming javax.inject-1.jar (javax.inject:javax.inject:1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming bcprov-jdk15on-1.67.jar (org.bouncycastle:bcprov-jdk15on:1.67) with MergeInstrumentationAnalysisTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with InstrumentationAnalysisTransform
+Transforming kxml2-2.3.0.jar (net.sf.kxml:kxml2:2.3.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-reflect-1.9.0.jar (org.jetbrains.kotlin:kotlin-reflect:1.9.0) with InstrumentationAnalysisTransform
+Transforming kotlin-reflect-1.9.0.jar (org.jetbrains.kotlin:kotlin-reflect:1.9.0) with MergeInstrumentationAnalysisTransform
+Transforming bcprov-jdk15on-1.67.jar (org.bouncycastle:bcprov-jdk15on:1.67) with ExternalDependencyInstrumentingArtifactTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with ExternalDependencyInstrumentingArtifactTransform
+Transforming xercesImpl-2.12.0.jar (xerces:xercesImpl:2.12.0) with InstrumentationAnalysisTransform
+Transforming kotlin-reflect-1.9.0.jar (org.jetbrains.kotlin:kotlin-reflect:1.9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming xercesImpl-2.12.0.jar (xerces:xercesImpl:2.12.0) with MergeInstrumentationAnalysisTransform
+Transforming commons-compress-1.21.jar (org.apache.commons:commons-compress:1.21) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.21.jar (org.apache.commons:commons-compress:1.21) with MergeInstrumentationAnalysisTransform
+Transforming httpclient-4.5.14.jar (org.apache.httpcomponents:httpclient:4.5.14) with InstrumentationAnalysisTransform
+Transforming xercesImpl-2.12.0.jar (xerces:xercesImpl:2.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpclient-4.5.14.jar (org.apache.httpcomponents:httpclient:4.5.14) with MergeInstrumentationAnalysisTransform
+Transforming httpcore-4.4.16.jar (org.apache.httpcomponents:httpcore:4.4.16) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.21.jar (org.apache.commons:commons-compress:1.21) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpcore-4.4.16.jar (org.apache.httpcomponents:httpcore:4.4.16) with MergeInstrumentationAnalysisTransform
+Transforming javax.activation-1.2.0.jar (com.sun.activation:javax.activation:1.2.0) with InstrumentationAnalysisTransform
+Transforming httpclient-4.5.14.jar (org.apache.httpcomponents:httpclient:4.5.14) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javax.activation-1.2.0.jar (com.sun.activation:javax.activation:1.2.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-stdlib-jdk7-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0) with InstrumentationAnalysisTransform
+Transforming httpcore-4.4.16.jar (org.apache.httpcomponents:httpcore:4.4.16) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-stdlib-jdk7-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0) with MergeInstrumentationAnalysisTransform
+Transforming javax.activation-1.2.0.jar (com.sun.activation:javax.activation:1.2.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-stdlib-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib:1.9.0) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib:1.9.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-stdlib-jdk7-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-13.0.jar (org.jetbrains:annotations:13.0) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib:1.9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-13.0.jar (org.jetbrains:annotations:13.0) with MergeInstrumentationAnalysisTransform
+Transforming signflinger-8.2.2.jar (com.android:signflinger:8.2.2) with InstrumentationAnalysisTransform
+Transforming signflinger-8.2.2.jar (com.android:signflinger:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming zipflinger-8.2.2.jar (com.android:zipflinger:8.2.2) with InstrumentationAnalysisTransform
+Transforming annotations-13.0.jar (org.jetbrains:annotations:13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming zipflinger-8.2.2.jar (com.android:zipflinger:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming annotations-31.2.2.jar (com.android.tools:annotations:31.2.2) with InstrumentationAnalysisTransform
+Transforming annotations-31.2.2.jar (com.android.tools:annotations:31.2.2) with MergeInstrumentationAnalysisTransform
+Transforming signflinger-8.2.2.jar (com.android:signflinger:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jna-platform-5.6.0.jar (net.java.dev.jna:jna-platform:5.6.0) with InstrumentationAnalysisTransform
+Transforming zipflinger-8.2.2.jar (com.android:zipflinger:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jna-platform-5.6.0.jar (net.java.dev.jna:jna-platform:5.6.0) with MergeInstrumentationAnalysisTransform
+Transforming juniversalchardet-1.0.3.jar (com.googlecode.juniversalchardet:juniversalchardet:1.0.3) with InstrumentationAnalysisTransform
+Transforming annotations-31.2.2.jar (com.android.tools:annotations:31.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming juniversalchardet-1.0.3.jar (com.googlecode.juniversalchardet:juniversalchardet:1.0.3) with MergeInstrumentationAnalysisTransform
+Transforming javax.annotation-api-1.3.2.jar (javax.annotation:javax.annotation-api:1.3.2) with InstrumentationAnalysisTransform
+Transforming jna-platform-5.6.0.jar (net.java.dev.jna:jna-platform:5.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javax.annotation-api-1.3.2.jar (javax.annotation:javax.annotation-api:1.3.2) with MergeInstrumentationAnalysisTransform
+Transforming stax-ex-1.8.1.jar (org.jvnet.staxex:stax-ex:1.8.1) with InstrumentationAnalysisTransform
+Transforming juniversalchardet-1.0.3.jar (com.googlecode.juniversalchardet:juniversalchardet:1.0.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming stax-ex-1.8.1.jar (org.jvnet.staxex:stax-ex:1.8.1) with MergeInstrumentationAnalysisTransform
+Transforming javax.annotation-api-1.3.2.jar (javax.annotation:javax.annotation-api:1.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jakarta.xml.bind-api-2.3.2.jar (jakarta.xml.bind:jakarta.xml.bind-api:2.3.2) with InstrumentationAnalysisTransform
+Transforming jakarta.xml.bind-api-2.3.2.jar (jakarta.xml.bind:jakarta.xml.bind-api:2.3.2) with MergeInstrumentationAnalysisTransform
+Transforming stax-ex-1.8.1.jar (org.jvnet.staxex:stax-ex:1.8.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming txw2-2.3.2.jar (org.glassfish.jaxb:txw2:2.3.2) with InstrumentationAnalysisTransform
+Transforming txw2-2.3.2.jar (org.glassfish.jaxb:txw2:2.3.2) with MergeInstrumentationAnalysisTransform
+Transforming istack-commons-runtime-3.0.8.jar (com.sun.istack:istack-commons-runtime:3.0.8) with InstrumentationAnalysisTransform
+Transforming jakarta.xml.bind-api-2.3.2.jar (jakarta.xml.bind:jakarta.xml.bind-api:2.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming istack-commons-runtime-3.0.8.jar (com.sun.istack:istack-commons-runtime:3.0.8) with MergeInstrumentationAnalysisTransform
+Transforming FastInfoset-1.2.16.jar (com.sun.xml.fastinfoset:FastInfoset:1.2.16) with InstrumentationAnalysisTransform
+Transforming txw2-2.3.2.jar (org.glassfish.jaxb:txw2:2.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming istack-commons-runtime-3.0.8.jar (com.sun.istack:istack-commons-runtime:3.0.8) with ExternalDependencyInstrumentingArtifactTransform
+Transforming FastInfoset-1.2.16.jar (com.sun.xml.fastinfoset:FastInfoset:1.2.16) with MergeInstrumentationAnalysisTransform
+Transforming jakarta.activation-api-1.2.1.jar (jakarta.activation:jakarta.activation-api:1.2.1) with InstrumentationAnalysisTransform
+Transforming jakarta.activation-api-1.2.1.jar (jakarta.activation:jakarta.activation-api:1.2.1) with MergeInstrumentationAnalysisTransform
+Transforming auto-value-annotations-1.6.2.jar (com.google.auto.value:auto-value-annotations:1.6.2) with InstrumentationAnalysisTransform
+Transforming auto-value-annotations-1.6.2.jar (com.google.auto.value:auto-value-annotations:1.6.2) with MergeInstrumentationAnalysisTransform
+Transforming FastInfoset-1.2.16.jar (com.sun.xml.fastinfoset:FastInfoset:1.2.16) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jakarta.activation-api-1.2.1.jar (jakarta.activation:jakarta.activation-api:1.2.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming error_prone_annotations-2.11.0.jar (com.google.errorprone:error_prone_annotations:2.11.0) with InstrumentationAnalysisTransform
+Transforming auto-value-annotations-1.6.2.jar (com.google.auto.value:auto-value-annotations:1.6.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming error_prone_annotations-2.11.0.jar (com.google.errorprone:error_prone_annotations:2.11.0) with MergeInstrumentationAnalysisTransform
+Transforming jose4j-0.7.0.jar (org.bitbucket.b_c:jose4j:0.7.0) with InstrumentationAnalysisTransform
+Transforming jose4j-0.7.0.jar (org.bitbucket.b_c:jose4j:0.7.0) with MergeInstrumentationAnalysisTransform
+Transforming slf4j-api-1.7.30.jar (org.slf4j:slf4j-api:1.7.30) with InstrumentationAnalysisTransform
+Transforming error_prone_annotations-2.11.0.jar (com.google.errorprone:error_prone_annotations:2.11.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming slf4j-api-1.7.30.jar (org.slf4j:slf4j-api:1.7.30) with MergeInstrumentationAnalysisTransform
+Transforming jdom2-2.0.6.jar (org.jdom:jdom2:2.0.6) with InstrumentationAnalysisTransform
+Transforming jose4j-0.7.0.jar (org.bitbucket.b_c:jose4j:0.7.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jdom2-2.0.6.jar (org.jdom:jdom2:2.0.6) with MergeInstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with InstrumentationAnalysisTransform
+Transforming slf4j-api-1.7.30.jar (org.slf4j:slf4j-api:1.7.30) with ExternalDependencyInstrumentingArtifactTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with MergeInstrumentationAnalysisTransform
+Transforming jdom2-2.0.6.jar (org.jdom:jdom2:2.0.6) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with InstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with MergeInstrumentationAnalysisTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-4.1.1.4.jar (com.google.android:annotations:4.1.1.4) with InstrumentationAnalysisTransform
+Transforming annotations-4.1.1.4.jar (com.google.android:annotations:4.1.1.4) with MergeInstrumentationAnalysisTransform
+Transforming animal-sniffer-annotations-1.19.jar (org.codehaus.mojo:animal-sniffer-annotations:1.19) with InstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming animal-sniffer-annotations-1.19.jar (org.codehaus.mojo:animal-sniffer-annotations:1.19) with MergeInstrumentationAnalysisTransform
+Transforming perfmark-api-0.23.0.jar (io.perfmark:perfmark-api:0.23.0) with InstrumentationAnalysisTransform
+Transforming annotations-4.1.1.4.jar (com.google.android:annotations:4.1.1.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming perfmark-api-0.23.0.jar (io.perfmark:perfmark-api:0.23.0) with MergeInstrumentationAnalysisTransform
+Transforming netty-codec-http2-4.1.72.Final.jar (io.netty:netty-codec-http2:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-codec-http2-4.1.72.Final.jar (io.netty:netty-codec-http2:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming animal-sniffer-annotations-1.19.jar (org.codehaus.mojo:animal-sniffer-annotations:1.19) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-handler-proxy-4.1.72.Final.jar (io.netty:netty-handler-proxy:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming perfmark-api-0.23.0.jar (io.perfmark:perfmark-api:0.23.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-handler-proxy-4.1.72.Final.jar (io.netty:netty-handler-proxy:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-codec-http2-4.1.72.Final.jar (io.netty:netty-codec-http2:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming checker-qual-3.12.0.jar (org.checkerframework:checker-qual:3.12.0) with InstrumentationAnalysisTransform
+Transforming checker-qual-3.12.0.jar (org.checkerframework:checker-qual:3.12.0) with MergeInstrumentationAnalysisTransform
+Transforming commons-codec-1.11.jar (commons-codec:commons-codec:1.11) with InstrumentationAnalysisTransform
+Transforming netty-handler-proxy-4.1.72.Final.jar (io.netty:netty-handler-proxy:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-codec-1.11.jar (commons-codec:commons-codec:1.11) with MergeInstrumentationAnalysisTransform
+Transforming apksig-8.2.2.jar (com.android.tools.build:apksig:8.2.2) with InstrumentationAnalysisTransform
+Transforming checker-qual-3.12.0.jar (org.checkerframework:checker-qual:3.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming apksig-8.2.2.jar (com.android.tools.build:apksig:8.2.2) with MergeInstrumentationAnalysisTransform
+Transforming commons-codec-1.11.jar (commons-codec:commons-codec:1.11) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javawriter-2.5.0.jar (com.squareup:javawriter:2.5.0) with InstrumentationAnalysisTransform
+Transforming javawriter-2.5.0.jar (com.squareup:javawriter:2.5.0) with MergeInstrumentationAnalysisTransform
+Transforming apksig-8.2.2.jar (com.android.tools.build:apksig:8.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with InstrumentationAnalysisTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with MergeInstrumentationAnalysisTransform
+Transforming javawriter-2.5.0.jar (com.squareup:javawriter:2.5.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with InstrumentationAnalysisTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with MergeInstrumentationAnalysisTransform
+Transforming xml-apis-1.4.01.jar (xml-apis:xml-apis:1.4.01) with InstrumentationAnalysisTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming xml-apis-1.4.01.jar (xml-apis:xml-apis:1.4.01) with MergeInstrumentationAnalysisTransform
+Transforming commons-logging-1.2.jar (commons-logging:commons-logging:1.2) with InstrumentationAnalysisTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with ExternalDependencyInstrumentingArtifactTransform
+Transforming xml-apis-1.4.01.jar (xml-apis:xml-apis:1.4.01) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-logging-1.2.jar (commons-logging:commons-logging:1.2) with MergeInstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with InstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-stdlib-common-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0) with InstrumentationAnalysisTransform
+Transforming commons-logging-1.2.jar (commons-logging:commons-logging:1.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-stdlib-common-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0) with MergeInstrumentationAnalysisTransform
+Transforming grpc-context-1.45.1.jar (io.grpc:grpc-context:1.45.1) with InstrumentationAnalysisTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-context-1.45.1.jar (io.grpc:grpc-context:1.45.1) with MergeInstrumentationAnalysisTransform
+Transforming netty-codec-http-4.1.72.Final.jar (io.netty:netty-codec-http:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming kotlin-stdlib-common-1.9.0.jar (org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-codec-http-4.1.72.Final.jar (io.netty:netty-codec-http:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-handler-4.1.72.Final.jar (io.netty:netty-handler:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming grpc-context-1.45.1.jar (io.grpc:grpc-context:1.45.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-handler-4.1.72.Final.jar (io.netty:netty-handler:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-codec-socks-4.1.72.Final.jar (io.netty:netty-codec-socks:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-codec-http-4.1.72.Final.jar (io.netty:netty-codec-http:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-codec-socks-4.1.72.Final.jar (io.netty:netty-codec-socks:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-codec-4.1.72.Final.jar (io.netty:netty-codec:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-handler-4.1.72.Final.jar (io.netty:netty-handler:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-codec-4.1.72.Final.jar (io.netty:netty-codec:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-transport-4.1.72.Final.jar (io.netty:netty-transport:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-codec-socks-4.1.72.Final.jar (io.netty:netty-codec-socks:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-transport-4.1.72.Final.jar (io.netty:netty-transport:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-buffer-4.1.72.Final.jar (io.netty:netty-buffer:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-codec-4.1.72.Final.jar (io.netty:netty-codec:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-buffer-4.1.72.Final.jar (io.netty:netty-buffer:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-transport-4.1.72.Final.jar (io.netty:netty-transport:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-resolver-4.1.72.Final.jar (io.netty:netty-resolver:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-resolver-4.1.72.Final.jar (io.netty:netty-resolver:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-common-4.1.72.Final.jar (io.netty:netty-common:4.1.72.Final) with InstrumentationAnalysisTransform
+Transforming netty-buffer-4.1.72.Final.jar (io.netty:netty-buffer:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-common-4.1.72.Final.jar (io.netty:netty-common:4.1.72.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-tcnative-classes-2.0.46.Final.jar (io.netty:netty-tcnative-classes:2.0.46.Final) with InstrumentationAnalysisTransform
+Transforming netty-resolver-4.1.72.Final.jar (io.netty:netty-resolver:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-tcnative-classes-2.0.46.Final.jar (io.netty:netty-tcnative-classes:2.0.46.Final) with MergeInstrumentationAnalysisTransform
+Transforming netty-common-4.1.72.Final.jar (io.netty:netty-common:4.1.72.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-tcnative-classes-2.0.46.Final.jar (io.netty:netty-tcnative-classes:2.0.46.Final) with ExternalDependencyInstrumentingArtifactTransform
+Using default execution profile
+No keystore property found. Releases will be unsigned.
+Configuration 'natives' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+java.lang.RuntimeException: Configuration 'natives' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+	at com.android.build.gradle.internal.DependencyResolutionChecks$registerDependencyCheck$4$1.execute(DependencyResolutionChecks.kt:72)
+	at com.android.build.gradle.internal.DependencyResolutionChecks$registerDependencyCheck$4$1.execute(DependencyResolutionChecks.kt:55)
+	at org.gradle.internal.code.DefaultUserCodeApplicationContext$CurrentApplication$1.execute(DefaultUserCodeApplicationContext.java:123)
+	at org.gradle.internal.event.BroadcastDispatch$ActionInvocationHandler.dispatch(BroadcastDispatch.java:99)
+	at org.gradle.internal.event.BroadcastDispatch$ActionInvocationHandler.dispatch(BroadcastDispatch.java:87)
+	at org.gradle.internal.event.AbstractBroadcastDispatch.dispatch(AbstractBroadcastDispatch.java:43)
+	at org.gradle.internal.event.BroadcastDispatch$SingletonDispatch.dispatch(BroadcastDispatch.java:268)
+	at org.gradle.internal.event.BroadcastDispatch$SingletonDispatch.dispatch(BroadcastDispatch.java:170)
+	at org.gradle.internal.event.AbstractBroadcastDispatch.dispatch(AbstractBroadcastDispatch.java:83)
+	at org.gradle.internal.event.AbstractBroadcastDispatch.dispatch(AbstractBroadcastDispatch.java:69)
+	at org.gradle.internal.event.BroadcastDispatch$CompositeDispatch.dispatch(BroadcastDispatch.java:381)
+	at org.gradle.internal.event.BroadcastDispatch$CompositeDispatch.dispatch(BroadcastDispatch.java:272)
+	at org.gradle.internal.event.ListenerBroadcast.dispatch(ListenerBroadcast.java:148)
+	at org.gradle.internal.event.ListenerBroadcast.dispatch(ListenerBroadcast.java:37)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy1/jdk.proxy1.$Proxy67.beforeResolve(Unknown Source)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.runBeforeResolve(DefaultConfiguration.java:880)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.access$600(DefaultConfiguration.java:156)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$1.call(DefaultConfiguration.java:753)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$1.call(DefaultConfiguration.java:749)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveGraphInBuildOperation(DefaultConfiguration.java:749)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.lambda$resolveExclusivelyIfRequired$7(DefaultConfiguration.java:741)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$CalculatedModelValueImpl.update(DefaultProjectStateRegistry.java:505)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveExclusivelyIfRequired(DefaultConfiguration.java:736)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveGraphIfRequired(DefaultConfiguration.java:729)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.access$500(DefaultConfiguration.java:156)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$ResolverResultsResolutionResultProvider.getValue(DefaultConfiguration.java:703)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$ResolverResultsResolutionResultProvider.getValue(DefaultConfiguration.java:664)
+	at org.gradle.api.internal.artifacts.configurations.ResolutionResultProvider$1.getValue(ResolutionResultProvider.java:53)
+	at org.gradle.api.internal.artifacts.configurations.ResolutionBackedFileCollection.getSelectedArtifacts(ResolutionBackedFileCollection.java:95)
+	at org.gradle.api.internal.artifacts.configurations.ResolutionBackedFileCollection.visitContents(ResolutionBackedFileCollection.java:73)
+	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:361)
+	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.visitContents(DefaultConfiguration.java:526)
+	at org.gradle.api.internal.file.AbstractFileCollection.getFiles(AbstractFileCollection.java:124)
+	at org.gradle.api.internal.artifacts.configurations.DefaultUnlockedConfiguration_Decorated.getFiles(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaBeanProperty.getProperty(MetaBeanProperty.java:59)
+	at org.gradle.internal.metaobject.BeanDynamicObject$MetaClassAdapter.getProperty(BeanDynamicObject.java:256)
+	at org.gradle.internal.metaobject.BeanDynamicObject.tryGetProperty(BeanDynamicObject.java:198)
+	at org.gradle.internal.metaobject.CompositeDynamicObject.tryGetProperty(CompositeDynamicObject.java:56)
+	at org.gradle.internal.metaobject.AbstractDynamicObject.getProperty(AbstractDynamicObject.java:60)
+	at org.gradle.api.internal.artifacts.configurations.DefaultUnlockedConfiguration_Decorated.getProperty(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoGetPropertySite.getProperty(PogoGetPropertySite.java:49)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callGetProperty(AbstractCallSite.java:329)
+	at build_50j0dakn6v9b5w4p34765wq1f$_run_closure6.doCall$original(E:\Projects\Mindustry\android\build.gradle:140)
+	at build_50j0dakn6v9b5w4p34765wq1f$_run_closure6.doCall(E:\Projects\Mindustry\android\build.gradle)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at groovy.lang.Closure.call(Closure.java:416)
+	at org.gradle.util.internal.ClosureBackedAction.execute(ClosureBackedAction.java:73)
+	at org.gradle.util.internal.ConfigureUtil.configureTarget(ConfigureUtil.java:166)
+	at org.gradle.util.internal.ConfigureUtil.configureSelf(ConfigureUtil.java:142)
+	at org.gradle.api.internal.AbstractTask.configure(AbstractTask.java:698)
+	at org.gradle.api.DefaultTask.configure(DefaultTask.java:319)
+	at org.gradle.api.internal.project.DefaultProject.task(DefaultProject.java:1334)
+	at jdk.internal.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.gradle.internal.metaobject.BeanDynamicObject$MetaClassAdapter.invokeMethod(BeanDynamicObject.java:541)
+	at org.gradle.internal.metaobject.BeanDynamicObject.tryInvokeMethod(BeanDynamicObject.java:218)
+	at org.gradle.internal.metaobject.CompositeDynamicObject.tryInvokeMethod(CompositeDynamicObject.java:99)
+	at org.gradle.internal.extensibility.MixInClosurePropertiesAsMethodsDynamicObject.tryInvokeMethod(MixInClosurePropertiesAsMethodsDynamicObject.java:38)
+	at org.gradle.groovy.scripts.BasicScript$ScriptDynamicObject.tryInvokeMethod(BasicScript.java:138)
+	at org.gradle.internal.metaobject.AbstractDynamicObject.invokeMethod(AbstractDynamicObject.java:163)
+	at org.gradle.api.internal.project.DefaultDynamicLookupRoutine.invokeMethod(DefaultDynamicLookupRoutine.java:58)
+	at org.gradle.groovy.scripts.BasicScript.invokeMethod(BasicScript.java:87)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:68)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:194)
+	at build_50j0dakn6v9b5w4p34765wq1f.run(E:\Projects\Mindustry\android\build.gradle:139)
+	at org.gradle.groovy.scripts.internal.DefaultScriptRunnerFactory$ScriptRunnerImpl.run(DefaultScriptRunnerFactory.java:91)
+	at org.gradle.configuration.DefaultScriptPluginFactory$ScriptPluginImpl.lambda$apply$0(DefaultScriptPluginFactory.java:137)
+	at org.gradle.configuration.ProjectScriptTarget.addConfiguration(ProjectScriptTarget.java:79)
+	at org.gradle.configuration.DefaultScriptPluginFactory$ScriptPluginImpl.apply(DefaultScriptPluginFactory.java:140)
+	at org.gradle.configuration.BuildOperationScriptPlugin$1.run(BuildOperationScriptPlugin.java:68)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
+	at org.gradle.configuration.BuildOperationScriptPlugin.lambda$apply$0(BuildOperationScriptPlugin.java:65)
+	at org.gradle.internal.code.DefaultUserCodeApplicationContext.apply(DefaultUserCodeApplicationContext.java:43)
+	at org.gradle.configuration.BuildOperationScriptPlugin.apply(BuildOperationScriptPlugin.java:65)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.lambda$applyToMutableState$1(DefaultProjectStateRegistry.java:407)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.fromMutableState(DefaultProjectStateRegistry.java:425)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.applyToMutableState(DefaultProjectStateRegistry.java:406)
+	at org.gradle.configuration.project.BuildScriptProcessor.execute(BuildScriptProcessor.java:46)
+	at org.gradle.configuration.project.BuildScriptProcessor.execute(BuildScriptProcessor.java:27)
+	at org.gradle.configuration.project.ConfigureActionsProjectEvaluator.evaluate(ConfigureActionsProjectEvaluator.java:35)
+	at org.gradle.configuration.project.LifecycleProjectEvaluator$EvaluateProject.lambda$run$0(LifecycleProjectEvaluator.java:109)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.lambda$applyToMutableState$1(DefaultProjectStateRegistry.java:407)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.lambda$fromMutableState$2(DefaultProjectStateRegistry.java:430)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withReplacedLocks(DefaultWorkerLeaseService.java:360)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.fromMutableState(DefaultProjectStateRegistry.java:430)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.applyToMutableState(DefaultProjectStateRegistry.java:406)
+	at org.gradle.configuration.project.LifecycleProjectEvaluator$EvaluateProject.run(LifecycleProjectEvaluator.java:100)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
+	at org.gradle.configuration.project.LifecycleProjectEvaluator.evaluate(LifecycleProjectEvaluator.java:72)
+	at org.gradle.api.internal.project.DefaultProject.evaluate(DefaultProject.java:785)
+	at org.gradle.api.internal.project.DefaultProject.evaluate(DefaultProject.java:155)
+	at org.gradle.api.internal.project.ProjectLifecycleController.lambda$ensureSelfConfigured$2(ProjectLifecycleController.java:84)
+	at org.gradle.internal.model.StateTransitionController.lambda$doTransition$14(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:254)
+	at org.gradle.internal.model.StateTransitionController.lambda$maybeTransitionIfNotCurrentlyTransitioning$10(StateTransitionController.java:199)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:34)
+	at org.gradle.internal.model.StateTransitionController.maybeTransitionIfNotCurrentlyTransitioning(StateTransitionController.java:195)
+	at org.gradle.api.internal.project.ProjectLifecycleController.ensureSelfConfigured(ProjectLifecycleController.java:84)
+	at org.gradle.api.internal.project.DefaultProjectStateRegistry$ProjectStateImpl.ensureConfigured(DefaultProjectStateRegistry.java:381)
+	at org.gradle.execution.TaskPathProjectEvaluator.configure(TaskPathProjectEvaluator.java:34)
+	at org.gradle.execution.TaskPathProjectEvaluator.configureHierarchy(TaskPathProjectEvaluator.java:50)
+	at org.gradle.configuration.DefaultProjectsPreparer.prepareProjects(DefaultProjectsPreparer.java:42)
+	at org.gradle.configuration.BuildTreePreparingProjectsPreparer.prepareProjects(BuildTreePreparingProjectsPreparer.java:65)
+	at org.gradle.configuration.BuildOperationFiringProjectsPreparer$ConfigureBuild.run(BuildOperationFiringProjectsPreparer.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
+	at org.gradle.configuration.BuildOperationFiringProjectsPreparer.prepareProjects(BuildOperationFiringProjectsPreparer.java:40)
+	at org.gradle.initialization.VintageBuildModelController.lambda$prepareProjects$2(VintageBuildModelController.java:84)
+	at org.gradle.internal.model.StateTransitionController.lambda$doTransition$14(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:254)
+	at org.gradle.internal.model.StateTransitionController.lambda$transitionIfNotPreviously$11(StateTransitionController.java:213)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:34)
+	at org.gradle.internal.model.StateTransitionController.transitionIfNotPreviously(StateTransitionController.java:209)
+	at org.gradle.initialization.VintageBuildModelController.prepareProjects(VintageBuildModelController.java:84)
+	at org.gradle.initialization.VintageBuildModelController.prepareToScheduleTasks(VintageBuildModelController.java:71)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$prepareToScheduleTasks$6(DefaultBuildLifecycleController.java:175)
+	at org.gradle.internal.model.StateTransitionController.lambda$doTransition$14(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:254)
+	at org.gradle.internal.model.StateTransitionController.lambda$maybeTransition$9(StateTransitionController.java:190)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:34)
+	at org.gradle.internal.model.StateTransitionController.maybeTransition(StateTransitionController.java:186)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.prepareToScheduleTasks(DefaultBuildLifecycleController.java:173)
+	at org.gradle.internal.buildtree.DefaultBuildTreeWorkPreparer.scheduleRequestedTasks(DefaultBuildTreeWorkPreparer.java:36)
+	at org.gradle.configurationcache.VintageBuildTreeWorkController$scheduleAndRunRequestedTasks$1.apply(VintageBuildTreeWorkController.kt:36)
+	at org.gradle.configurationcache.VintageBuildTreeWorkController$scheduleAndRunRequestedTasks$1.apply(VintageBuildTreeWorkController.kt:35)
+	at org.gradle.composite.internal.DefaultIncludedBuildTaskGraph.withNewWorkGraph(DefaultIncludedBuildTaskGraph.java:112)
+	at org.gradle.configurationcache.VintageBuildTreeWorkController.scheduleAndRunRequestedTasks(VintageBuildTreeWorkController.kt:35)
+	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.lambda$scheduleAndRunTasks$1(DefaultBuildTreeLifecycleController.java:77)
+	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.lambda$runBuild$4(DefaultBuildTreeLifecycleController.java:120)
+	at org.gradle.internal.model.StateTransitionController.lambda$transition$6(StateTransitionController.java:169)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$transition$7(StateTransitionController.java:169)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
+	at org.gradle.internal.model.StateTransitionController.transition(StateTransitionController.java:169)
+	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.runBuild(DefaultBuildTreeLifecycleController.java:117)
+	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.scheduleAndRunTasks(DefaultBuildTreeLifecycleController.java:77)
+	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.scheduleAndRunTasks(DefaultBuildTreeLifecycleController.java:72)
+	at org.gradle.tooling.internal.provider.ExecuteBuildActionRunner.run(ExecuteBuildActionRunner.java:31)
+	at org.gradle.launcher.exec.ChainingBuildActionRunner.run(ChainingBuildActionRunner.java:35)
+	at org.gradle.internal.buildtree.ProblemReportingBuildActionRunner.run(ProblemReportingBuildActionRunner.java:49)
+	at org.gradle.launcher.exec.BuildOutcomeReportingBuildActionRunner.run(BuildOutcomeReportingBuildActionRunner.java:65)
+	at org.gradle.tooling.internal.provider.FileSystemWatchingBuildActionRunner.run(FileSystemWatchingBuildActionRunner.java:140)
+	at org.gradle.launcher.exec.BuildCompletionNotifyingBuildActionRunner.run(BuildCompletionNotifyingBuildActionRunner.java:41)
+	at org.gradle.launcher.exec.RootBuildLifecycleBuildActionExecutor.lambda$execute$0(RootBuildLifecycleBuildActionExecutor.java:40)
+	at org.gradle.composite.internal.DefaultRootBuildState.run(DefaultRootBuildState.java:123)
+	at org.gradle.launcher.exec.RootBuildLifecycleBuildActionExecutor.execute(RootBuildLifecycleBuildActionExecutor.java:40)
+	at org.gradle.internal.buildtree.InitDeprecationLoggingActionExecutor.execute(InitDeprecationLoggingActionExecutor.java:66)
+	at org.gradle.internal.buildtree.InitProblems.execute(InitProblems.java:36)
+	at org.gradle.internal.buildtree.DefaultBuildTreeContext.execute(DefaultBuildTreeContext.java:40)
+	at org.gradle.launcher.exec.BuildTreeLifecycleBuildActionExecutor.lambda$execute$0(BuildTreeLifecycleBuildActionExecutor.java:71)
+	at org.gradle.internal.buildtree.BuildTreeState.run(BuildTreeState.java:60)
+	at org.gradle.launcher.exec.BuildTreeLifecycleBuildActionExecutor.execute(BuildTreeLifecycleBuildActionExecutor.java:71)
+	at org.gradle.launcher.exec.RunAsBuildOperationBuildActionExecutor$3.call(RunAsBuildOperationBuildActionExecutor.java:61)
+	at org.gradle.launcher.exec.RunAsBuildOperationBuildActionExecutor$3.call(RunAsBuildOperationBuildActionExecutor.java:57)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.launcher.exec.RunAsBuildOperationBuildActionExecutor.execute(RunAsBuildOperationBuildActionExecutor.java:57)
+	at org.gradle.launcher.exec.RunAsWorkerThreadBuildActionExecutor.lambda$execute$0(RunAsWorkerThreadBuildActionExecutor.java:36)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:264)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:128)
+	at org.gradle.launcher.exec.RunAsWorkerThreadBuildActionExecutor.execute(RunAsWorkerThreadBuildActionExecutor.java:36)
+	at org.gradle.tooling.internal.provider.continuous.ContinuousBuildActionExecutor.execute(ContinuousBuildActionExecutor.java:110)
+	at org.gradle.tooling.internal.provider.SubscribableBuildActionExecutor.execute(SubscribableBuildActionExecutor.java:64)
+	at org.gradle.internal.session.DefaultBuildSessionContext.execute(DefaultBuildSessionContext.java:46)
+	at org.gradle.tooling.internal.provider.BuildSessionLifecycleBuildActionExecuter$ActionImpl.apply(BuildSessionLifecycleBuildActionExecuter.java:92)
+	at org.gradle.tooling.internal.provider.BuildSessionLifecycleBuildActionExecuter$ActionImpl.apply(BuildSessionLifecycleBuildActionExecuter.java:80)
+	at org.gradle.internal.session.BuildSessionState.run(BuildSessionState.java:71)
+	at org.gradle.tooling.internal.provider.BuildSessionLifecycleBuildActionExecuter.execute(BuildSessionLifecycleBuildActionExecuter.java:62)
+	at org.gradle.tooling.internal.provider.BuildSessionLifecycleBuildActionExecuter.execute(BuildSessionLifecycleBuildActionExecuter.java:41)
+	at org.gradle.tooling.internal.provider.StartParamsValidatingActionExecuter.execute(StartParamsValidatingActionExecuter.java:64)
+	at org.gradle.tooling.internal.provider.StartParamsValidatingActionExecuter.execute(StartParamsValidatingActionExecuter.java:32)
+	at org.gradle.tooling.internal.provider.SessionFailureReportingActionExecuter.execute(SessionFailureReportingActionExecuter.java:51)
+	at org.gradle.tooling.internal.provider.SessionFailureReportingActionExecuter.execute(SessionFailureReportingActionExecuter.java:39)
+	at org.gradle.tooling.internal.provider.SetupLoggingActionExecuter.execute(SetupLoggingActionExecuter.java:47)
+	at org.gradle.tooling.internal.provider.SetupLoggingActionExecuter.execute(SetupLoggingActionExecuter.java:31)
+	at org.gradle.launcher.daemon.server.exec.ExecuteBuild.doBuild(ExecuteBuild.java:65)
+	at org.gradle.launcher.daemon.server.exec.BuildCommandOnly.execute(BuildCommandOnly.java:37)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.WatchForDisconnection.execute(WatchForDisconnection.java:39)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.ResetDeprecationLogger.execute(ResetDeprecationLogger.java:29)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.RequestStopIfSingleUsedDaemon.execute(RequestStopIfSingleUsedDaemon.java:35)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.ForwardClientInput.lambda$execute$0(ForwardClientInput.java:39)
+	at org.gradle.launcher.daemon.server.clientinput.ClientInputForwarder.forwardInput(ClientInputForwarder.java:88)
+	at org.gradle.launcher.daemon.server.exec.ForwardClientInput.execute(ForwardClientInput.java:36)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.LogAndCheckHealth.execute(LogAndCheckHealth.java:64)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.LogToClient.doBuild(LogToClient.java:63)
+	at org.gradle.launcher.daemon.server.exec.BuildCommandOnly.execute(BuildCommandOnly.java:37)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment.doBuild(EstablishBuildEnvironment.java:84)
+	at org.gradle.launcher.daemon.server.exec.BuildCommandOnly.execute(BuildCommandOnly.java:37)
+	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy$1.run(StartBuildOrRespondWithBusy.java:52)
+	at org.gradle.launcher.daemon.server.DaemonStateCoordinator$1.run(DaemonStateCoordinator.java:297)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+Parsed shrinker version: 8.2.47
+
+> Configure project :annotations
+Evaluating project ':annotations' using build file 'E:\Projects\Mindustry\annotations\build.gradle'.
+
+> Configure project :core
+Evaluating project ':core' using build file 'E:\Projects\Mindustry\core\build.gradle'.
+
+> Configure project :desktop
+Evaluating project ':desktop' using build file 'E:\Projects\Mindustry\desktop\build.gradle'.
+
+> Configure project :ios
+Evaluating project ':ios' using build file 'E:\Projects\Mindustry\ios\build.gradle'.
+Transforming robovm-gradle-plugin-2.3.19.jar (com.mobidevelop.robovm:robovm-gradle-plugin:2.3.19) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.5.jar (org.apache.commons:commons-compress:1.5) with InstrumentationAnalysisTransform
+Transforming robovm-compiler-2.3.19.jar (com.mobidevelop.robovm:robovm-compiler:2.3.19) with InstrumentationAnalysisTransform
+Transforming aether-connector-wagon-1.13.1.jar (org.sonatype.aether:aether-connector-wagon:1.13.1) with InstrumentationAnalysisTransform
+Transforming maven-aether-provider-3.0.4.jar (org.apache.maven:maven-aether-provider:3.0.4) with InstrumentationAnalysisTransform
+Transforming wagon-http-2.4.jar (org.apache.maven.wagon:wagon-http:2.4) with InstrumentationAnalysisTransform
+Transforming wagon-http-shared4-2.4.jar (org.apache.maven.wagon:wagon-http-shared4:2.4) with InstrumentationAnalysisTransform
+Transforming wagon-provider-api-2.4.jar (org.apache.maven.wagon:wagon-provider-api:2.4) with InstrumentationAnalysisTransform
+Transforming xz-1.2.jar (org.tukaani:xz:1.2) with InstrumentationAnalysisTransform
+Transforming commons-io-2.7.jar (commons-io:commons-io:2.7) with InstrumentationAnalysisTransform
+Transforming commons-exec-1.3.jar (org.apache.commons:commons-exec:1.3) with InstrumentationAnalysisTransform
+Transforming commons-lang3-3.9.jar (org.apache.commons:commons-lang3:3.9) with InstrumentationAnalysisTransform
+Transforming robovm-libimobiledevice-2.3.19.jar (com.mobidevelop.robovm:robovm-libimobiledevice:2.3.19) with InstrumentationAnalysisTransform
+Transforming dd-plist-1.21.jar (com.googlecode.plist:dd-plist:1.21) with InstrumentationAnalysisTransform
+Transforming simple-xml-2.7.1.jar (org.simpleframework:simple-xml:2.7.1) with InstrumentationAnalysisTransform
+Transforming bcpkix-jdk15on-1.49.jar (org.bouncycastle:bcpkix-jdk15on:1.49) with InstrumentationAnalysisTransform
+Transforming json-simple-1.1.1.jar (com.googlecode.json-simple:json-simple:1.1.1) with InstrumentationAnalysisTransform
+Transforming asm-commons-9.0.jar (org.ow2.asm:asm-commons:9.0) with InstrumentationAnalysisTransform
+Transforming asm-analysis-9.0.jar (org.ow2.asm:asm-analysis:9.0) with InstrumentationAnalysisTransform
+Transforming asm-tree-9.0.jar (org.ow2.asm:asm-tree:9.0) with InstrumentationAnalysisTransform
+Transforming asm-9.0.jar (org.ow2.asm:asm:9.0) with InstrumentationAnalysisTransform
+Transforming robovm-llvm-2.3.19.jar (com.mobidevelop.robovm:robovm-llvm:2.3.19) with InstrumentationAnalysisTransform
+Transforming robovm-soot-2.5.0-9.jar (com.mobidevelop.robovm:robovm-soot:2.5.0-9) with InstrumentationAnalysisTransform
+Transforming robovm-debugger-2.3.19.jar (com.mobidevelop.robovm:robovm-debugger:2.3.19) with InstrumentationAnalysisTransform
+Transforming aether-impl-1.13.1.jar (org.sonatype.aether:aether-impl:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-spi-1.13.1.jar (org.sonatype.aether:aether-spi:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-util-1.13.1.jar (org.sonatype.aether:aether-util:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-api-1.13.1.jar (org.sonatype.aether:aether-api:1.13.1) with InstrumentationAnalysisTransform
+Transforming sisu-inject-plexus-2.2.3.jar (org.sonatype.sisu:sisu-inject-plexus:2.2.3) with InstrumentationAnalysisTransform
+Transforming plexus-classworlds-2.4.jar (org.codehaus.plexus:plexus-classworlds:2.4) with InstrumentationAnalysisTransform
+Transforming maven-model-builder-3.0.4.jar (org.apache.maven:maven-model-builder:3.0.4) with InstrumentationAnalysisTransform
+Transforming maven-model-3.0.4.jar (org.apache.maven:maven-model:3.0.4) with InstrumentationAnalysisTransform
+Transforming maven-repository-metadata-3.0.4.jar (org.apache.maven:maven-repository-metadata:3.0.4) with InstrumentationAnalysisTransform
+Transforming plexus-utils-3.0.8.jar (org.codehaus.plexus:plexus-utils:3.0.8) with InstrumentationAnalysisTransform
+Transforming plexus-component-annotations-1.5.5.jar (org.codehaus.plexus:plexus-component-annotations:1.5.5) with InstrumentationAnalysisTransform
+Transforming httpclient-4.2.3.jar (org.apache.httpcomponents:httpclient:4.2.3) with InstrumentationAnalysisTransform
+Transforming httpcore-4.2.3.jar (org.apache.httpcomponents:httpcore:4.2.3) with InstrumentationAnalysisTransform
+Transforming bcprov-jdk15on-1.49.jar (org.bouncycastle:bcprov-jdk15on:1.49) with InstrumentationAnalysisTransform
+Transforming sisu-inject-bean-2.2.3.jar (org.sonatype.sisu:sisu-inject-bean:2.2.3) with InstrumentationAnalysisTransform
+Transforming plexus-interpolation-1.14.jar (org.codehaus.plexus:plexus-interpolation:1.14) with InstrumentationAnalysisTransform
+Transforming jsoup-1.7.1.jar (org.jsoup:jsoup:1.7.1) with InstrumentationAnalysisTransform
+Transforming commons-logging-1.1.1.jar (commons-logging:commons-logging:1.1.1) with InstrumentationAnalysisTransform
+Transforming commons-codec-1.6.jar (commons-codec:commons-codec:1.6) with InstrumentationAnalysisTransform
+Transforming sisu-guice-3.0.3-no_aop.jar (org.sonatype.sisu:sisu-guice:3.0.3) with InstrumentationAnalysisTransform
+Transforming cglib-2.2.2.jar (cglib:cglib:2.2.2) with InstrumentationAnalysisTransform
+Transforming asm-3.3.1.jar (asm:asm:3.3.1) with InstrumentationAnalysisTransform
+Transforming robovm-gradle-plugin-2.3.19.jar (com.mobidevelop.robovm:robovm-gradle-plugin:2.3.19) with InstrumentationAnalysisTransform
+Transforming robovm-gradle-plugin-2.3.19.jar (com.mobidevelop.robovm:robovm-gradle-plugin:2.3.19) with MergeInstrumentationAnalysisTransform
+Transforming commons-compress-1.5.jar (org.apache.commons:commons-compress:1.5) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.5.jar (org.apache.commons:commons-compress:1.5) with MergeInstrumentationAnalysisTransform
+Transforming robovm-compiler-2.3.19.jar (com.mobidevelop.robovm:robovm-compiler:2.3.19) with InstrumentationAnalysisTransform
+Transforming robovm-compiler-2.3.19.jar (com.mobidevelop.robovm:robovm-compiler:2.3.19) with MergeInstrumentationAnalysisTransform
+Transforming robovm-gradle-plugin-2.3.19.jar (com.mobidevelop.robovm:robovm-gradle-plugin:2.3.19) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-compress-1.5.jar (org.apache.commons:commons-compress:1.5) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aether-connector-wagon-1.13.1.jar (org.sonatype.aether:aether-connector-wagon:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-connector-wagon-1.13.1.jar (org.sonatype.aether:aether-connector-wagon:1.13.1) with MergeInstrumentationAnalysisTransform
+Transforming robovm-compiler-2.3.19.jar (com.mobidevelop.robovm:robovm-compiler:2.3.19) with ExternalDependencyInstrumentingArtifactTransform
+Transforming maven-aether-provider-3.0.4.jar (org.apache.maven:maven-aether-provider:3.0.4) with InstrumentationAnalysisTransform
+Transforming maven-aether-provider-3.0.4.jar (org.apache.maven:maven-aether-provider:3.0.4) with MergeInstrumentationAnalysisTransform
+Transforming aether-connector-wagon-1.13.1.jar (org.sonatype.aether:aether-connector-wagon:1.13.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming wagon-http-2.4.jar (org.apache.maven.wagon:wagon-http:2.4) with InstrumentationAnalysisTransform
+Transforming wagon-http-2.4.jar (org.apache.maven.wagon:wagon-http:2.4) with MergeInstrumentationAnalysisTransform
+Transforming maven-aether-provider-3.0.4.jar (org.apache.maven:maven-aether-provider:3.0.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming wagon-http-shared4-2.4.jar (org.apache.maven.wagon:wagon-http-shared4:2.4) with InstrumentationAnalysisTransform
+Transforming wagon-http-shared4-2.4.jar (org.apache.maven.wagon:wagon-http-shared4:2.4) with MergeInstrumentationAnalysisTransform
+Transforming wagon-http-2.4.jar (org.apache.maven.wagon:wagon-http:2.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming wagon-provider-api-2.4.jar (org.apache.maven.wagon:wagon-provider-api:2.4) with InstrumentationAnalysisTransform
+Transforming wagon-provider-api-2.4.jar (org.apache.maven.wagon:wagon-provider-api:2.4) with MergeInstrumentationAnalysisTransform
+Transforming wagon-http-shared4-2.4.jar (org.apache.maven.wagon:wagon-http-shared4:2.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming xz-1.2.jar (org.tukaani:xz:1.2) with InstrumentationAnalysisTransform
+Transforming xz-1.2.jar (org.tukaani:xz:1.2) with MergeInstrumentationAnalysisTransform
+Transforming wagon-provider-api-2.4.jar (org.apache.maven.wagon:wagon-provider-api:2.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-io-2.7.jar (commons-io:commons-io:2.7) with InstrumentationAnalysisTransform
+Transforming commons-io-2.7.jar (commons-io:commons-io:2.7) with MergeInstrumentationAnalysisTransform
+Transforming xz-1.2.jar (org.tukaani:xz:1.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-exec-1.3.jar (org.apache.commons:commons-exec:1.3) with InstrumentationAnalysisTransform
+Transforming commons-exec-1.3.jar (org.apache.commons:commons-exec:1.3) with MergeInstrumentationAnalysisTransform
+Transforming commons-io-2.7.jar (commons-io:commons-io:2.7) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-lang3-3.9.jar (org.apache.commons:commons-lang3:3.9) with InstrumentationAnalysisTransform
+Transforming commons-lang3-3.9.jar (org.apache.commons:commons-lang3:3.9) with MergeInstrumentationAnalysisTransform
+Transforming commons-exec-1.3.jar (org.apache.commons:commons-exec:1.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming robovm-libimobiledevice-2.3.19.jar (com.mobidevelop.robovm:robovm-libimobiledevice:2.3.19) with InstrumentationAnalysisTransform
+Transforming robovm-libimobiledevice-2.3.19.jar (com.mobidevelop.robovm:robovm-libimobiledevice:2.3.19) with MergeInstrumentationAnalysisTransform
+Transforming dd-plist-1.21.jar (com.googlecode.plist:dd-plist:1.21) with InstrumentationAnalysisTransform
+Transforming robovm-libimobiledevice-2.3.19.jar (com.mobidevelop.robovm:robovm-libimobiledevice:2.3.19) with ExternalDependencyInstrumentingArtifactTransform
+Transforming dd-plist-1.21.jar (com.googlecode.plist:dd-plist:1.21) with MergeInstrumentationAnalysisTransform
+Transforming commons-lang3-3.9.jar (org.apache.commons:commons-lang3:3.9) with ExternalDependencyInstrumentingArtifactTransform
+Transforming simple-xml-2.7.1.jar (org.simpleframework:simple-xml:2.7.1) with InstrumentationAnalysisTransform
+Transforming simple-xml-2.7.1.jar (org.simpleframework:simple-xml:2.7.1) with MergeInstrumentationAnalysisTransform
+Transforming dd-plist-1.21.jar (com.googlecode.plist:dd-plist:1.21) with ExternalDependencyInstrumentingArtifactTransform
+Transforming bcpkix-jdk15on-1.49.jar (org.bouncycastle:bcpkix-jdk15on:1.49) with InstrumentationAnalysisTransform
+Transforming bcpkix-jdk15on-1.49.jar (org.bouncycastle:bcpkix-jdk15on:1.49) with MergeInstrumentationAnalysisTransform
+Transforming simple-xml-2.7.1.jar (org.simpleframework:simple-xml:2.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming json-simple-1.1.1.jar (com.googlecode.json-simple:json-simple:1.1.1) with InstrumentationAnalysisTransform
+Transforming json-simple-1.1.1.jar (com.googlecode.json-simple:json-simple:1.1.1) with MergeInstrumentationAnalysisTransform
+Transforming asm-commons-9.0.jar (org.ow2.asm:asm-commons:9.0) with InstrumentationAnalysisTransform
+Transforming bcpkix-jdk15on-1.49.jar (org.bouncycastle:bcpkix-jdk15on:1.49) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-commons-9.0.jar (org.ow2.asm:asm-commons:9.0) with MergeInstrumentationAnalysisTransform
+Transforming asm-analysis-9.0.jar (org.ow2.asm:asm-analysis:9.0) with InstrumentationAnalysisTransform
+Transforming json-simple-1.1.1.jar (com.googlecode.json-simple:json-simple:1.1.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-analysis-9.0.jar (org.ow2.asm:asm-analysis:9.0) with MergeInstrumentationAnalysisTransform
+Transforming asm-commons-9.0.jar (org.ow2.asm:asm-commons:9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-tree-9.0.jar (org.ow2.asm:asm-tree:9.0) with InstrumentationAnalysisTransform
+Transforming asm-tree-9.0.jar (org.ow2.asm:asm-tree:9.0) with MergeInstrumentationAnalysisTransform
+Transforming asm-analysis-9.0.jar (org.ow2.asm:asm-analysis:9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-9.0.jar (org.ow2.asm:asm:9.0) with InstrumentationAnalysisTransform
+Transforming asm-9.0.jar (org.ow2.asm:asm:9.0) with MergeInstrumentationAnalysisTransform
+Transforming asm-tree-9.0.jar (org.ow2.asm:asm-tree:9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming robovm-llvm-2.3.19.jar (com.mobidevelop.robovm:robovm-llvm:2.3.19) with InstrumentationAnalysisTransform
+Transforming robovm-llvm-2.3.19.jar (com.mobidevelop.robovm:robovm-llvm:2.3.19) with MergeInstrumentationAnalysisTransform
+Transforming asm-9.0.jar (org.ow2.asm:asm:9.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming robovm-soot-2.5.0-9.jar (com.mobidevelop.robovm:robovm-soot:2.5.0-9) with InstrumentationAnalysisTransform
+Transforming robovm-soot-2.5.0-9.jar (com.mobidevelop.robovm:robovm-soot:2.5.0-9) with MergeInstrumentationAnalysisTransform
+Transforming robovm-llvm-2.3.19.jar (com.mobidevelop.robovm:robovm-llvm:2.3.19) with ExternalDependencyInstrumentingArtifactTransform
+Transforming robovm-debugger-2.3.19.jar (com.mobidevelop.robovm:robovm-debugger:2.3.19) with InstrumentationAnalysisTransform
+Transforming robovm-debugger-2.3.19.jar (com.mobidevelop.robovm:robovm-debugger:2.3.19) with MergeInstrumentationAnalysisTransform
+Transforming robovm-soot-2.5.0-9.jar (com.mobidevelop.robovm:robovm-soot:2.5.0-9) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aether-impl-1.13.1.jar (org.sonatype.aether:aether-impl:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-impl-1.13.1.jar (org.sonatype.aether:aether-impl:1.13.1) with MergeInstrumentationAnalysisTransform
+Transforming robovm-debugger-2.3.19.jar (com.mobidevelop.robovm:robovm-debugger:2.3.19) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aether-spi-1.13.1.jar (org.sonatype.aether:aether-spi:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-spi-1.13.1.jar (org.sonatype.aether:aether-spi:1.13.1) with MergeInstrumentationAnalysisTransform
+Transforming aether-impl-1.13.1.jar (org.sonatype.aether:aether-impl:1.13.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aether-util-1.13.1.jar (org.sonatype.aether:aether-util:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-util-1.13.1.jar (org.sonatype.aether:aether-util:1.13.1) with MergeInstrumentationAnalysisTransform
+Transforming aether-api-1.13.1.jar (org.sonatype.aether:aether-api:1.13.1) with InstrumentationAnalysisTransform
+Transforming aether-spi-1.13.1.jar (org.sonatype.aether:aether-spi:1.13.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming aether-api-1.13.1.jar (org.sonatype.aether:aether-api:1.13.1) with MergeInstrumentationAnalysisTransform
+Transforming sisu-inject-plexus-2.2.3.jar (org.sonatype.sisu:sisu-inject-plexus:2.2.3) with InstrumentationAnalysisTransform
+Transforming aether-util-1.13.1.jar (org.sonatype.aether:aether-util:1.13.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming sisu-inject-plexus-2.2.3.jar (org.sonatype.sisu:sisu-inject-plexus:2.2.3) with MergeInstrumentationAnalysisTransform
+Transforming aether-api-1.13.1.jar (org.sonatype.aether:aether-api:1.13.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming plexus-classworlds-2.4.jar (org.codehaus.plexus:plexus-classworlds:2.4) with InstrumentationAnalysisTransform
+Transforming plexus-classworlds-2.4.jar (org.codehaus.plexus:plexus-classworlds:2.4) with MergeInstrumentationAnalysisTransform
+Transforming sisu-inject-plexus-2.2.3.jar (org.sonatype.sisu:sisu-inject-plexus:2.2.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming maven-model-builder-3.0.4.jar (org.apache.maven:maven-model-builder:3.0.4) with InstrumentationAnalysisTransform
+Transforming maven-model-builder-3.0.4.jar (org.apache.maven:maven-model-builder:3.0.4) with MergeInstrumentationAnalysisTransform
+Transforming maven-model-3.0.4.jar (org.apache.maven:maven-model:3.0.4) with InstrumentationAnalysisTransform
+Transforming plexus-classworlds-2.4.jar (org.codehaus.plexus:plexus-classworlds:2.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming maven-model-3.0.4.jar (org.apache.maven:maven-model:3.0.4) with MergeInstrumentationAnalysisTransform
+Transforming maven-model-builder-3.0.4.jar (org.apache.maven:maven-model-builder:3.0.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming maven-repository-metadata-3.0.4.jar (org.apache.maven:maven-repository-metadata:3.0.4) with InstrumentationAnalysisTransform
+Transforming maven-repository-metadata-3.0.4.jar (org.apache.maven:maven-repository-metadata:3.0.4) with MergeInstrumentationAnalysisTransform
+Transforming plexus-utils-3.0.8.jar (org.codehaus.plexus:plexus-utils:3.0.8) with InstrumentationAnalysisTransform
+Transforming maven-model-3.0.4.jar (org.apache.maven:maven-model:3.0.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming plexus-utils-3.0.8.jar (org.codehaus.plexus:plexus-utils:3.0.8) with MergeInstrumentationAnalysisTransform
+Transforming plexus-component-annotations-1.5.5.jar (org.codehaus.plexus:plexus-component-annotations:1.5.5) with InstrumentationAnalysisTransform
+Transforming maven-repository-metadata-3.0.4.jar (org.apache.maven:maven-repository-metadata:3.0.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming plexus-component-annotations-1.5.5.jar (org.codehaus.plexus:plexus-component-annotations:1.5.5) with MergeInstrumentationAnalysisTransform
+Transforming httpclient-4.2.3.jar (org.apache.httpcomponents:httpclient:4.2.3) with InstrumentationAnalysisTransform
+Transforming plexus-utils-3.0.8.jar (org.codehaus.plexus:plexus-utils:3.0.8) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpclient-4.2.3.jar (org.apache.httpcomponents:httpclient:4.2.3) with MergeInstrumentationAnalysisTransform
+Transforming plexus-component-annotations-1.5.5.jar (org.codehaus.plexus:plexus-component-annotations:1.5.5) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpcore-4.2.3.jar (org.apache.httpcomponents:httpcore:4.2.3) with InstrumentationAnalysisTransform
+Transforming httpcore-4.2.3.jar (org.apache.httpcomponents:httpcore:4.2.3) with MergeInstrumentationAnalysisTransform
+Transforming httpclient-4.2.3.jar (org.apache.httpcomponents:httpclient:4.2.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming bcprov-jdk15on-1.49.jar (org.bouncycastle:bcprov-jdk15on:1.49) with InstrumentationAnalysisTransform
+Transforming bcprov-jdk15on-1.49.jar (org.bouncycastle:bcprov-jdk15on:1.49) with MergeInstrumentationAnalysisTransform
+Transforming sisu-inject-bean-2.2.3.jar (org.sonatype.sisu:sisu-inject-bean:2.2.3) with InstrumentationAnalysisTransform
+Transforming httpcore-4.2.3.jar (org.apache.httpcomponents:httpcore:4.2.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming sisu-inject-bean-2.2.3.jar (org.sonatype.sisu:sisu-inject-bean:2.2.3) with MergeInstrumentationAnalysisTransform
+Transforming plexus-interpolation-1.14.jar (org.codehaus.plexus:plexus-interpolation:1.14) with InstrumentationAnalysisTransform
+Transforming bcprov-jdk15on-1.49.jar (org.bouncycastle:bcprov-jdk15on:1.49) with ExternalDependencyInstrumentingArtifactTransform
+Transforming plexus-interpolation-1.14.jar (org.codehaus.plexus:plexus-interpolation:1.14) with MergeInstrumentationAnalysisTransform
+Transforming sisu-inject-bean-2.2.3.jar (org.sonatype.sisu:sisu-inject-bean:2.2.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsoup-1.7.1.jar (org.jsoup:jsoup:1.7.1) with InstrumentationAnalysisTransform
+Transforming jsoup-1.7.1.jar (org.jsoup:jsoup:1.7.1) with MergeInstrumentationAnalysisTransform
+Transforming plexus-interpolation-1.14.jar (org.codehaus.plexus:plexus-interpolation:1.14) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-logging-1.1.1.jar (commons-logging:commons-logging:1.1.1) with InstrumentationAnalysisTransform
+Transforming jsoup-1.7.1.jar (org.jsoup:jsoup:1.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-logging-1.1.1.jar (commons-logging:commons-logging:1.1.1) with MergeInstrumentationAnalysisTransform
+Transforming commons-codec-1.6.jar (commons-codec:commons-codec:1.6) with InstrumentationAnalysisTransform
+Transforming commons-codec-1.6.jar (commons-codec:commons-codec:1.6) with MergeInstrumentationAnalysisTransform
+Transforming sisu-guice-3.0.3-no_aop.jar (org.sonatype.sisu:sisu-guice:3.0.3) with InstrumentationAnalysisTransform
+Transforming commons-logging-1.1.1.jar (commons-logging:commons-logging:1.1.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming sisu-guice-3.0.3-no_aop.jar (org.sonatype.sisu:sisu-guice:3.0.3) with MergeInstrumentationAnalysisTransform
+Transforming cglib-2.2.2.jar (cglib:cglib:2.2.2) with InstrumentationAnalysisTransform
+Transforming commons-codec-1.6.jar (commons-codec:commons-codec:1.6) with ExternalDependencyInstrumentingArtifactTransform
+Transforming cglib-2.2.2.jar (cglib:cglib:2.2.2) with MergeInstrumentationAnalysisTransform
+Transforming asm-3.3.1.jar (asm:asm:3.3.1) with InstrumentationAnalysisTransform
+Transforming sisu-guice-3.0.3-no_aop.jar (org.sonatype.sisu:sisu-guice:3.0.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-3.3.1.jar (asm:asm:3.3.1) with MergeInstrumentationAnalysisTransform
+Transforming cglib-2.2.2.jar (cglib:cglib:2.2.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-3.3.1.jar (asm:asm:3.3.1) with ExternalDependencyInstrumentingArtifactTransform
+
+> Configure project :server
+Evaluating project ':server' using build file 'E:\Projects\Mindustry\server\build.gradle'.
+
+> Configure project :tests
+Evaluating project ':tests' using build file 'E:\Projects\Mindustry\tests\build.gradle'.
+
+> Configure project :tools
+Evaluating project ':tools' using build file 'E:\Projects\Mindustry\tools\build.gradle'.
+All projects evaluated.
+Task path 'desktop:dist' matched project ':desktop'
+Task name matched 'dist'
+Selected primary task 'dist' from project :desktop
+Tasks to be executed: [task ':annotations:clearCache', task ':annotations:compileJava', task ':core:clearCache', task ':annotations:processResources', task ':annotations:classes', task ':annotations:jar', task ':core:kaptGenerateStubsKotlin', task ':core:kaptKotlin', task ':core:compileKotlin', task ':core:preGen', task ':core:compileJava', task ':core:processResources', task ':core:classes', task ':core:inspectClassesForKotlinIC', task ':core:jar', task ':desktop:clearCache', task ':desktop:compileJava', task ':desktop:processResources', task ':desktop:dist']
+Tasks that were excluded: []
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.jetbrains.kotlin.gradle.scripting.internal.ScriptingKotlinGradleSubplugin expected enum ORG_JETBRAINS_KOTLIN_GRADLE_SCRIPTING_INTERNAL_SCRIPTINGKOTLINGRADLESUBPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.jetbrains.kotlin.gradle.scripting.internal.ScriptingGradleSubplugin expected enum ORG_JETBRAINS_KOTLIN_GRADLE_SCRIPTING_INTERNAL_SCRIPTINGGRADLESUBPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper expected enum ORG_JETBRAINS_KOTLIN_GRADLE_PLUGIN_KOTLINPLUGINWRAPPER
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JavaLibraryPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JAVALIBRARYPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JavaLibraryPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JAVALIBRARYPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.jetbrains.kotlin.gradle.scripting.internal.ScriptingKotlinGradleSubplugin expected enum ORG_JETBRAINS_KOTLIN_GRADLE_SCRIPTING_INTERNAL_SCRIPTINGKOTLINGRADLESUBPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.jetbrains.kotlin.gradle.scripting.internal.ScriptingGradleSubplugin expected enum ORG_JETBRAINS_KOTLIN_GRADLE_SCRIPTING_INTERNAL_SCRIPTINGGRADLESUBPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper expected enum ORG_JETBRAINS_KOTLIN_GRADLE_PLUGIN_KOTLINPLUGINWRAPPER
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.robovm.gradle.RoboVMPlugin expected enum ORG_ROBOVM_GRADLE_ROBOVMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.publish.plugins.PublishingPlugin$Inject expected enum ORG_GRADLE_API_PUBLISH_PLUGINS_PUBLISHINGPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmEcosystemPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMECOSYSTEMPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmToolchainsPlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTOOLCHAINSPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.testing.base.plugins.TestSuiteBasePlugin$Inject expected enum ORG_GRADLE_TESTING_BASE_PLUGINS_TESTSUITEBASEPLUGIN
+Analytics other plugin to proto: Unknown plugin type org.gradle.api.plugins.JvmTestSuitePlugin$Inject expected enum ORG_GRADLE_API_PLUGINS_JVMTESTSUITEPLUGIN
+Resolve mutations for :annotations:clearCache (Thread[Execution worker,5,main]) started.
+:annotations:clearCache (Thread[Execution worker,5,main]) started.
+
+> Task :annotations:clearCache
+Custom actions are attached to task ':annotations:clearCache'.
+Caching disabled for task ':annotations:clearCache' because:
+  Gradle would require more information to cache this task
+Task ':annotations:clearCache' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :annotations:compileJava (Thread[Execution worker,5,main]) started.
+:annotations:compileJava (Thread[Execution worker,5,main]) started.
+
+> Task :annotations:compileJava UP-TO-DATE
+Build cache key for task ':annotations:compileJava' is c52cad82f524f752cb848df27c209884
+Skipping task ':annotations:compileJava' as it is up-to-date.
+No compile result for :annotations:compileJava
+No compile result for :annotations:compileJava
+work action resolve main (project :annotations) (Thread[Execution worker,5,main]) started.
+Resolve mutations for :core:clearCache (Thread[Execution worker,5,main]) started.
+:core:clearCache (Thread[Execution worker,5,main]) started.
+
+> Task :core:clearCache
+Custom actions are attached to task ':core:clearCache'.
+Caching disabled for task ':core:clearCache' because:
+  Gradle would require more information to cache this task
+Task ':core:clearCache' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :annotations:processResources (Thread[Execution worker,5,main]) started.
+:annotations:processResources (Thread[Execution worker,5,main]) started.
+
+> Task :annotations:processResources UP-TO-DATE
+Caching disabled for task ':annotations:processResources' because:
+  Not worth caching
+Skipping task ':annotations:processResources' as it is up-to-date.
+Resolve mutations for :annotations:classes (Thread[Execution worker,5,main]) started.
+:annotations:classes (Thread[Execution worker,5,main]) started.
+
+> Task :annotations:classes UP-TO-DATE
+Skipping task ':annotations:classes' as it has no actions.
+Resolve mutations for :annotations:jar (Thread[Execution worker,5,main]) started.
+:annotations:jar (Thread[Execution worker,5,main]) started.
+
+> Task :annotations:jar UP-TO-DATE
+Caching disabled for task ':annotations:jar' because:
+  Not worth caching
+Skipping task ':annotations:jar' as it is up-to-date.
+work action resolve annotations-release.jar (project :annotations) (Thread[Execution worker,5,main]) started.
+Resolve mutations for :core:kaptGenerateStubsKotlin (Thread[Execution worker,5,main]) started.
+:core:kaptGenerateStubsKotlin (Thread[Execution worker,5,main]) started.
+
+> Task :core:kaptGenerateStubsKotlin SKIPPED
+Skipping task ':core:kaptGenerateStubsKotlin' as task onlyIf 'Task satisfies onlyIf closure' is false.
+Resolve mutations for :core:kaptKotlin (Thread[Execution worker,5,main]) started.
+:core:kaptKotlin (Thread[Execution worker,5,main]) started.
+Resolve mutations for :core:preGen (Thread[Execution worker Thread 10,5,main]) started.
+:core:preGen (Thread[Execution worker Thread 10,5,main]) started.
+
+> Task :core:preGen UP-TO-DATE
+Skipping task ':core:preGen' as it has no actions.
+Resolve mutations for :core:processResources (Thread[Execution worker Thread 10,5,main]) started.
+:core:processResources (Thread[Execution worker Thread 10,5,main]) started.
+
+> Task :core:processResources NO-SOURCE
+Skipping task ':core:processResources' as it has no source files and no previous output files.
+Resolve mutations for :desktop:clearCache (Thread[Execution worker Thread 10,5,main]) started.
+:desktop:clearCache (Thread[Execution worker Thread 10,5,main]) started.
+
+> Task :desktop:clearCache
+Custom actions are attached to task ':desktop:clearCache'.
+Caching disabled for task ':desktop:clearCache' because:
+  Gradle would require more information to cache this task
+Task ':desktop:clearCache' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :desktop:processResources (Thread[Execution worker Thread 10,5,main]) started.
+:desktop:processResources (Thread[Execution worker Thread 10,5,main]) started.
+
+> Task :desktop:processResources NO-SOURCE
+Skipping task ':desktop:processResources' as it has no source files and no previous output files.
+
+> Task :core:kaptKotlin
+Transforming lz4-java-1.8.0.jar with StructureTransformAction
+Transforming arc-core-277a7cc689.jar with StructureTransformAction
+Transforming flabel-277a7cc689.jar with StructureTransformAction
+Transforming freetype-277a7cc689.jar with StructureTransformAction
+Transforming g3d-277a7cc689.jar with StructureTransformAction
+Transforming fx-277a7cc689.jar with StructureTransformAction
+Transforming arcnet-277a7cc689.jar with StructureTransformAction
+Transforming rhino-73a812444ac388ac2d94013b5cadc8f70b7ea027.jar with StructureTransformAction
+Transforming main with StructureTransformAction
+Transforming filedialogs-277a7cc689.jar with StructureTransformAction
+Transforming rhino-1.7.15.jar with StructureTransformAction
+file or directory 'E:\Projects\Mindustry\core\build\tmp\kapt3\stubs\main', not found
+Build cache key for task ':core:kaptKotlin' is 2b4f55ae1f4b4a8c59059768f5b7a673
+Task ':core:kaptKotlin' is not up-to-date because:
+  Input property 'source' file E:\Projects\Mindustry\core\src\mindustry\graphics\BlockRenderer.java has changed.
+  Input property 'source' file E:\Projects\Mindustry\core\src\mindustry\logic\JsExecutor.java has changed.
+  Input property 'source' file E:\Projects\Mindustry\core\src\mindustry\logic\LExecutor.java has changed.
+Running kapt annotation processing using the Gradle Worker API
+Full list of impacted classpath names: []. Took 26ms.
+Using workers NONE isolation mode to run kapt
+Stored cache entry for task ':core:kaptKotlin' with cache key 2b4f55ae1f4b4a8c59059768f5b7a673
+Resolve mutations for :core:compileKotlin (Thread[Execution worker,5,main]) started.
+:core:compileKotlin (Thread[Execution worker,5,main]) started.
+
+> Task :core:compileKotlin SKIPPED
+Skipping task ':core:compileKotlin' as task onlyIf 'Task satisfies onlyIf closure' is false.
+work action resolve main (project :core) (Thread[Execution worker,5,main]) started.
+Resolve mutations for :core:compileJava (Thread[Execution worker,5,main]) started.
+:core:compileJava (Thread[Execution worker,5,main]) started.
+
+> Task :core:compileJava
+Build cache key for task ':core:compileJava' is 33dd03fef15aae391310a325b2435a38
+Task ':core:compileJava' is not up-to-date because:
+  Input property 'stableSources' file E:\Projects\Mindustry\core\src\mindustry\graphics\BlockRenderer.java has changed.
+  Input property 'stableSources' file E:\Projects\Mindustry\core\src\mindustry\logic\JsExecutor.java has changed.
+  Input property 'stableSources' file E:\Projects\Mindustry\core\src\mindustry\logic\LExecutor.java has changed.
+Created classpath snapshot for incremental compilation in 0.003 secs.
+Compiling with toolchain 'C:\Program Files\Eclipse Adoptium\jdk-17.0.12.7-hotspot'.
+Compiling with JDK Java compiler API.
+Incremental compilation of 1898 classes completed in 32.849 secs.
+Class dependency analysis for incremental compilation took 0.703 secs.
+Stored cache entry for task ':core:compileJava' with cache key 33dd03fef15aae391310a325b2435a38
+work action resolve main (project :core) (Thread[Execution worker Thread 2,5,main]) started.
+work action resolve main (project :core) (Thread[Execution worker Thread 4,5,main]) started.
+work action resolve main (project :core) (Thread[Execution worker Thread 4,5,main]) started.
+Resolve mutations for :core:classes (Thread[Execution worker Thread 4,5,main]) started.
+:core:classes (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :core:classes
+Skipping task ':core:classes' as it has no actions.
+Resolve mutations for :core:inspectClassesForKotlinIC (Thread[Execution worker Thread 4,5,main]) started.
+:core:inspectClassesForKotlinIC (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :core:inspectClassesForKotlinIC SKIPPED
+Skipping task ':core:inspectClassesForKotlinIC' as task onlyIf 'Task satisfies onlyIf closure' is false.
+Resolve mutations for :core:jar (Thread[Execution worker Thread 4,5,main]) started.
+:core:jar (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :core:jar
+Caching disabled for task ':core:jar' because:
+  Not worth caching
+Task ':core:jar' is not up-to-date because:
+  Input property 'rootSpec$1' file E:\Projects\Mindustry\core\build\classes\java\main\mindustry\content\Blocks$1.class has changed.
+  Input property 'rootSpec$1' file E:\Projects\Mindustry\core\build\classes\java\main\mindustry\content\Blocks$105.class has changed.
+  Input property 'rootSpec$1' file E:\Projects\Mindustry\core\build\classes\java\main\mindustry\content\Blocks$110$1.class has changed.
+file or directory 'E:\Projects\Mindustry\core\build\classes\kotlin\main', not found
+file or directory 'E:\Projects\Mindustry\core\build\resources\main', not found
+work action resolve core-release.jar (project :core) (Thread[Execution worker Thread 2,5,main]) started.
+Resolve mutations for :desktop:compileJava (Thread[Execution worker Thread 2,5,main]) started.
+:desktop:compileJava (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :desktop:compileJava UP-TO-DATE
+Build cache key for task ':desktop:compileJava' is fc501909ab7e79c9dd6b1fcc8b7cd99d
+Skipping task ':desktop:compileJava' as it is up-to-date.
+No compile result for :desktop:compileJava
+No compile result for :desktop:compileJava
+Resolve mutations for :desktop:dist (Thread[Execution worker Thread 10,5,main]) started.
+:desktop:dist (Thread[Execution worker Thread 10,5,main]) started.
+
+> Task :desktop:dist
+Caching disabled for task ':desktop:dist' because:
+  Not worth caching
+Task ':desktop:dist' is not up-to-date because:
+  Input property 'rootSpec$1' file E:\Projects\Mindustry\core\build\libs\core-release.jar has changed.
+  Input property 'rootSpec$1' file E:\Projects\Mindustry\core\assets\version.properties has changed.
+file or directory 'E:\Projects\Mindustry\desktop\build\resources\main', not found
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 52s
+11 actionable tasks: 7 executed, 4 up-to-date
+Watched directory hierarchies: [E:\Projects\Mindustry]
