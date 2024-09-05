@@ -1,7 +1,10 @@
 package mindustry.logic;
 
 import arc.util.*;
+import arc.struct.*;
 import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.ctype.*;
 import mindustry.logic.JsExecutor;
 import mindustry.logic.JsWrapper.CPU;
 import mindustry.logic.JsWrapper.Console;
@@ -11,6 +14,7 @@ import mindustry.logic.JsWrapper.JsGeneric;
 import mindustry.logic.JsWrapper.JsUnit;
 import mindustry.logic.LExecutor.*;
 import mindustry.logic.LStatements.*;
+import mindustry.Vars;
 import mindustry.game.Team;
 import mindustry.world.blocks.logic.LogicBlock.*;
 import mindustry.world.blocks.logic.LogicDisplay.*;
@@ -41,17 +45,32 @@ public class JsWrapper {
         
         createJsEnum(scope, RadarSort.class);
         createJsEnum(scope, RadarTarget.class);
-    }
+        createJsEnum(scope, BlockFlag.class);
 
+        //createJsEnumFrowSeq(scope, Vars.content.items());
+    }
     
     private <T extends Enum<T>> void createJsEnum(Scriptable scope, Class<T> enumType){
+        createJsEnum(scope, enumType, null);
+    }
+    private <T extends Enum<T>> void createJsEnum(Scriptable scope, Class<T> enumType, String name){
         Scriptable enumObj = executor.context.newObject(scope);
         for(T enumValue : enumType.getEnumConstants()){
             ScriptableObject.putConstProperty(enumObj, enumValue.name(), enumValue);
         }
-        String className = enumType.getName().substring(enumType.getName().lastIndexOf(".") + 1);
+        String className = name  == null ? enumType.getName().substring(enumType.getName().lastIndexOf(".") + 1) : name;
         ScriptableObject.putProperty(scope, className, Context.javaToJS(enumObj, scope));
     }
+
+    /*private <T extends MappableContent> void createJsEnumFrowSeq(Scriptable scope, Seq<T> seq){
+        Scriptable enumObj = executor.context.newObject(scope);
+        for(T item : seq){
+            ScriptableObject.putConstProperty(enumObj, item.name, Context.javaToJS(item, scope));
+        }
+        String classFullName = seq.items.getClass().getComponentType().getName();
+        String className = classFullName.substring(classFullName.lastIndexOf(".") + 1);
+        ScriptableObject.putProperty(scope, className + "s", Context.javaToJS(enumObj, scope));
+    }*/
 
 
     public class CPU extends JsBuilding {
@@ -255,7 +274,6 @@ public class JsWrapper {
         public Object radar(RadarTarget targetType1, RadarTarget targetType2, RadarTarget targetType3, Long order, RadarSort sort) {
             cpu.yield();
             p1.setnum(order);
-            console.log("From radar: " + targetType1.name() + targetType2.name() + targetType3.name() + order + sort.name() + target.objval.toString());
             LExecutor.RadarI radar = new LExecutor.RadarI(targetType1, targetType2, targetType3, sort, target, p1, ret);
             radar.run(executor);
             if (ret.isobj) {                
@@ -358,9 +376,9 @@ public class JsWrapper {
             control(LUnitControl.targetp);
         }
 
-        public void itemTake(JsBuilding fromBuilding, String itemType, Long amount) {
+        public void itemTake(JsBuilding fromBuilding, Item itemType, Long amount) {
             p1.setobj(fromBuilding.target.objval);
-            p2.setobj(executor.builder.var(itemType));
+            p2.setobj(itemType);
             p3.setnum(amount);
             control(LUnitControl.itemTake);
         }
@@ -443,12 +461,13 @@ public class JsWrapper {
             return null;
         }
 
-        public LocateResult locateBuilding(String group, Boolean enemy) {
+        public LocateResult locateBuilding(BlockFlag group, Boolean enemy) {
             p1.setbool(enemy);
-            return locate(LLocate.building, BlockFlag.valueOf(group));
+            return locate(LLocate.building, group);
         }
 
         public LocateResult locateOre(String oreType) {
+            Vars.content.items();
             p1.setobj(executor.builder.var(oreType));
             return locate(LLocate.ore);
         }

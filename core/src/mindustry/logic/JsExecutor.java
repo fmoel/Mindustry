@@ -76,6 +76,7 @@ public class JsExecutor extends LExecutor implements Debugger {
                     }
                 }catch(InterruptedException e){
                     // this interrupt would stop the thread
+                    isRunning = false;
                     return;
                 }
             }
