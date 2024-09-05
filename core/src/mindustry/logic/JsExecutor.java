@@ -46,8 +46,8 @@ public class JsExecutor extends LExecutor implements Debugger {
     private volatile int currentLineNumber = 1;
     public String consoleLog = "";
     public Cons<String> consoleListener;
-    public Console console;
     public JsWrapper jsWrapper;
+    public JsWrapper.Console console;
     public long sleepUntil = 0;
 
     public JsExecutor() {
@@ -207,9 +207,7 @@ public class JsExecutor extends LExecutor implements Debugger {
             cx.setWrapFactory(new SandboxWrapFactory());
             cx.setClassShutter(new ClassShutter() {
                 public boolean visibleToScripts(String className) {
-                    if (className.startsWith("JsWrapper"))
-                        return true;
-                    if (className.startsWith("JsExecutor$"))
+                    if (className.startsWith("mindustry.logic.JsWrapper"))
                         return true;
                     if (className.startsWith("java.lang.Object"))
                         return true;
@@ -217,9 +215,10 @@ public class JsExecutor extends LExecutor implements Debugger {
                         return true;
                     if (className.startsWith("java.lang.String"))
                         return true;
-                    if (className.startsWith("java.lang.Object"))
+                    if (className.startsWith("java.lang.Double"))
                         return true;
 
+                    console.error("requested className: " + className);
                     return false;
                 }
             });
@@ -229,7 +228,7 @@ public class JsExecutor extends LExecutor implements Debugger {
 
     // Initializes the context and attaches the debugger
     private void initializeContext() {
-        ContextFactory sandboxFactory = new ContextFactory();
+        ContextFactory sandboxFactory = new SandboxContextFactory();
         context = sandboxFactory.enterContext();
         // context = Context.enter();
         context.setOptimizationLevel(-1); // Run in interpreted mode for easier debugging
@@ -238,8 +237,9 @@ public class JsExecutor extends LExecutor implements Debugger {
         context.setDebugger(this, null);
         scope = context.initStandardObjects();
         
-        console = new Console();
-        jsWrapper = new JsWrapper(this, console, scope);
+        jsWrapper = new JsWrapper(this, scope);
+        this.console = jsWrapper.console;
+
     }
 
     public void setConsoleListener(Cons<String> listener) {
@@ -313,44 +313,6 @@ public class JsExecutor extends LExecutor implements Debugger {
             Context.exit(); // Properly exit the context
             context = null; // Nullify the context to allow reinitialization
             scope = null; // Nullify the scope for a fresh start
-        }
-    }
-
-    public class Console {
-        private StringBuilder logContent;
-
-        public Console() {
-            this.logContent = new StringBuilder();
-        }
-
-        public void clear() {
-            logContent.setLength(0);
-            if (consoleListener != null)
-                consoleListener.get(getLogContent());
-        }
-
-        public void log(String string) {
-            appendMessage("LOG: ", string);
-        }
-
-        public void warn(String string) {
-            appendMessage("WARN: ", string);
-        }
-
-        public void error(String string) {
-            appendMessage("ERROR: ", string);
-        }
-
-        private void appendMessage(String prefix, String string) {
-            logContent.append(prefix);
-            logContent.append(string).append(" ");
-            logContent.append("\n");
-            if (consoleListener != null)
-                consoleListener.get(getLogContent());
-        }
-
-        public String getLogContent() {
-            return logContent.toString();
         }
     }
 

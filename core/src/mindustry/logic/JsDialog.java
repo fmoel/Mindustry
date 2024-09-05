@@ -209,8 +209,11 @@ public class JsDialog extends BaseDialog {
         });
 
         if(executor.console != null){
-            logText = executor.console.getLogContent();
+            logText = executor.console.getLogContent();            
+        }else{
+            logText = "";
         }
+        consoleOutput.setText(logText);
 
         this.consumer = result -> {
             if (!result.equals(code)) {

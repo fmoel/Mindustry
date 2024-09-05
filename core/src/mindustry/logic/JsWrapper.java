@@ -3,6 +3,12 @@ package mindustry.logic;
 import arc.util.*;
 import mindustry.gen.*;
 import mindustry.logic.JsExecutor;
+import mindustry.logic.JsWrapper.CPU;
+import mindustry.logic.JsWrapper.Console;
+import mindustry.logic.JsWrapper.JsBuilding;
+import mindustry.logic.JsWrapper.JsCanvas;
+import mindustry.logic.JsWrapper.JsGeneric;
+import mindustry.logic.JsWrapper.JsUnit;
 import mindustry.logic.LExecutor.*;
 import mindustry.logic.LStatements.*;
 import mindustry.game.Team;
@@ -13,20 +19,40 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+/* WARNING:
+ * Everything in this class can be exposed to JS. 
+ * This includes classes enums and other things. 
+ * Make sure to properly encapsulate all public classes, variables etc.
+ * In case you need other public classes in JS then the one existing,
+ * they must be actively allowed in JsExecutor.SandboxContextFactory.makeContext.
+*/
 public class JsWrapper {
     private JsExecutor executor;
     public CPU cpu;
-    public JsExecutor.Console console;
+    public Console console;
 
-    public JsWrapper(JsExecutor executor, JsExecutor.Console console, Scriptable scope) {
+    public JsWrapper(JsExecutor executor, Scriptable scope) {
         this.executor = executor;
-        this.console = console;
+        this.console = new Console();
         cpu = new CPU(executor);
 
         ScriptableObject.putProperty(scope, "cpu", Context.javaToJS(cpu, scope));
         ScriptableObject.putProperty(scope, "console", Context.javaToJS(console, scope));
-
+        
+        createJsEnum(scope, RadarSort.class);
+        createJsEnum(scope, RadarTarget.class);
     }
+
+    
+    private <T extends Enum<T>> void createJsEnum(Scriptable scope, Class<T> enumType){
+        Scriptable enumObj = executor.context.newObject(scope);
+        for(T enumValue : enumType.getEnumConstants()){
+            ScriptableObject.putConstProperty(enumObj, enumValue.name(), enumValue);
+        }
+        String className = enumType.getName().substring(enumType.getName().lastIndexOf(".") + 1);
+        ScriptableObject.putProperty(scope, className, Context.javaToJS(enumObj, scope));
+    }
+
 
     public class CPU extends JsBuilding {
         private final LogicBuild logicBuild;
@@ -226,21 +252,18 @@ public class JsWrapper {
             write.run(executor);
         }
 
-        public Object radar(String targetType1, String targetType2, String targetType3, Long order, String sort) {
+        public Object radar(RadarTarget targetType1, RadarTarget targetType2, RadarTarget targetType3, Long order, RadarSort sort) {
             cpu.yield();
             p1.setnum(order);
-            p3.setobj(executor.builder.var(targetType3));
-            LExecutor.RadarI radar = new LExecutor.RadarI(RadarTarget.valueOf(targetType1),
-                    RadarTarget.valueOf(targetType2),
-                    RadarTarget.valueOf(targetType3), RadarSort.valueOf(sort), ret, p1, ret);
+            console.log("From radar: " + targetType1.name() + targetType2.name() + targetType3.name() + order + sort.name() + target.objval.toString());
+            LExecutor.RadarI radar = new LExecutor.RadarI(targetType1, targetType2, targetType3, sort, target, p1, ret);
             radar.run(executor);
-            if (ret.isobj) {
+            if (ret.isobj) {                
                 if (ret.obj() instanceof Building b) {
                     return new JsBuilding(b);
                 }
                 if (ret.obj() instanceof Unit u) {
-                    if (u.team == Team.derelict)
-                        return new JsUnit(u);
+                    return new JsUnit(u);
                 }
             }
             return null;
@@ -623,4 +646,41 @@ public class JsWrapper {
             draw(GraphicsType.rotate);           
         }
     }
+    public class Console {
+        private StringBuilder logContent;
+
+        public Console() {
+            this.logContent = new StringBuilder();
+        }
+
+        public void clear() {
+            logContent.setLength(0);
+            if (executor.consoleListener != null)
+                executor.consoleListener.get(getLogContent());
+        }
+
+        public void log(String string) {
+            appendMessage("LOG: ", string);
+        }
+
+        public void warn(String string) {
+            appendMessage("WARN: ", string);
+        }
+
+        public void error(String string) {
+            appendMessage("ERROR: ", string);
+        }
+
+        private void appendMessage(String prefix, String string) {
+            logContent.append(prefix);
+            logContent.append(string).append(" ");
+            logContent.append("\n");
+            if (executor.consoleListener != null)
+                executor.consoleListener.get(getLogContent());
+        }
+
+        public String getLogContent() {
+            return logContent.toString();
+        }
+    }    
 }
