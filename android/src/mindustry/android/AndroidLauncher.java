@@ -38,7 +38,7 @@ public class AndroidLauncher extends AndroidApplication{
         UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
 
         Thread.setDefaultUncaughtExceptionHandler((thread, error) -> {
-            CrashSender.log(error);
+            CrashHandler.log(error);
 
             //try to forward exception to system handler
             if(handler != null){
@@ -73,28 +73,57 @@ public class AndroidLauncher extends AndroidApplication{
             @Override
             public ClassLoader loadJar(Fi jar, ClassLoader parent) throws Exception{
                 //Required to load jar files in Android 14: https://developer.android.com/about/versions/14/behavior-changes-14#safer-dynamic-code-loading
-                jar.file().setReadOnly();
-                return new DexClassLoader(jar.file().getPath(), getFilesDir().getPath(), null, parent){
-                    @Override
-                    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException{
-                        //check for loaded state
-                        Class<?> loadedClass = findLoadedClass(name);
-                        if(loadedClass == null){
-                            try{
-                                //try to load own class first
-                                loadedClass = findClass(name);
-                            }catch(ClassNotFoundException | NoClassDefFoundError e){
-                                //use parent if not found
-                                return parent.loadClass(name);
+                try{
+                    jar.file().setReadOnly();
+                    return new DexClassLoader(jar.file().getPath(), getFilesDir().getPath(), null, parent){
+                        @Override
+                        protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException{
+                            //check for loaded state
+                            Class<?> loadedClass = findLoadedClass(name);
+                            if(loadedClass == null){
+                                try{
+                                    //try to load own class first
+                                    loadedClass = findClass(name);
+                                }catch(ClassNotFoundException | NoClassDefFoundError e){
+                                    //use parent if not found
+                                    return parent.loadClass(name);
+                                }
                             }
-                        }
 
-                        if(resolve){
-                            resolveClass(loadedClass);
+                            if(resolve){
+                                resolveClass(loadedClass);
+                            }
+                            return loadedClass;
                         }
-                        return loadedClass;
+                    };
+                }catch(SecurityException e){
+                    //`setReadOnly` to jar file in `/sdcard/Android/data/...` does not work on some Android 14 device
+                    //But in `/data/...` it works
+
+                    if(Build.VERSION.SDK_INT < VERSION_CODES.O_MR1){
+                        throw e;
                     }
-                };
+
+                    Fi cacheDir = new Fi(getCacheDir()).child("mods");
+                    cacheDir.mkdirs();
+
+                    //long file name support
+                    Fi modCacheDir = cacheDir.child(jar.nameWithoutExtension());
+                    Fi modCache = modCacheDir.child(Long.toHexString(jar.lastModified()) + ".zip");
+
+                    if(modCacheDir.equals(jar.parent())){
+                        //should not reach here, just in case
+                        throw e;
+                    }
+
+                    //Cache will be deleted when mod is removed
+                    if(!modCache.exists() || jar.length() != modCache.length()){
+                        modCacheDir.mkdirs();
+                        jar.copyTo(modCache);
+                    }
+                    modCache.file().setReadOnly();
+                    return loadJar(modCache, parent);
+                }
             }
 
             @Override
@@ -110,6 +139,7 @@ public class AndroidLauncher extends AndroidApplication{
                         Intent intent = new Intent(open ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_CREATE_DOCUMENT);
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         intent.setType(extension.equals("zip") && !open && extensions.length == 1 ? "application/zip" : "*/*");
+                        intent.putExtra(Intent.EXTRA_TITLE, "export." + extension);
 
                         addResultListener(i -> startActivityForResult(intent, i), (code, in) -> {
                             if(code == Activity.RESULT_OK && in != null && in.getData() != null){

@@ -17,7 +17,6 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.ui.*;
-import mindustry.world.*;
 
 import static arc.Core.*;
 import static mindustry.Vars.*;
@@ -47,7 +46,7 @@ public class DatabaseDialog extends BaseDialog{
         });
         onResize(this::rebuild);
 
-        all.margin(20).marginTop(0f);
+        all.margin(20).marginTop(0f).marginRight(30f);
 
         cont.top();
         cont.table(s -> {
@@ -86,7 +85,7 @@ public class DatabaseDialog extends BaseDialog{
         all.table(t -> {
             int i = 0;
             for(var content : allTabs){
-                t.button(content == Planets.sun ? Icon.eyeSmall : content instanceof Planet ? Icon.planet : new TextureRegionDrawable(content.uiIcon), Styles.clearNoneTogglei, iconMed, () -> {
+                t.button(content == Planets.sun ? Icon.eyeSmall : content instanceof Planet p ? Icon.icons.get(p.icon, Icon.commandRally) : new TextureRegionDrawable(content.uiIcon), Styles.clearNoneTogglei, iconMed, () -> {
                     tab = content;
                     rebuild();
                 }).size(50f).checked(b -> tab == content).tooltip(content == Planets.sun ? "@all" : content.localizedName).with(but -> {
@@ -95,16 +94,21 @@ public class DatabaseDialog extends BaseDialog{
 
                 if(++i % 10 == 0) t.row();
             }
-        }).row();;
+        }).row();
 
         for(int j = 0; j < allContent.length; j++){
             ContentType type = ContentType.all[j];
 
             Seq<UnlockableContent> array = allContent[j]
-                .select(c -> c instanceof UnlockableContent u && !u.isHidden() && (tab == Planets.sun || u.allDatabaseTabs || u.databaseTabs.contains(tab)) &&
+                .select(c -> c instanceof UnlockableContent u && !u.isHidden() && !u.hideDatabase && (tab == Planets.sun || u.allDatabaseTabs || u.databaseTabs.contains(tab)) &&
                     (text.isEmpty() || u.localizedName.toLowerCase().contains(text))).as();
 
             if(array.size == 0) continue;
+
+            //sorting only makes sense when in-game; otherwise, banned blocks can't exist
+            if(state.isGame()){
+                array.sort(Structs.comps(Structs.comparingBool(UnlockableContent::isBanned), Structs.comparingInt(u -> u.id)));
+            }
 
             all.add("@content." + type.name() + ".name").growX().left().color(Pal.accent);
             all.row();
@@ -116,13 +120,11 @@ public class DatabaseDialog extends BaseDialog{
                 int cols = (int)Mathf.clamp((Core.graphics.getWidth() - Scl.scl(30)) / Scl.scl(32 + 12), 1, 22);
                 int count = 0;
 
-                for(int i = 0; i < array.size; i++){
-                    UnlockableContent unlock = array.get(i);
-
-                    Image image = unlocked(unlock) ? new Image(unlock.uiIcon).setScaling(Scaling.fit) : new Image(Icon.lock, Pal.gray);
+                for(var unlock : array){
+                    Image image = unlocked(unlock) ? new Image(new TextureRegionDrawable(unlock.uiIcon), mobile ? Color.white : Color.lightGray).setScaling(Scaling.fit) : new Image(Icon.lock, Pal.gray);
 
                     //banned cross
-                    if(state.isGame() && (unlock instanceof UnitType u && u.isBanned() || unlock instanceof Block b && state.rules.isBanned(b))){
+                    if(state.isGame() && unlock.isBanned()){
                         list.stack(image, new Image(Icon.cancel){{
                             setColor(Color.scarlet);
                             touchable = Touchable.disabled;

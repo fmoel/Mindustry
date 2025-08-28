@@ -5,6 +5,7 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
+import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
@@ -12,6 +13,7 @@ import mindustry.ctype.*;
 import mindustry.entities.units.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
+import mindustry.io.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.*;
@@ -37,7 +39,7 @@ public class PayloadSource extends PayloadBlock{
         noUpdateDisabled = true;
         clearOnDoubleTap = true;
         regionRotated1 = 1;
-        acceptsPayloads = false;
+        acceptsUnitPayloads = false;
         commandable = true;
 
         config(Block.class, (PayloadSourceBuild build, Block block) -> {
@@ -64,6 +66,12 @@ public class PayloadSource extends PayloadBlock{
             build.payload = null;
             build.scl = 0f;
         });
+    }
+
+    @Override
+    public void getPlanConfigs(Seq<UnlockableContent> options){
+        options.add(content.blocks().select(this::canProduce));
+        options.add(content.units().select(this::canProduce));
     }
 
     @Override
@@ -157,10 +165,16 @@ public class PayloadSource extends PayloadBlock{
         }
 
         @Override
+        public byte version(){
+            return 1;
+        }
+
+        @Override
         public void write(Writes write){
             super.write(write);
             write.s(unit == null ? -1 : unit.id);
             write.s(configBlock == null ? -1 : configBlock.id);
+            TypeIO.writeVecNullable(write, commandPos);
         }
 
         @Override
@@ -168,6 +182,9 @@ public class PayloadSource extends PayloadBlock{
             super.read(read, revision);
             unit = Vars.content.unit(read.s());
             configBlock = Vars.content.block(read.s());
+            if(revision >= 1){
+                commandPos = TypeIO.readVecNullable(read);
+            }
         }
     }
 }

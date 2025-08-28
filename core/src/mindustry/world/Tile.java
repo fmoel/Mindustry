@@ -23,10 +23,18 @@ import static mindustry.Vars.*;
 public class Tile implements Position, QuadTreeObject, Displayable{
     private static final TileChangeEvent tileChange = new TileChangeEvent();
     private static final TilePreChangeEvent preChange = new TilePreChangeEvent();
+    private static final TileFloorChangeEvent floorChange = new TileFloorChangeEvent();
+    private static final TileOverlayChangeEvent overlayChange = new TileOverlayChangeEvent();;
     private static final ObjectSet<Building> tileSet = new ObjectSet<>();
 
-    /** Extra data for very specific blocks. */
-    public byte data;
+    /**
+     * Extra data for specific blocks. Only saved if Block#saveData is true.
+     * It is generally recommended that blocks only access data in their own category unless necessary - for example, a floor should not read/write overlay data.
+     * However, one byte may sometimes not be enough to hold enough data, in which case "overlapping" data storage is necessary.
+     * */
+    public byte data, floorData, overlayData;
+    /** Even more data for blocks. Use with caution; any floor/block can access this value. Due to 8-byte alignment of Java objects, this extra 4-byte field can be added with no additional cost.*/
+    public int extraData;
     /** Tile entity, usually null. */
     public @Nullable Building build;
     public short x, y;
@@ -155,6 +163,7 @@ public class Tile implements Position, QuadTreeObject, Displayable{
         return y * tilesize;
     }
 
+    //TODO: this method is misleading and buggy for non-center tiles
     public float drawx(){
         return block().offset + worldx();
     }
@@ -164,7 +173,7 @@ public class Tile implements Position, QuadTreeObject, Displayable{
     }
 
     public boolean isDarkened(){
-        return block.solid && ((!block.synthetic() && block.fillsTile) || block.checkForceDark(this));
+        return block.isDarkened(this);
     }
 
     public Floor floor(){
@@ -223,6 +232,8 @@ public class Tile implements Position, QuadTreeObject, Displayable{
             recacheWall();
         }
 
+        if(type.forceTeam != null) team = type.forceTeam;
+
         preChanged();
 
         this.block = type;
@@ -270,6 +281,8 @@ public class Tile implements Position, QuadTreeObject, Displayable{
 
         changed();
         changing = false;
+
+        block.blockChanged(this);
     }
 
     public void setBlock(Block type, Team team){
@@ -280,10 +293,11 @@ public class Tile implements Position, QuadTreeObject, Displayable{
         setBlock(type, Team.derelict, 0);
     }
 
-    /** This resets the overlay! */
     public void setFloor(Floor type){
+        if(this.floor == type) return;
+
+        var prev = this.floor;
         this.floor = type;
-        this.overlay = (Floor)Blocks.air;
 
         if(!headless && !world.isGenerating() && !isEditorTile()){
             renderer.blocks.removeFloorIndex(this);
@@ -293,19 +307,21 @@ public class Tile implements Position, QuadTreeObject, Displayable{
         if(build != null){
             build.onProximityUpdate();
         }
+        if(!world.isGenerating() && pathfinder != null && !state.isEditor()){
+            pathfinder.updateTile(this);
+        }
+
+        if(!world.isGenerating()){
+            Events.fire(floorChange.set(this, prev, type));
+        }
+
+        if(this.floor != prev){
+            this.floor.floorChanged(this);
+        }
     }
 
     public boolean isEditorTile(){
         return false;
-    }
-
-    /** Sets the floor, preserving overlay.*/
-    public void setFloorUnder(Floor floor){
-        Block overlay = this.overlay;
-        setFloor(floor);
-        if(this.overlay != overlay){
-            setOverlay(overlay);
-        }
     }
 
     /** Sets the block to air. */
@@ -390,14 +406,19 @@ public class Tile implements Position, QuadTreeObject, Displayable{
         return floor.id;
     }
 
-    public void setOverlayID(short ore){
-        setOverlay(content.block(ore));
-    }
-
     public void setOverlay(Block block){
+        if(this.overlay == block) return;
+
+        var prev = this.overlay;
+
         this.overlay = (Floor)block;
 
         recache();
+
+        if(!world.isGenerating()){
+            Events.fire(overlayChange.set(this, prev, this.overlay));
+        }
+
         if(!world.isGenerating() && build != null){
             build.onProximityUpdate();
         }
@@ -409,7 +430,7 @@ public class Tile implements Position, QuadTreeObject, Displayable{
     }
 
     public void clearOverlay(){
-        setOverlayID((short)0);
+        setOverlay(Blocks.air);
     }
 
     public boolean passable(){
@@ -546,6 +567,10 @@ public class Tile implements Position, QuadTreeObject, Displayable{
             null : null;
     }
 
+    public boolean shouldSaveData(){
+        return floor.saveData || overlay.saveData || block.saveData;
+    }
+
     public int staticDarkness(){
         return block.solid && block.fillsTile && !block.synthetic() ? data : 0;
     }
@@ -658,6 +683,19 @@ public class Tile implements Position, QuadTreeObject, Displayable{
         }
     }
 
+    /** @return all extra tile data, packed into a single long for data transfer convenience. */
+    public long getPackedData(){
+        return PackedTileData.get(extraData, data, floorData, overlayData);
+    }
+
+    /** Sets the packed data as obtained from {@link #getPackedData()}*/
+    public void setPackedData(long packed){
+        extraData = PackedTileData.extraData(packed);
+        data = PackedTileData.data(packed);
+        floorData = PackedTileData.floorData(packed);
+        overlayData = PackedTileData.overlayData(packed);
+    }
+
     @Override
     public void display(Table table){
 
@@ -690,6 +728,42 @@ public class Tile implements Position, QuadTreeObject, Displayable{
 
     //remote utility methods
 
+    /** Positions are in 'packed position' format - left bits x, right bits y. */
+    @Remote(called = Loc.server)
+    public static void setTileBlocks(Block block, Team team, int[] positions){
+        if(block == null || positions == null) return;
+        for(int pos : positions){
+            Tile tile = world.tile(pos);
+            if(tile != null){
+                tile.setBlock(block, team, 0);
+            }
+        }
+    }
+
+    /** Positions are in 'packed position' format - left bits x, right bits y. */
+    @Remote(called = Loc.server)
+    public static void setTileFloors(Block block, int[] positions){
+        if(positions == null || !(block instanceof Floor floor)) return;
+        for(int pos : positions){
+            Tile tile = world.tile(pos);
+            if(tile != null){
+                tile.setFloor(floor);
+            }
+        }
+    }
+
+    /** Positions are in 'packed position' format - left bits x, right bits y. */
+    @Remote(called = Loc.server)
+    public static void setTileOverlays(Block block, int[] positions){
+        if(positions == null || !(block instanceof OverlayFloor floor)) return;
+        for(int pos : positions){
+            Tile tile = world.tile(pos);
+            if(tile != null){
+                tile.setOverlay(floor);
+            }
+        }
+    }
+
     @Remote(called = Loc.server)
     public static void setFloor(Tile tile, Block floor, Block overlay){
         tile.setFloor(floor.asFloor());
@@ -720,6 +794,17 @@ public class Tile implements Position, QuadTreeObject, Displayable{
     }
 
     @Remote(called = Loc.server)
+    public static void setTeams(int[] positions, Team team){
+        if(positions == null) return;
+        for(int pos : positions){
+            Tile tile = world.tile(pos);
+            if(tile != null && tile.build != null){
+                tile.build.changeTeam(team);
+            }
+        }
+    }
+
+    @Remote(called = Loc.server)
     public static void buildDestroyed(Building build){
         if(build == null) return;
         build.killed();
@@ -736,5 +821,11 @@ public class Tile implements Position, QuadTreeObject, Displayable{
                 indexer.notifyHealthChanged(build);
             }
         }
+    }
+
+    @Struct
+    class PackedTileDataStruct{
+        int extraData;
+        byte data, floorData, overlayData;
     }
 }

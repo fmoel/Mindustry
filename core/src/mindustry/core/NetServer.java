@@ -23,6 +23,7 @@ import mindustry.net.*;
 import mindustry.net.Administration.*;
 import mindustry.net.Packets.*;
 import mindustry.world.*;
+import mindustry.world.meta.*;
 
 import java.io.*;
 import java.net.*;
@@ -51,7 +52,7 @@ public class NetServer implements ApplicationListener{
         if(state.rules.pvp){
             //find team with minimum amount of players and auto-assign player to that.
             TeamData re = state.teams.getActive().min(data -> {
-                if((state.rules.waveTeam == data.team && state.rules.waves) || !data.team.active() || data.team == Team.derelict) return Integer.MAX_VALUE;
+                if((state.rules.waveTeam == data.team && state.rules.waves) || !data.hasCore() || data.team == Team.derelict) return Integer.MAX_VALUE;
 
                 int count = 0;
                 for(Player other : players){
@@ -117,6 +118,8 @@ public class NetServer implements ApplicationListener{
     private DataOutputStream dataStream = new DataOutputStream(syncStream);
     /** Packet handlers for custom types of messages. */
     private ObjectMap<String, Seq<Cons2<Player, String>>> customPacketHandlers = new ObjectMap<>();
+    /** Packet handlers for custom types of messages - binary version. */
+    private ObjectMap<String, Seq<Cons2<Player, byte[]>>> customBinaryPacketHandlers = new ObjectMap<>();
     /** Packet handlers for logic client data */
     private ObjectMap<String, Seq<Cons2<Player, Object>>> logicClientDataHandlers = new ObjectMap<>();
 
@@ -423,7 +426,7 @@ public class NetServer implements ApplicationListener{
             }
         });
 
-        clientCommands.<Player>register("vote", "<y/n/c>", "Vote to kick the current player. Admin can cancel the voting with 'c'.", (arg, player) -> {
+        clientCommands.<Player>register("vote", "<y/n/c>", "Vote to kick the current player. Admins can cancel the voting with 'c'.", (arg, player) -> {
             if(currentlyKicking == null){
                 player.sendMessage("[scarlet]Nobody is being voted on.");
             }else{
@@ -506,7 +509,7 @@ public class NetServer implements ApplicationListener{
         data.stream = new ByteArrayInputStream(stream.toByteArray());
         player.con.sendStream(data);
 
-        debug("Packed @ bytes of world data.", stream.size());
+        debug("Packed @ bytes of world data to @ (@ / @)", stream.size(), player.name, player.con.address, player.uuid());
     }
 
     public void addPacketHandler(String type, Cons2<Player, String> handler){
@@ -515,6 +518,14 @@ public class NetServer implements ApplicationListener{
 
     public Seq<Cons2<Player, String>> getPacketHandlers(String type){
         return customPacketHandlers.get(type, Seq::new);
+    }
+
+    public void addBinaryPacketHandler(String type, Cons2<Player, byte[]> handler){
+        customBinaryPacketHandlers.get(type, Seq::new).add(handler);
+    }
+
+    public Seq<Cons2<Player, byte[]>> getBinaryPacketHandlers(String type){
+        return customBinaryPacketHandlers.get(type, Seq::new);
     }
 
     public void addLogicDataHandler(String type, Cons2<Player, Object> handler){
@@ -590,6 +601,20 @@ public class NetServer implements ApplicationListener{
     }
 
     @Remote(targets = Loc.client)
+    public static void serverBinaryPacketReliable(Player player, String type, byte[] contents){
+        if(netServer.customBinaryPacketHandlers.containsKey(type)){
+            for(var c : netServer.customBinaryPacketHandlers.get(type)){
+                c.get(player, contents);
+            }
+        }
+    }
+
+    @Remote(targets = Loc.client, unreliable = true)
+    public static void serverBinaryPacketUnreliable(Player player, String type, byte[] contents){
+        serverBinaryPacketReliable(player, type, contents);
+    }
+
+    @Remote(targets = Loc.client)
     public static void clientLogicDataReliable(Player player, String channel, Object value){
         Seq<Cons2<Player, Object>> handlers = netServer.logicClientDataHandlers.get(channel);
         if(handlers != null){
@@ -608,7 +633,7 @@ public class NetServer implements ApplicationListener{
         return Float.isInfinite(f) || Float.isNaN(f);
     }
 
-    @Remote(targets = Loc.client, unreliable = true)
+    @Remote(targets = Loc.client, unreliable = true, priority = PacketPriority.high)
     public static void clientSnapshot(
     Player player,
     int snapshotID,
@@ -791,7 +816,7 @@ public class NetServer implements ApplicationListener{
             }
             case trace -> {
                 PlayerInfo stats = netServer.admins.getInfo(other.uuid());
-                TraceInfo info = new TraceInfo(other.con.address, other.uuid(), other.con.modclient, other.con.mobile, stats.timesJoined, stats.timesKicked, stats.ips.toArray(String.class), stats.names.toArray(String.class));
+                TraceInfo info = new TraceInfo(other.con.address, other.uuid(), other.locale, other.con.modclient, other.con.mobile, stats.timesJoined, stats.timesKicked, stats.ips.toArray(String.class), stats.names.toArray(String.class));
                 if(player.con != null){
                     Call.traceInfo(player.con, other, info);
                 }else{
@@ -806,7 +831,7 @@ public class NetServer implements ApplicationListener{
         }
     }
 
-    @Remote(targets = Loc.client)
+    @Remote(targets = Loc.client, priority = PacketPriority.high)
     public static void connectConfirm(Player player){
         if(player.con.kicked) return;
 
@@ -907,19 +932,20 @@ public class NetServer implements ApplicationListener{
         syncStream.reset();
 
         short sent = 0;
-        for(Building entity : Groups.build){
-            if(!entity.block.sync) continue;
-            sent++;
+        for(var team : state.teams.present){
+            for(var build : indexer.getFlagged(team.team, BlockFlag.synced)){
+                sent++;
 
-            dataStream.writeInt(entity.pos());
-            dataStream.writeShort(entity.block.id);
-            entity.writeSync(Writes.get(dataStream));
+                dataStream.writeInt(build.pos());
+                dataStream.writeShort(build.block.id);
+                build.writeSync(Writes.get(dataStream));
 
-            if(syncStream.size() > maxSnapshotSize){
-                dataStream.close();
-                Call.blockSnapshot(sent, syncStream.toByteArray());
-                sent = 0;
-                syncStream.reset();
+                if(syncStream.size() > maxSnapshotSize){
+                    dataStream.close();
+                    Call.blockSnapshot(sent, syncStream.toByteArray());
+                    sent = 0;
+                    syncStream.reset();
+                }
             }
         }
 
@@ -966,6 +992,7 @@ public class NetServer implements ApplicationListener{
             //write all entities now
             dataStream.writeInt(entity.id()); //write id
             dataStream.writeByte(entity.classId() & 0xFF); //write type ID
+            entity.beforeWrite();
             entity.writeSync(Writes.get(dataStream)); //write entity
 
             sent++;
@@ -1058,7 +1085,7 @@ public class NetServer implements ApplicationListener{
                 try{
                     writeEntitySnapshot(player);
                 }catch(IOException e){
-                    e.printStackTrace();
+                    Log.err(e);
                 }
             });
 

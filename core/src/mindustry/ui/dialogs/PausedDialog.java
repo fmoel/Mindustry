@@ -57,7 +57,7 @@ public class PausedDialog extends BaseDialog{
             .visible(() -> state.rules.sector != null && state.rules.sector.preset != null && state.rules.sector.preset.description != null).padTop(-60f);
 
             cont.button("@abandon", Icon.cancel, () -> ui.planet.abandonSectorConfirm(state.rules.sector, this::hide)).padTop(-60f)
-            .disabled(b -> net.client()).visible(() -> state.rules.sector != null).row();
+            .disabled(b -> net.client() || state.gameOver).visible(() -> state.rules.sector != null).row();
 
             cont.button("@back", Icon.left, this::hide).name("back");
             cont.button("@settings", Icon.settings, ui.settings::show).name("settings");
@@ -159,7 +159,7 @@ public class PausedDialog extends BaseDialog{
             return;
         }
 
-        if(control.saves.getCurrent() == null || !control.saves.getCurrent().isAutosave() || wasClient || state.gameOver){
+        if(control.saves.getCurrent() == null || !control.saves.getCurrent().isAutosave() || wasClient || state.gameOver || disableSave){
             logic.reset();
             return;
         }

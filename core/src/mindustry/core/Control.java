@@ -16,9 +16,9 @@ import mindustry.content.*;
 import mindustry.content.TechTree.*;
 import mindustry.core.GameState.*;
 import mindustry.entities.*;
+import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.game.Objectives.*;
-import mindustry.game.*;
 import mindustry.game.Saves.*;
 import mindustry.gen.*;
 import mindustry.input.*;
@@ -30,7 +30,6 @@ import mindustry.net.*;
 import mindustry.type.*;
 import mindustry.ui.dialogs.*;
 import mindustry.world.*;
-import mindustry.world.blocks.storage.*;
 import mindustry.world.blocks.storage.CoreBlock.*;
 
 import java.io.*;
@@ -74,6 +73,16 @@ public class Control implements ApplicationListener, Loadable{
                 Time.runTask(4f, () -> {
                     ui.showInfo("@mods.initfailed");
                 });
+            }
+            checkAutoUnlocks();
+
+            if((OS.isWindows && !OS.is64Bit && !Core.settings.getBool("nowarn32bit", false))){
+                BaseDialog dialog = new BaseDialog("@warn.32bit.title");
+                dialog.buttons.button("@ok", dialog::hide).size(120f, 64f);
+                dialog.cont.add("@warn.32bit").labelAlign(Align.center, Align.center).wrap().grow().row();
+                dialog.cont.check("@dontshowagain", val -> Core.settings.put("nowarn32bit", val));
+
+                dialog.show();
             }
         });
 
@@ -199,9 +208,9 @@ public class Control implements ApplicationListener, Loadable{
 
             float coreDelay = 0f;
             if(!settings.getBool("skipcoreanimation") && !state.rules.pvp){
-                coreDelay = core.landDuration();
+                coreDelay = core.launchDuration();
                 //delay player respawn so animation can play.
-                player.deathTimer = Player.deathDelay - core.landDuration();
+                player.deathTimer = Player.deathDelay - core.launchDuration();
                 //TODO this sounds pretty bad due to conflict
                 if(settings.getInt("musicvol") > 0){
                     //TODO what to do if another core with different music is already playing?
@@ -215,6 +224,10 @@ public class Control implements ApplicationListener, Loadable{
             }
 
             if(state.isCampaign()){
+                if(state.rules.sector.info.importRateCache != null){
+                    state.rules.sector.info.refreshImportRates(state.rules.sector.planet);
+                }
+
                 //don't run when hosting, that doesn't really work.
                 if(state.rules.sector.planet.prebuildBase){
                     toBePlaced.clear();
@@ -300,9 +313,12 @@ public class Control implements ApplicationListener, Loadable{
         "lastBuild", 0
         );
 
-        createPlayer();
-
         saves.load();
+    }
+
+    @Override
+    public void loadSync(){
+        createPlayer();
     }
 
     /** Automatically unlocks things with no requirements and no locked parents. */
@@ -396,7 +412,6 @@ public class Control implements ApplicationListener, Loadable{
                 control.saves.resetSave();
             }
 
-            //for planet launches, mostly
             if(sector.preset != null){
                 sector.preset.quietUnlock();
             }
@@ -404,12 +419,13 @@ public class Control implements ApplicationListener, Loadable{
             ui.planet.hide();
             SaveSlot slot = sector.save;
             sector.planet.setLastSector(sector);
-            if(slot != null && !clearSectors && (!sector.planet.clearSectorOnLose || sector.info.hasCore)){
+            if(slot != null && !clearSectors && (!(sector.planet.clearSectorOnLose || sector.info.hasWorldProcessor) || sector.info.hasCore)){
 
                 try{
                     boolean hadNoCore = !sector.info.hasCore;
                     reloader.begin();
-                    slot.load();
+                    //pass in a sector context to make absolutely sure the correct sector is written; it may differ from what's in the meta due to remapping.
+                    slot.load(world.makeSectorContext(sector));
                     slot.setAutosave(true);
                     state.rules.sector = sector;
                     state.rules.cloudColor = sector.planet.landCloudColor;
@@ -417,7 +433,7 @@ public class Control implements ApplicationListener, Loadable{
                     //if there is no base, simulate a new game and place the right loadout at the spawn position
                     if(state.rules.defaultTeam.cores().isEmpty() || hadNoCore){
 
-                        if(sector.planet.clearSectorOnLose){
+                        if(sector.planet.clearSectorOnLose || sector.info.hasWorldProcessor){
                             playNewSector(origin, sector, reloader);
                         }else{
                             //no spawn set -> delete the sector save
@@ -441,6 +457,7 @@ public class Control implements ApplicationListener, Loadable{
                             state.wave = 1;
                             //set up default wave time
                             state.wavetime = state.rules.initialWaveSpacing <= 0f ? (state.rules.waveSpacing * (sector.preset == null ? 2f : sector.preset.startWaveTimeMultiplier)) : state.rules.initialWaveSpacing;
+                            state.wavetime *= sector.planet.campaignRules.difficulty.waveTimeMultiplier;
                             //reset captured state
                             sector.info.wasCaptured = false;
 
@@ -457,7 +474,7 @@ public class Control implements ApplicationListener, Loadable{
                                 for(var plan : state.rules.waveTeam.data().plans){
                                     Tile tile = world.tile(plan.x, plan.y);
                                     if(tile != null){
-                                        tile.setBlock(content.block(plan.block), state.rules.waveTeam, plan.rotation);
+                                        tile.setBlock(plan.block, state.rules.waveTeam, plan.rotation);
                                         if(plan.config != null && tile.build != null){
                                             tile.build.configureAny(plan.config);
                                         }
@@ -529,6 +546,7 @@ public class Control implements ApplicationListener, Loadable{
         if(saves != null && saves.getCurrent() != null && saves.getCurrent().isAutosave() && !net.client() && !state.isMenu() && !state.gameOver){
             try{
                 SaveIO.save(control.saves.getCurrent().file);
+                settings.forceSave();
                 Log.info("Saved on exit.");
             }catch(Throwable t){
                 Log.err(t);
@@ -657,8 +675,12 @@ public class Control implements ApplicationListener, Loadable{
                 state.set(State.playing);
             }
 
-            if(!net.client() && Core.input.keyTap(Binding.pause) && !renderer.isCutscene() && !scene.hasDialog() && !scene.hasKeyboard() && !ui.restart.isShown() && (state.is(State.paused) || state.is(State.playing))){
+            if(!net.client() && Core.input.keyTap(Binding.pause) && !(state.isCampaign() && state.afterGameOver) && !renderer.isCutscene() && !scene.hasDialog() && !scene.hasKeyboard() && !ui.restart.isShown() && (state.is(State.paused) || state.is(State.playing))){
                 state.set(state.isPaused() ? State.playing : State.paused);
+            }
+
+            if(state.isCampaign() && state.afterGameOver){
+                state.set(State.paused);
             }
 
             if(Core.input.keyTap(Binding.menu) && !ui.restart.isShown() && !ui.minimapfrag.shown()){

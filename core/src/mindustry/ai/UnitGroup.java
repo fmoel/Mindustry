@@ -18,7 +18,7 @@ public class UnitGroup{
     public int collisionLayer;
     public volatile float[] positions, originalPositions;
     public volatile boolean valid;
-    
+
     public void calculateFormation(Vec2 dest, int collisionLayer){
         this.collisionLayer = collisionLayer;
 
@@ -72,7 +72,7 @@ public class UnitGroup{
                         positions[a * 2] = v1.x;
                         positions[a * 2 + 1] = v1.y;
 
-                        float rad = units.get(a).hitSize/2f;
+                        float rad = units.get(a).hitSize * Vars.unitCollisionRadiusScale;
 
                         maxDst = Math.max(maxDst, v1.dst(0f, 0f) + rad);
                         totalArea += Mathf.PI * rad * rad;
@@ -158,7 +158,7 @@ public class UnitGroup{
     }
 
     private void updateRaycast(int index, Vec2 dest, Vec2 v1){
-        if(collisionLayer != PhysicsProcess.layerFlying){
+        if(collisionLayer != PhysicsProcess.layerFlying && originalPositions != null && positions != null){
 
             //coordinates in world space
             float

@@ -71,6 +71,13 @@ public class SchematicsDialog extends BaseDialog{
                 rebuildPane.run();
             }).growX().get();
             searchField.setMessageText("@schematic.search");
+            searchField.clicked(KeyCode.mouseRight, () -> {
+                if(!search.isEmpty()){
+                    search = "";
+                    searchField.clearText();
+                    rebuildPane.run();
+                }
+            });
         }).fillX().padBottom(4);
 
         cont.row();
@@ -550,7 +557,7 @@ public class SchematicsDialog extends BaseDialog{
                     next.pack();
                     float w = next.getWidth() + Scl.scl(9f);
 
-                    if(w + sum >= Core.graphics.getWidth() * 0.9f){
+                    if(w*2f + sum >= Core.graphics.getWidth() * 0.9f){
                         p.add(current).row();
                         current = new Table();
                         current.left();

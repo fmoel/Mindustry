@@ -19,7 +19,7 @@ import mindustry.world.blocks.logic.LogicBlock.*;
 import static mindustry.Vars.*;
 
 public class MapProcessorsDialog extends BaseDialog{
-    private IconSelectDialog iconSelect = new IconSelectDialog();
+    private IconSelectDialog iconSelect = new IconSelectDialog(true);
     private TextField search;
     private Seq<Building> processors = new Seq<>();
     private Table list;
@@ -41,7 +41,7 @@ public class MapProcessorsDialog extends BaseDialog{
                         foundAny = true;
                         tile.setNet(Blocks.worldProcessor, Team.sharded, 0);
                         if(ui.editor.isShown()){
-                            Vars.editor.renderer.updatePoint(x, y);
+                            Vars.editor.renderer.updateStatic(x, y);
                         }
                         break outer;
                     }

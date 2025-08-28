@@ -22,9 +22,7 @@ public abstract class GenerateFilter implements Cloneable{
             long[] buffer = new long[tiles.width * tiles.height];
 
             for(int i = 0; i < tiles.width * tiles.height; i++){
-                Tile tile = tiles.geti(i);
-
-                in.set(tile.x, tile.y, tile.block(), tile.floor(), tile.overlay());
+                in.set(tiles.geti(i));
                 apply(in);
 
                 buffer[i] = PackTile.get(in.block.id, in.floor.id, in.overlay.id);
@@ -35,10 +33,12 @@ public abstract class GenerateFilter implements Cloneable{
                 Tile tile = tiles.geti(i);
                 long b = buffer[i];
 
-                Block block = Vars.content.block(PackTile.block(b)), floor = Vars.content.block(PackTile.floor(b)), overlay = Vars.content.block(PackTile.overlay(b));
+                Block block = Vars.content.block(PackTile.block(b)), floorb = Vars.content.block(PackTile.floor(b)), overlay = Vars.content.block(PackTile.overlay(b));
 
-                tile.setFloor(floor.asFloor());
-                tile.setOverlay(!floor.asFloor().hasSurface() && overlay.asFloor().needsSurface && overlay instanceof OreBlock ? Blocks.air : overlay);
+                if(floorb instanceof Floor floor){
+                    tile.setFloor(floor);
+                    tile.setOverlay(!floor.hasSurface() && overlay.asFloor().needsSurface && overlay instanceof OreBlock ? Blocks.air : overlay);
+                }
 
                 if(!tile.block().synthetic() && !block.synthetic()){
                     tile.setBlock(block);
@@ -46,15 +46,18 @@ public abstract class GenerateFilter implements Cloneable{
             }
         }else{
             for(Tile tile : tiles){
-                in.set(tile.x, tile.y, tile.block(), tile.floor(), tile.overlay());
+                in.set(tile);
                 apply(in);
 
-                tile.setFloor(in.floor.asFloor());
-                tile.setOverlay(!in.floor.asFloor().hasSurface() && in.overlay.asFloor().needsSurface && in.overlay instanceof OreBlock ? Blocks.air : in.overlay);
+                if(in.floor instanceof Floor floor){
+                    tile.setFloor(floor);
+                    tile.setOverlay(!floor.hasSurface() && in.overlay.asFloor().needsSurface && in.overlay instanceof OreBlock ? Blocks.air : in.overlay);
+                }
 
                 if(!tile.block().synthetic() && !in.block.synthetic()){
                     tile.setBlock(in.block);
                 }
+                tile.setPackedData(in.packedData);
             }
         }
     }
@@ -144,15 +147,21 @@ public abstract class GenerateFilter implements Cloneable{
 
         /** output parameters */
         public Block floor, block, overlay;
+        public long packedData;
 
         TileProvider buffer;
 
-        public void set(int x, int y, Block block, Block floor, Block overlay){
+        public void set(int x, int y, Block block, Block floor, Block overlay, long packedData){
             this.floor = floor;
             this.block = block;
             this.overlay = overlay;
             this.x = x;
             this.y = y;
+            this.packedData = packedData;
+        }
+
+        public void set(Tile tile){
+            set(tile.x, tile.y, tile.block(), tile.floor(), tile.overlay(), tile.getPackedData());
         }
 
         public void begin(int width, int height, TileProvider buffer){
